@@ -1,47 +1,63 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import BaseHead from '../components/BaseHead.astro'
+import Footer from '../components/Footer.astro'
+import Header from '../components/Header.astro'
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts'
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
+
 	<body>
 		<Header />
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
+			<h1>🧑‍🚀 こんにちは, Astronaut!</h1>
 			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
+				<a href="https://astro.build/">Astro</a> 公式ブログスターターテンプレートへようこそ。
+				このテンプレートは、Astroで個人のWebサイト、ブログ、ポートフォリオを構築したい人のための、
+				軽量で最小限のスタイルの出発点として機能します。
 			</p>
 			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
+				このテンプレートには、すでにいくつかのインテグレーションが <code
+					>astro.config.mjs</code
+				> ファイルに設定されています。
+				<a href="https://astro.build/integrations">Astro Integrations</a> を使用してセットアップをカスタマイズし、
+				Tailwind、React、Vueなどのツールをプロジェクトに追加できます。
 			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
+			<p>
+				テンプレートの使用を開始するためのいくつかのアイデアを次に示します。
+			</p>
 			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
+				<li><code>src/pages/index.astro</code> でこのページを編集する</li>
+				<li>
+					<code>src/components/Header.astro</code> でサイトのヘッダー項目を編集する
+				</li>
+				<li>
+					<code>src/components/Footer.astro</code> でフッターに自分の名前を追加する
+				</li>
+				<li>
+					<code>src/content/blog/</code> にあるブログ記事を確認する
+				</li>
+				<li>
+					<code>src/layouts/BlogPost.astro</code> でブログ記事のレイアウトをカスタマイズする
+				</li>
 			</ul>
 			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
+				楽しんでください！ もし行き詰まったら、
+				<a href="https://docs.astro.build/">ドキュメントを読む</a>か、
+				<a href="https://astro.build/chat">Discordに参加</a
+				>して質問してください。
 			</p>
 			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
+				もっと個性的なブログテンプレートをお探しですか？
+				<a href="https://twitter.com/Charca">Maxi Ferreira</a> による
+				<a href="https://github.com/Charca/astro-blog-template"
+					>astro-blog-template</a
+				>
+				をチェックしてみてください。
 			</p>
 		</main>
 		<Footer />
