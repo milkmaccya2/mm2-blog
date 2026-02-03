@@ -1,8 +1,14 @@
 ---
+import { getCollection } from 'astro:content'
 import BaseHead from '../components/BaseHead.astro'
 import Footer from '../components/Footer.astro'
 import Header from '../components/Header.astro'
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts'
+import FormattedDate from '../components/FormattedDate.astro'
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts'
+
+const posts = (await getCollection('blog'))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 5)
 ---
 
 <!doctype html>
@@ -10,55 +16,64 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts'
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
-
 	<body>
 		<Header />
-		<main>
-			<h1>🧑‍🚀 こんにちは, Astronaut!</h1>
-			<p>
-				<a href="https://astro.build/">Astro</a> 公式ブログスターターテンプレートへようこそ。
-				このテンプレートは、Astroで個人のWebサイト、ブログ、ポートフォリオを構築したい人のための、
-				軽量で最小限のスタイルの出発点として機能します。
-			</p>
-			<p>
-				このテンプレートには、すでにいくつかのインテグレーションが <code
-					>astro.config.mjs</code
-				> ファイルに設定されています。
-				<a href="https://astro.build/integrations">Astro Integrations</a> を使用してセットアップをカスタマイズし、
-				Tailwind、React、Vueなどのツールをプロジェクトに追加できます。
-			</p>
-			<p>
-				テンプレートの使用を開始するためのいくつかのアイデアを次に示します。
-			</p>
-			<ul>
-				<li><code>src/pages/index.astro</code> でこのページを編集する</li>
-				<li>
-					<code>src/components/Header.astro</code> でサイトのヘッダー項目を編集する
-				</li>
-				<li>
-					<code>src/components/Footer.astro</code> でフッターに自分の名前を追加する
-				</li>
-				<li>
-					<code>src/content/blog/</code> にあるブログ記事を確認する
-				</li>
-				<li>
-					<code>src/layouts/BlogPost.astro</code> でブログ記事のレイアウトをカスタマイズする
-				</li>
-			</ul>
-			<p>
-				楽しんでください！ もし行き詰まったら、
-				<a href="https://docs.astro.build/">ドキュメントを読む</a>か、
-				<a href="https://astro.build/chat">Discordに参加</a
-				>して質問してください。
-			</p>
-			<p>
-				もっと個性的なブログテンプレートをお探しですか？
-				<a href="https://twitter.com/Charca">Maxi Ferreira</a> による
-				<a href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template</a
+		<main class="max-w-4xl mx-auto px-4 py-8">
+			<section class="mb-12 text-center md:text-left">
+				<h1 class="text-4xl font-bold mb-4">Hello, World! 🌍</h1>
+				<p class="text-lg text-gray-700 mb-6">
+					私のブログへようこそ。ここでは技術的な知見や日々の学びを記録しています。
+				</p>
+				<div
+					class="flex flex-col md:flex-row gap-4 justify-center md:justify-start"
 				>
-				をチェックしてみてください。
-			</p>
+					<a
+						href="/about"
+						class="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition text-center"
+					>
+						About Me
+					</a>
+					<a
+						href="/blog"
+						class="px-6 py-2 border border-black text-black rounded-lg hover:bg-gray-100 transition text-center"
+					>
+						Read Blog
+					</a>
+				</div>
+			</section>
+
+			<section>
+				<h2 class="text-2xl font-bold mb-6 border-b pb-2">Recent Posts</h2>
+				<ul class="space-y-6">
+					{
+						posts.map((post) => (
+							<li class="group">
+								<a
+									href={`/blog/${post.id}/`}
+									class="block p-4 -mx-4 rounded-xl hover:bg-gray-50 transition"
+								>
+									<h3 class="text-xl font-semibold text-black group-hover:text-blue-600 transition mb-1">
+										{post.data.title}
+									</h3>
+									<p class="text-sm text-gray-500 mb-2">
+										<FormattedDate date={post.data.pubDate} />
+									</p>
+									{post.data.description && (
+										<p class="text-gray-600 line-clamp-2">
+											{post.data.description}
+										</p>
+									)}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+				<div class="mt-8 text-center md:text-left">
+					<a href="/blog" class="text-blue-600 hover:text-blue-800 font-medium">
+						All Posts &rarr;
+					</a>
+				</div>
+			</section>
 		</main>
 		<Footer />
 	</body>
