@@ -6,9 +6,12 @@ import Footer from '../components/Footer.astro'
 import FormattedDate from '../components/FormattedDate.astro'
 import Header from '../components/Header.astro'
 
-type Props = CollectionEntry<'blog'>['data']
+type Props = CollectionEntry<'blog'>['data'] & {
+	headings?: { depth: number; slug: string; text: string }[]
+}
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props
+const { title, description, pubDate, updatedDate, heroImage, headings } =
+	Astro.props
 ---
 
 <html lang="en">
@@ -18,7 +21,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props
 
 	<body>
 		<Header />
-		<main>
+		<main class="max-w-full! px-0! md:px-4!">
 			<article>
 				<div class="w-full">
 					{
@@ -34,7 +37,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props
 					}
 				</div>
 				<div
-					class="w-[720px] max-w-[calc(100%-2em)] mx-auto p-4 text-gray-700 prose prose-lg prose-headings:text-black hover:prose-a:text-blue-500"
+					class="w-full max-w-[720px] mx-auto px-4 text-gray-700 prose md:prose-lg prose-headings:text-black hover:prose-a:text-blue-500"
 				>
 					<div class="mb-4 py-4 text-center leading-none">
 						<div class="mb-2 text-gray-500">
@@ -50,6 +53,43 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props
 						<h1 class="m-0 mb-2">{title}</h1>
 						<hr />
 					</div>
+					{
+						headings && headings.length > 0 && (
+							<nav class="mb-8 p-4 bg-gray-50 rounded-lg">
+								<h2 class="text-lg font-bold mb-2">目次</h2>
+								<ul class="list-disc list-outside space-y-1">
+									{headings.map(
+										(heading: {
+											depth: number
+											slug: string
+											text: string
+										}) => {
+											const depthClass =
+												{
+													1: 'ml-0',
+													2: 'ml-0',
+													3: 'ml-2 md:ml-4',
+													4: 'ml-4 md:ml-8',
+													5: 'ml-6 md:ml-12',
+													6: 'ml-8 md:ml-16',
+												}[heading.depth as 1 | 2 | 3 | 4 | 5 | 6] || 'ml-0'
+
+											return (
+												<li class={`${depthClass} toc-level-${heading.depth}`}>
+													<a
+														href={`#${heading.slug}`}
+														class="text-blue-600 hover:underline"
+													>
+														{heading.text}
+													</a>
+												</li>
+											)
+										},
+									)}
+								</ul>
+							</nav>
+						)
+					}
 					<slot />
 				</div>
 			</article>

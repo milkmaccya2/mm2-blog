@@ -1,0 +1,5 @@
+- [x] 実装計画の作成 ([implementation_plan.md](file:///Users/yokoyama/git/mm2-blog/docs/fix_mobile_spacing/implementation_plan.md))
+- [x] `src/layouts/BlogPost.astro` の修正
+  - [x] `<main>` タグにクラスを追加し、global CSSのスタイルを上書きまたは調整
+  - [x] 内部の `<div>` の `max-w-[calc(100%-2em)]` を `w-full` などに変更し、二重のマージンを解消
+- [x] 修正内容のドキュメント化 (`walkthrough.md`)
