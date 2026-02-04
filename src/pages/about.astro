@@ -1,121 +1,109 @@
 ---
-import BaseHead from '../components/BaseHead.astro'
-import Footer from '../components/Footer.astro'
-import Header from '../components/Header.astro'
+import BaseLayout from '../layouts/BaseLayout.astro'
 import { SITE_TITLE } from '../consts'
 ---
 
-<!doctype html>
-<html lang="ja">
-	<head>
-		<BaseHead title={`About | ${SITE_TITLE}`} description="About Me - CV" />
-	</head>
-	<body>
-		<Header />
-		<main class="max-w-4xl mx-auto px-4 py-8">
-			<div class="space-y-12">
-				<section class="text-center md:text-left">
-					<h1 class="text-4xl font-bold mb-4">About Me</h1>
-					<p class="text-lg text-gray-700 leading-relaxed max-w-2xl">
-						こんにちは。私は[Your Name]です。<br />
-						ソフトウェアエンジニアとして、Web技術を用いた課題解決に取り組んでいます。<br
-						/>
-						シンプルでパフォーマンスの高い実装を心がけています。
-					</p>
+<BaseLayout title={`About | ${SITE_TITLE}`} description="About Me - CV">
+	<main class="max-w-4xl mx-auto px-4 py-8">
+		<div class="space-y-12">
+			<section class="text-center md:text-left">
+				<h1 class="text-4xl font-bold mb-4">About Me</h1>
+				<p class="text-lg text-gray-700 leading-relaxed max-w-2xl">
+					こんにちは。私は[Your Name]です。<br />
+					ソフトウェアエンジニアとして、Web技術を用いた課題解決に取り組んでいます。<br
+					/>
+					シンプルでパフォーマンスの高い実装を心がけています。
+				</p>
 
-					<div
-						class="mt-6 flex flex-wrap gap-4 justify-center md:justify-start"
-					>
-						<a
-							href="https://github.com/milkmaccya"
-							target="_blank"
-							class="text-blue-600 hover:text-blue-800 font-medium"
-						>
-							GitHub &rarr;
-						</a>
-						<a
-							href="https://twitter.com/milkmaccya"
-							target="_blank"
-							class="text-blue-600 hover:text-blue-800 font-medium"
-						>
-							Twitter &rarr;
-						</a>
-					</div>
-				</section>
-
-				<hr class="border-gray-200" />
-
-				<section>
-					<h2 class="text-2xl font-bold mb-6">Experience</h2>
-					<div class="space-y-8">
-						<div
-							class="border-l-4 border-gray-200 pl-4 hover:border-black transition"
-						>
-							<h3 class="text-xl font-semibold">Senior Frontend Engineer</h3>
-							<p class="text-gray-500 mb-2">Tech Company A | 2023 - Present</p>
-							<p class="text-gray-700">
-								Next.jsとTypeScriptを用いた大規模Eコマースサイトのフロントエンド刷新をリード。<br
-								/>
-								パフォーマンス最適化によりLCPを1.5秒短縮。
-							</p>
-						</div>
-						<div
-							class="border-l-4 border-gray-200 pl-4 hover:border-black transition"
-						>
-							<h3 class="text-xl font-semibold">Web Developer</h3>
-							<p class="text-gray-500 mb-2">Web Agency B | 2020 - 2023</p>
-							<p class="text-gray-700">
-								中小企業向けのコーポレートサイト制作およびCMS構築。<br />
-								React, Astro, WordPressなど要件に応じた技術選定と実装を担当。
-							</p>
-						</div>
-					</div>
-				</section>
-
-				<section>
-					<h2 class="text-2xl font-bold mb-6">Skills</h2>
-					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-						<div>
-							<h3 class="text-lg font-semibold mb-3 border-b inline-block">
-								Languages & Frameworks
-							</h3>
-							<ul class="list-disc list-inside text-gray-700 space-y-1">
-								<li>JavaScript / TypeScript</li>
-								<li>React / Next.js</li>
-								<li>Vue.js / Nuxt</li>
-								<li>Astro</li>
-								<li>Node.js</li>
-							</ul>
-						</div>
-						<div>
-							<h3 class="text-lg font-semibold mb-3 border-b inline-block">
-								Tools & Infrastructure
-							</h3>
-							<ul class="list-disc list-inside text-gray-700 space-y-1">
-								<li>Git / GitHub</li>
-								<li>Docker</li>
-								<li>AWS (S3, CloudFront, Lambda)</li>
-								<li>Vercel / Cloudflare Pages</li>
-								<li>Figma</li>
-							</ul>
-						</div>
-					</div>
-				</section>
-
-				<section>
-					<h2 class="text-2xl font-bold mb-6">Contact</h2>
-					<p class="text-gray-700 mb-4">
-						お仕事のご相談やお問い合わせは、SNSのDMまたはメールにてお願いいたします。
-					</p>
+				<div class="mt-6 flex flex-wrap gap-4 justify-center md:justify-start">
 					<a
-						href="mailto:your.email@example.com"
-						class="inline-block bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition"
+						href="https://github.com/milkmaccya"
+						target="_blank"
+						class="text-blue-600 hover:text-blue-800 font-medium"
 					>
-						Contact Me
+						GitHub &rarr;
 					</a>
-				</section>
-			</div>
-		</main>
-		<Footer />
-	</body>
-</html>
+					<a
+						href="https://twitter.com/milkmaccya"
+						target="_blank"
+						class="text-blue-600 hover:text-blue-800 font-medium"
+					>
+						Twitter &rarr;
+					</a>
+				</div>
+			</section>
+
+			<hr class="border-gray-200" />
+
+			<section>
+				<h2 class="text-2xl font-bold mb-6">Experience</h2>
+				<div class="space-y-8">
+					<div
+						class="border-l-4 border-gray-200 pl-4 hover:border-black transition"
+					>
+						<h3 class="text-xl font-semibold">Senior Frontend Engineer</h3>
+						<p class="text-gray-500 mb-2">Tech Company A | 2023 - Present</p>
+						<p class="text-gray-700">
+							Next.jsとTypeScriptを用いた大規模Eコマースサイトのフロントエンド刷新をリード。<br
+							/>
+							パフォーマンス最適化によりLCPを1.5秒短縮。
+						</p>
+					</div>
+					<div
+						class="border-l-4 border-gray-200 pl-4 hover:border-black transition"
+					>
+						<h3 class="text-xl font-semibold">Web Developer</h3>
+						<p class="text-gray-500 mb-2">Web Agency B | 2020 - 2023</p>
+						<p class="text-gray-700">
+							中小企業向けのコーポレートサイト制作およびCMS構築。<br />
+							React, Astro, WordPressなど要件に応じた技術選定と実装を担当。
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h2 class="text-2xl font-bold mb-6">Skills</h2>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+					<div>
+						<h3 class="text-lg font-semibold mb-3 border-b inline-block">
+							Languages & Frameworks
+						</h3>
+						<ul class="list-disc list-inside text-gray-700 space-y-1">
+							<li>JavaScript / TypeScript</li>
+							<li>React / Next.js</li>
+							<li>Vue.js / Nuxt</li>
+							<li>Astro</li>
+							<li>Node.js</li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="text-lg font-semibold mb-3 border-b inline-block">
+							Tools & Infrastructure
+						</h3>
+						<ul class="list-disc list-inside text-gray-700 space-y-1">
+							<li>Git / GitHub</li>
+							<li>Docker</li>
+							<li>AWS (S3, CloudFront, Lambda)</li>
+							<li>Vercel / Cloudflare Pages</li>
+							<li>Figma</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h2 class="text-2xl font-bold mb-6">Contact</h2>
+				<p class="text-gray-700 mb-4">
+					お仕事のご相談やお問い合わせは、SNSのDMまたはメールにてお願いいたします。
+				</p>
+				<a
+					href="mailto:your.email@example.com"
+					class="inline-block bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition"
+				>
+					Contact Me
+				</a>
+			</section>
+		</div>
+	</main>
+</BaseLayout>
