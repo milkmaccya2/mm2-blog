@@ -1,11 +1,10 @@
-# Create Projects Page
+# Add POS-80 Project
 
-- [x] Create `src/pages/projects.astro` <!-- id: 0 -->
-    - [x] Use `BaseLayout`
-    - [x] Add "HostSwitch" project details (Title, Description, Link)
-- [x] Modify `src/components/Header.astro` <!-- id: 1 -->
-    - [x] Add `<HeaderLink href="/projects">Projects</HeaderLink>`
-- [x] Verify the changes <!-- id: 2 -->
-    - [x] Check if the link works
-    - [x] Check if the projects page displays correctly
-- [/] Commit and create PR <!-- id: 3 -->
+- [ ] Check for Mermaid support <!-- id: 0 -->
+- [ ] Create detailed project page `src/pages/projects/pos-80-controller.md` <!-- id: 1 -->
+    - [ ] Create layout if needed
+    - [ ] Add content (Features, Tech Stack, Architecture)
+    - [ ] Add placeholder for printer image or ask user
+- [ ] Update `src/pages/projects.astro` to link to the new page <!-- id: 2 -->
+- [ ] Verify pages <!-- id: 3 -->
+- [ ] Commit and create PR <!-- id: 4 -->
