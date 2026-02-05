@@ -1,8 +1,10 @@
-# Add POS-80 Project
+# Refactor POS-80 Project Link
 
-- [x] Create detailed project page `src/pages/projects/pos-80-controller.md` <!-- id: 1 -->
-    - [x] Create layout `src/layouts/ProjectLayout.astro` with Mermaid support
-    - [x] Add content (Features, Tech Stack, Architecture)
-- [x] Update `src/pages/projects.astro` to link to the new page <!-- id: 2 -->
-- [/] Verify pages <!-- id: 3 -->
-- [ ] Commit and create PR <!-- id: 4 -->
+- [x] Modify `src/pages/projects.astro` <!-- id: 0 -->
+    - [x] Update POS-80 link to `https://github.com/milkmaccya2/thermal-printer-app/blob/main/README.md`
+    - [x] Update "View Project Details" text to "View on GitHub" or similar
+- [x] Remove unused files <!-- id: 1 -->
+    - [x] `src/pages/projects/pos-80-thermal-printer.md`
+    - [x] `src/layouts/ProjectLayout.astro`
+- [x] Verify changes <!-- id: 2 -->
+- [/] Commit and Update PR <!-- id: 3 -->
