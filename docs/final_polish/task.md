@@ -6,4 +6,4 @@
 - [x] Fix margin between POS-80 and HostSwitch <!-- id: 4 -->
 - [x] Rename page title to "Personal Projects" <!-- id: 5 -->
 - [x] Verify all changes <!-- id: 2 -->
-- [/] Commit and Update PR <!-- id: 3 -->
+- [x] Commit and Update PR <!-- id: 3 -->
