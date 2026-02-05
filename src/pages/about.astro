@@ -1,17 +1,26 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { SITE_TITLE } from '../consts'
+import { Image } from 'astro:assets'
+import icon from '../assets/icon.png'
 ---
 
 <BaseLayout title={`About | ${SITE_TITLE}`} description="About Me - CV">
 	<main class="max-w-4xl mx-auto px-4 py-8">
 		<div class="space-y-12">
 			{/* Header Section */}
-			<section class="text-center md:text-left">
-				<h1 class="text-4xl font-bold mb-4">About Me</h1>
+			<section class="text-left">
+				<div class="mb-4">
+					<Image
+						src={icon}
+						alt="milkmaccya icon"
+						class="w-20 h-20 rounded-full shadow-md mx-auto md:mx-0"
+					/>
+				</div>
+				<h1 class="text-4xl font-bold mb-4 text-center">About Me</h1>
 				<p class="text-lg text-gray-700 leading-relaxed max-w-2xl">
 					こんにちは。milkmaccyaです。<br />
-					現在は国内インターネット企業にてFrontend Development Managerを務めています。<br
+					現在は国内インターネット関連企業にてFrontend Development Managerを務めています。<br
 					/>
 					<br />
 					キャリアのスタートはSIer/SESでのバックエンド・インフラ領域から。<br />
@@ -25,7 +34,7 @@ import { SITE_TITLE } from '../consts'
 
 				<div class="mt-6 flex flex-wrap gap-4 justify-center md:justify-start">
 					<a
-						href="https://github.com/milkmaccya"
+						href="https://github.com/milkmaccya2"
 						target="_blank"
 						class="text-blue-600 hover:text-blue-800 font-medium"
 					>
