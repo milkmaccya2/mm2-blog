@@ -1,7 +1,7 @@
 # Projects Page Addition and Refactor
 
 ユーザーからのリクエストを受け、Projectsページを作成しました。
-当初、POS-80プロジェクトのために詳細ページを作成しましたが、最終的にGitHub READMEへの直接リンクに変更しました。
+POS-80プロジェクトについては、GitHub READMEへの直接リンクを設定しました。
 
 ## Final Changes
 
