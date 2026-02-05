@@ -7,4 +7,4 @@
     - [x] `src/pages/projects/pos-80-thermal-printer.md`
     - [x] `src/layouts/ProjectLayout.astro`
 - [x] Verify changes <!-- id: 2 -->
-- [/] Commit and Update PR <!-- id: 3 -->
+- [x] Commit and Update PR <!-- id: 3 -->

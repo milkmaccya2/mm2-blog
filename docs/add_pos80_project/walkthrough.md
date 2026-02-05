@@ -1,31 +1,28 @@
-# POS-80 Project Addition
+# Projects Page Addition and Refactor
 
-ユーザーからのリクエストを受けて、POS-80 Thermal Printer Controller のプロジェクト紹介ページを追加しました。
+ユーザーからのリクエストを受け、Projectsページを作成しました。
+当初、POS-80プロジェクトのために詳細ページを作成しましたが、最終的にGitHub READMEへの直接リンクに変更しました。
 
-## Changes
+## Final Changes
 
 ### Pages
 
-#### [NEW] [src/pages/projects/pos-80-thermal-printer.md](file:///Users/yokoyama/git/mm2-blog/src/pages/projects/pos-80-thermal-printer.md)
-- 詳細なプロジェクト説明、機能、技術スタック、アーキテクチャ図を含むMarkdownファイル。
-- Mermaid.js の図表がレンダリングされるように構成されています。
+#### [NEW] [src/pages/projects.astro](file:///Users/yokoyama/git/mm2-blog/src/pages/projects.astro)
+- プロジェクト一覧ページ。
+- 以下の2つのプロジェクトを紹介しています：
+    1. **HostSwitch**: GitHub Documentationへのリンク
+    2. **POS-80 Thermal Printer Controller**: GitHub READMEへのリンク
 
-#### [MODIFY] [src/pages/projects.astro](file:///Users/yokoyama/git/mm2-blog/src/pages/projects.astro)
-- 新しいプロジェクトページへのリンクを追加しました。
+### Clean Up
 
-### Layouts
-
-#### [NEW] [src/layouts/ProjectLayout.astro](file:///Users/yokoyama/git/mm2-blog/src/layouts/ProjectLayout.astro)
-- プロジェクト詳細ページ用の専用レイアウト。
-- `BaseLayout` を拡張し、Mermaid.js のサポートを追加しています。
+以下のファイルは一時的に作成されましたが、リファクタリングにより削除されました。
+- `src/layouts/ProjectLayout.astro`
+- `src/pages/projects/pos-80-thermal-printer.md`
 
 ## Verification Results
 
 ### Manual Verification
-- `npm run build` が正常に完了することを確認しました。
-- `npm run preview` でブラウザテストを実施し、以下の点を確認しました：
-    - プロジェクト一覧に POS-80 が表示されること。
-    - 詳細ページに遷移できること。
-    - Mermaid 作図（アーキテクチャ図）が正しくレンダリングされること。
+- `npm run dev` および `preview` にて、`/projects` ページが正しくレンダリングされることを確認しました。
+- 各プロジェクトのリンクが正常にGitHubの該当ページを開くことを確認しました。
 
-![Architecture Diagram](project_details_architecture_1770292810414.png)
+![Final Projects Page](projects_page_verification_1770293333780.png)
