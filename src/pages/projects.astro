@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { SITE_TITLE } from '../consts'
+import ProjectCard from '../components/ProjectCard.astro'
 ---
 
 <BaseLayout
@@ -11,81 +12,50 @@ import { SITE_TITLE } from '../consts'
     <section class="text-left">
       <h1 class="text-4xl font-bold mb-8 text-center">Personal Projects</h1>
       <div class="space-y-8">
-        <div
-          class="border-l-4 border-gray-200 pl-4 hover:border-black transition"
-        >
-          <h2 class="text-2xl font-bold">
-            <a
-              href="https://github.com/milkmaccya2/thermal-printer-app/blob/main/README.md"
-              target="_blank"
-              class="hover:underline">POS-80 Thermal Printer Controller</a
-            >
-          </h2>
-          <p class="text-gray-700 mt-2">
-            An Astro-based web interface for controlling a POS-80 thermal
-            printer connected to a Raspberry Pi.
-          </p>
-          <div class="mt-4 flex flex-wrap gap-2">
-            {
-              [
-                'Astro',
-                'React',
-                'TailwindCSS',
-                'Node.js',
-                'pnpm',
-                'Sharp',
-                'Puppeteer',
-                'Google Calendar API',
-                'Raspberry Pi',
-                'PM2',
-              ].map((tech) => (
-                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">
-                  {tech}
-                </span>
-              ))
-            }
-          </div>
-          <a
-            href="https://github.com/milkmaccya2/thermal-printer-app/blob/main/README.md"
-            target="_blank"
-            class="text-blue-600 hover:text-blue-800 font-medium mt-2 inline-block"
-          >
-            View on GitHub &rarr;
-          </a>
-        </div>
+        <ProjectCard
+          title="POS-80 Thermal Printer Controller"
+          description="An Astro-based web interface for controlling a POS-80 thermal printer connected to a Raspberry Pi."
+          url="https://github.com/milkmaccya2/thermal-printer-app/blob/main/README.md"
+          tags={[
+            'Astro',
+            'React',
+            'TailwindCSS',
+            'Node.js',
+            'pnpm',
+            'Sharp',
+            'Puppeteer',
+            'Google Calendar API',
+            'Raspberry Pi',
+            'PM2',
+          ]}
+          linkText="View on GitHub"
+        />
 
-        <div
-          class="border-l-4 border-gray-200 pl-4 hover:border-black transition"
-        >
-          <h2 class="text-2xl font-bold">
-            <a
-              href="https://milkmaccya2.github.io/hostswitch/en/"
-              target="_blank"
-              class="hover:underline">HostSwitch</a
-            >
-          </h2>
-          <p class="text-gray-700 mt-2">
-            A CLI tool for switching hosts file comfortably.
-          </p>
-          <div class="mt-4 flex flex-wrap gap-2">
-            {
-              ['TypeScript', 'Node.js', 'Biome', 'Vitest', 'Docusaurus'].map(
-                (tech) => (
-                  <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">
-                    {tech}
-                  </span>
-                ),
-              )
-            }
-          </div>
-          <a
-            href="https://milkmaccya2.github.io/hostswitch/en/"
-            target="_blank"
-            class="text-blue-600 hover:text-blue-800 font-medium mt-2 inline-block"
-          >
-            View Documentation &rarr;
-          </a>
-        </div>
+        <ProjectCard
+          title="HostSwitch"
+          description="A CLI tool for switching hosts file comfortably."
+          url="https://milkmaccya2.github.io/hostswitch/en/"
+          tags={['TypeScript', 'Node.js', 'Biome', 'Vitest', 'Docusaurus']}
+          linkText="View Documentation"
+        />
+
+        <ProjectCard
+          title="QR Note"
+          description="スマホとPCのちょっとした橋渡しアプリ"
+          url="https://qrnote-sandy.vercel.app"
+          repoUrl="https://github.com/milkmaccya2/qrnote/blob/main/README.md"
+          tags={[
+            'Next.js',
+            'React',
+            'Tailwind CSS',
+            'qrcode',
+            'Web Speech API',
+            'MediaRecorder API',
+            'AWS S3',
+            'PWA',
+            'TypeScript',
+          ]}
+        />
       </div>
     </section>
   </main>

@@ -1,0 +1,43 @@
+---
+interface Props {
+  title: string
+  description: string
+  url: string
+  repoUrl?: string
+  tags: string[]
+  linkText?: string
+}
+
+const {
+  title,
+  description,
+  url,
+  repoUrl,
+  tags,
+  linkText = 'View on GitHub',
+} = Astro.props
+const bottomLink = repoUrl || url
+---
+
+<div class="border-l-4 border-gray-200 pl-4 hover:border-black transition">
+  <h2 class="text-2xl font-bold">
+    <a href={url} target="_blank" class="hover:underline">{title}</a>
+  </h2>
+  <p class="text-gray-700 mt-2">{description}</p>
+  <div class="mt-4 flex flex-wrap gap-2">
+    {
+      tags.map((tech) => (
+        <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">
+          {tech}
+        </span>
+      ))
+    }
+  </div>
+  <a
+    href={bottomLink}
+    target="_blank"
+    class="text-blue-600 hover:text-blue-800 font-medium mt-2 inline-block"
+  >
+    {linkText} &rarr;
+  </a>
+</div>
