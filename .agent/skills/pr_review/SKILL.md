@@ -1,4 +1,4 @@
-  ---
+---
 name: PR Review (Main Branch)
 description: Skill for parsing, organizing, and implementing fixes based on GitHub Pull Request review comments for PRs merging into the main branch.
 ---
