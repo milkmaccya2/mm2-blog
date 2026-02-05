@@ -21,7 +21,12 @@ const bottomLink = repoUrl || url
 
 <div class="border-l-4 border-gray-200 pl-4 hover:border-black transition">
   <h2 class="text-2xl font-bold">
-    <a href={url} target="_blank" class="hover:underline">{title}</a>
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="hover:underline">{title}</a
+    >
   </h2>
   <p class="text-gray-700 mt-2">{description}</p>
   <div class="mt-4 flex flex-wrap gap-2">
@@ -36,6 +41,7 @@ const bottomLink = repoUrl || url
   <a
     href={bottomLink}
     target="_blank"
+    rel="noopener noreferrer"
     class="text-blue-600 hover:text-blue-800 font-medium mt-2 inline-block"
   >
     {linkText} &rarr;
