@@ -4,4 +4,4 @@
 - [x] Save image to `src/assets/2025-12-22.png` <!-- id: 2 -->
 - [x] Update `src/content/blog/weekly/2025-12-22.md` to reference the new image <!-- id: 3 -->
 - [x] Verify image is present and linked <!-- id: 4 -->
-- [ ] Create Pull Request <!-- id: 5 -->
+- [x] Create Pull Request <!-- id: 5 -->
