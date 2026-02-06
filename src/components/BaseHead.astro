@@ -2,6 +2,7 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css'
+import '@fontsource/line-seed-jp'
 import type { ImageMetadata } from 'astro'
 import FallbackImage from '../assets/blog-placeholder-1.jpg'
 import { SITE_TITLE } from '../consts'
@@ -38,13 +39,6 @@ const {
 	href={new URL('rss.xml', Astro.site)}
 />
 <meta name="generator" content={Astro.generator} />
-
-<!-- Font preloads -->
-<link
-	rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/@fontsource/line-seed-jp@latest/index.min.css"
-	crossorigin
-/>
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
