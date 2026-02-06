@@ -7,15 +7,24 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts'
 interface Props {
   title?: string
   description?: string
+  structuredData?: Record<string, any>
 }
 
-const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props
+const {
+  title = SITE_TITLE,
+  description = SITE_DESCRIPTION,
+  structuredData,
+} = Astro.props
 ---
 
 <!doctype html>
 <html lang="ja">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead
+      title={title}
+      description={description}
+      structuredData={structuredData}
+    />
   </head>
   <body>
     <Header />

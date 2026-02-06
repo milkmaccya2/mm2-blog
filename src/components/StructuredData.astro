@@ -1,0 +1,12 @@
+---
+import type { StructuredDataType } from '../types/structured-data'
+
+interface Props {
+	data: StructuredDataType
+}
+
+const { data } = Astro.props
+const jsonString = JSON.stringify(data).replace(/</g, '\\u003C')
+---
+
+<script type="application/ld+json" set:html={jsonString} />
