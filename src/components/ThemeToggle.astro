@@ -45,6 +45,8 @@
 </button>
 
 <script>
+  let controller: AbortController | null = null
+
   function updateIcon(theme: string | null) {
     const darkIcon = document.getElementById('theme-toggle-dark-icon')
     const lightIcon = document.getElementById('theme-toggle-light-icon')
@@ -83,6 +85,10 @@
   }
 
   function initThemeToggle() {
+    // 既存のイベントリスナーをクリーンアップ
+    controller?.abort()
+    controller = new AbortController()
+
     const themeToggleBtn = document.getElementById('theme-toggle')
     const currentTheme = getStoredTheme()
 
@@ -90,28 +96,28 @@
     updateIcon(currentTheme || 'system')
 
     if (themeToggleBtn) {
-      // 既存のイベントリスナーを削除するため、新しい要素に置き換える
-      const newBtn = themeToggleBtn.cloneNode(true) as HTMLElement
-      themeToggleBtn.parentNode?.replaceChild(newBtn, themeToggleBtn)
+      themeToggleBtn.addEventListener(
+        'click',
+        function () {
+          const themeCycle: Record<string, string> = {
+            system: 'light',
+            light: 'dark',
+            dark: 'system',
+          }
+          const currentThemeName = getStoredTheme() || 'system'
+          const nextTheme = themeCycle[currentThemeName]
 
-      newBtn.addEventListener('click', function () {
-        const themeCycle: Record<string, string> = {
-          system: 'light',
-          light: 'dark',
-          dark: 'system',
-        }
-        const currentThemeName = getStoredTheme() || 'system'
-        const nextTheme = themeCycle[currentThemeName]
+          if (nextTheme === 'system') {
+            localStorage.removeItem('theme')
+          } else {
+            localStorage.setItem('theme', nextTheme)
+          }
 
-        if (nextTheme === 'system') {
-          localStorage.removeItem('theme')
-        } else {
-          localStorage.setItem('theme', nextTheme)
-        }
-
-        applyTheme(nextTheme === 'system' ? null : nextTheme)
-        updateIcon(nextTheme)
-      })
+          applyTheme(nextTheme === 'system' ? null : nextTheme)
+          updateIcon(nextTheme)
+        },
+        { signal: controller.signal },
+      )
     }
   }
 
