@@ -1,7 +1,7 @@
 import { getCollection } from 'astro:content';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
-// XMLエスケープ関数
+// XML escape function
 function escapeXML(str) {
 	return str
 		.replace(/&/g, '&amp;')
@@ -11,9 +11,14 @@ function escapeXML(str) {
 		.replace(/'/g, '&apos;');
 }
 
-// サイトURLの末尾スラッシュを保証するヘルパー
+// Helper to ensure trailing slash for site URL
 function ensureTrailingSlash(url) {
 	return url.endsWith('/') ? url : `${url}/`;
+}
+
+// Escape CDATA content
+function escapeCDATA(str) {
+	return str.replace(/]]>/g, ']]]]><![CDATA[>');
 }
 
 export async function GET(context) {
@@ -31,6 +36,8 @@ export async function GET(context) {
 		<title>${escapeXML(SITE_TITLE)}</title>
 		<description>${escapeXML(SITE_DESCRIPTION)}</description>
 		<link>${siteUrl}</link>
+		<language>ja</language>
+		<lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
 		<generator>Astro</generator>
 		${posts.map((post) => {
 			const postUrl = new URL(`blog/${post.id}/`, siteUrl).toString();
@@ -39,7 +46,7 @@ export async function GET(context) {
 			<title>${escapeXML(post.data.title)}</title>
 			<link>${postUrl}</link>
 			<guid isPermaLink="true">${postUrl}</guid>
-			<description><![CDATA[${post.data.description || ''}]]></description>
+			<description><![CDATA[${escapeCDATA(post.data.description || '')}]]></description>
 			<pubDate>${new Date(post.data.pubDate).toUTCString()}</pubDate>
 		</item>`;
 		}).join('')}
