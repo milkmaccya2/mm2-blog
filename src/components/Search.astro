@@ -1,0 +1,122 @@
+---
+
+---
+
+<button
+  id="search-button"
+  aria-label="Search"
+  class="p-2 text-black hover:text-gray-600"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke-width="1.5"
+    stroke="currentColor"
+    class="w-6 h-6"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+    ></path>
+  </svg>
+</button>
+
+<dialog
+  id="search-dialog"
+  class="m-auto backdrop:bg-black/50 rounded-lg shadow-xl p-0 w-[90vw] max-w-2xl bg-white text-black"
+>
+  <div
+    class="p-4 border-b flex justify-between items-center bg-gray-50 rounded-t-lg"
+  >
+    <h3 class="text-lg font-semibold">Search</h3>
+    <button id="close-search" class="text-gray-500 hover:text-gray-700">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+  <div class="p-4">
+    <div id="pagefind-search"></div>
+  </div>
+</dialog>
+
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+<script src="/pagefind/pagefind-ui.js" is:inline></script>
+
+<script is:inline>
+  const searchButton = document.getElementById('search-button')
+  const searchDialog = document.getElementById('search-dialog')
+  const closeSearch = document.getElementById('close-search')
+
+  if (searchButton && searchDialog && closeSearch) {
+    searchButton.addEventListener('click', () => {
+      searchDialog.showModal()
+    })
+
+    closeSearch.addEventListener('click', () => {
+      searchDialog.close()
+    })
+
+    searchDialog.addEventListener('click', (e) => {
+      if (e.target === searchDialog) {
+        searchDialog.close()
+      }
+    })
+  }
+
+  window.addEventListener('DOMContentLoaded', (event) => {
+    new PagefindUI({
+      element: '#pagefind-search',
+      showSubResults: true,
+      showImages: false,
+    })
+  })
+</script>
+
+<style>
+  /* Customize Pagefind UI to match the theme */
+  :root {
+    --pagefind-ui-scale: 1;
+    --pagefind-ui-primary: #000000;
+    --pagefind-ui-text: #393939;
+    --pagefind-ui-background: #ffffff;
+    --pagefind-ui-border: #d1d5db;
+    --pagefind-ui-tag: #eeeeee;
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 6px;
+    --pagefind-ui-image-border-radius: 6px;
+    --pagefind-ui-image-box-ratio: 3 / 2;
+    --pagefind-ui-font: sans-serif;
+  }
+
+  dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  dialog[open] {
+    animation: fade-in 0.2s ease-out;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+</style>
