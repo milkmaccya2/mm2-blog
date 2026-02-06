@@ -2,9 +2,10 @@
 import { SITE_TITLE } from '../consts'
 import HeaderLink from './HeaderLink.astro'
 import SocialLinks from './SocialLinks.astro'
+import Search from './Search.astro'
 ---
 
-<header class="m-0 bg-white shadow-sm">
+<header class="m-0 bg-white shadow-sm sticky top-0 z-50">
 	<nav
 		class="flex flex-col items-start gap-4 pt-4 pb-0 mx-auto md:flex-row md:items-center md:justify-between md:py-0 w-[960px] max-w-[calc(100%-2em)]"
 	>
@@ -13,11 +14,12 @@ import SocialLinks from './SocialLinks.astro'
 				>{SITE_TITLE}</a
 			>
 		</h2>
-		<div class="flex flex-wrap gap-4 internal-links">
+		<div class="flex flex-wrap gap-4 internal-links items-center">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/projects">Projects</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
+			<Search />
 		</div>
 		<div class="hidden gap-2 social-links md:flex">
 			<SocialLinks />
