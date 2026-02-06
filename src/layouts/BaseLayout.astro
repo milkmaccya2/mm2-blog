@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro'
 import Footer from '../components/Footer.astro'
 import Header from '../components/Header.astro'
+import ThemeScript from '../components/ThemeScript.astro'
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts'
 
 interface Props {
@@ -25,6 +26,7 @@ const {
       description={description}
       structuredData={structuredData}
     />
+    <ThemeScript />
   </head>
   <body>
     <Header />

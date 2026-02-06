@@ -1,12 +1,26 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Force dark mode to effective when .dark class is present on html */
+@variant dark (&:where(.dark, .dark *));
+
 :root {
   --font-body: 'LINE Seed JP', sans-serif;
+  --color-bg: #ffffff;
+  --color-text: #1f2937; /* gray-800 */
+}
+
+.dark {
+  --color-bg: #0f172a; /* slate-900 */
+  --color-text: #f3f4f6; /* gray-100 */
 }
 
 body {
   font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  /* Smooth transition for theme switch */
+  transition: background-color 0.3s, color 0.3s;
 }
 
 main {

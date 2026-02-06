@@ -18,7 +18,7 @@ import icon from '../assets/icon.png'
 					/>
 				</div>
 				<h1 class="text-4xl font-bold mb-4 text-center">About Me</h1>
-				<p class="text-lg text-gray-700 leading-relaxed">
+				<p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
 					こんにちは。milkmaccyaです。<br />
 					現在は国内インターネット関連企業にてFrontend Development Managerを務めています。<br
 					/>
@@ -36,21 +36,21 @@ import icon from '../assets/icon.png'
 					<a
 						href="https://github.com/milkmaccya2"
 						target="_blank"
-						class="text-blue-600 hover:text-blue-800 font-medium"
+						class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium"
 					>
 						GitHub &rarr;
 					</a>
 					<a
 						href="https://x.com/milkmaccya"
 						target="_blank"
-						class="text-blue-600 hover:text-blue-800 font-medium"
+						class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium"
 					>
 						X &rarr;
 					</a>
 				</div>
 			</section>
 
-			<hr class="border-gray-200" />
+			<hr class="border-gray-200 dark:border-gray-700" />
 
 			{/* Experience Section */}
 			<section>
@@ -58,27 +58,30 @@ import icon from '../assets/icon.png'
 				<div class="space-y-8">
 					{/* Current Role: LINE Yahoo */}
 					<div
-						class="border-l-4 border-gray-200 pl-4 hover:border-black transition"
+						class="border-l-4 border-gray-200 dark:border-gray-700 pl-4 hover:border-black dark:hover:border-white transition"
 					>
 						<h3 class="text-xl font-semibold">Frontend Development Manager</h3>
-						<p class="text-gray-500 mb-2">
+						<p class="text-gray-500 dark:text-gray-400 mb-2">
 							LINE Yahoo Corporation | 2021 - Present
 						</p>
-						<div class="text-gray-700 space-y-2">
+						<div class="text-gray-700 dark:text-gray-300 space-y-2">
 							<p>
 								「Yahoo!しごとカタログ」等の開発・運用およびマネジメントを担当。<br
 								/>
 								プロダクトの成長を支える技術基盤の刷新と、エンジニアが開発しやすい組織づくりをリードしています。
 							</p>
-							<ul class="list-disc list-inside text-sm text-gray-600 ml-2">
+							<ul
+								class="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 ml-2"
+							>
 								<li>
-									<span class="font-medium text-gray-800"
+									<span class="font-medium text-gray-800 dark:text-gray-200"
 										>大規模リファクタリングの完遂</span
 									><br />
 									Next.js v10からv14へのメジャーバージョンアップを主導。変更ファイル数2,800超、削除行数41万行に及ぶ大規模改修を主導し、安定したリリースを実現。
 								</li>
 								<li>
-									<span class="font-medium text-gray-800">組織マネジメント</span
+									<span class="font-medium text-gray-800 dark:text-gray-200"
+										>組織マネジメント</span
 									><br />
 									中途採用、メンバー評価、キャリア開発支援および自律的なチームカルチャーの醸成。
 								</li>
@@ -89,7 +92,7 @@ import icon from '../assets/icon.png'
 									href="https://note.com/lycorp_recruit/n/n8dd97614e821"
 									target="_blank"
 									rel="noopener noreferrer"
-									class="inline-flex items-center text-sm text-blue-600 hover:underline"
+									class="inline-flex items-center text-sm text-blue-600 dark:text-blue-400 hover:underline"
 								>
 									<span class="mr-1">📄</span>
 									関連インタビュー記事: 大規模なNext.jsのバージョンアップを不具合ゼロで達成した話
@@ -101,18 +104,20 @@ import icon from '../assets/icon.png'
 
 					{/* Sky株式会社 */}
 					<div
-						class="border-l-4 border-gray-200 pl-4 hover:border-black transition"
+						class="border-l-4 border-gray-200 dark:border-gray-700 pl-4 hover:border-black dark:hover:border-white transition"
 					>
 						<h3 class="text-xl font-semibold">
 							Project Leader / Lead Engineer
 						</h3>
-						<p class="text-gray-500 mb-2">Sky株式会社 | 2016 - 2021</p>
-						<p class="text-gray-700">
+						<p class="text-gray-500 dark:text-gray-400 mb-2">
+							Sky株式会社 | 2016 - 2021
+						</p>
+						<p class="text-gray-700 dark:text-gray-300">
 							放送業界向けの基幹システム（営放・販売管理）開発を経て、人材業界向け転職支援サイトの新規構築および機能改修に従事。<br
 							/>
 							プロジェクトリーダーとしてスクラム開発の導入を推進し、仕様調整からメンバー管理までを担当。<br
 							/>
-							<span class="text-sm text-gray-500 mt-1 block"
+							<span class="text-sm text-gray-500 dark:text-gray-400 mt-1 block"
 								>Stack: Java (Spring Boot), C# (.NET), Vue.js, AWS,
 								Elasticsearch</span
 							>
@@ -121,18 +126,18 @@ import icon from '../assets/icon.png'
 
 					{/* 株式会社ティー・アール・シー */}
 					<div
-						class="border-l-4 border-gray-200 pl-4 hover:border-black transition"
+						class="border-l-4 border-gray-200 dark:border-gray-700 pl-4 hover:border-black dark:hover:border-white transition"
 					>
 						<h3 class="text-xl font-semibold">System Engineer</h3>
-						<p class="text-gray-500 mb-2">
+						<p class="text-gray-500 dark:text-gray-400 mb-2">
 							株式会社ティー・アール・シー | 2011 - 2016
 						</p>
-						<p class="text-gray-700">
+						<p class="text-gray-700 dark:text-gray-300">
 							大手産業機器メーカーの情報子会社にて、工場向けFAシステムの開発に従事。<br
 							/>
 							また、地球観測衛星関連システムのインフラ構築・運用（ネットワーク・サーバ）や、サポートデスク業務なども経験。<br
 							/>
-							<span class="text-sm text-gray-500 mt-1 block"
+							<span class="text-sm text-gray-500 dark:text-gray-400 mt-1 block"
 								>Stack: Java, C++, C#, VB.NET, Oracle, Network Infrastructure</span
 							>
 						</p>
@@ -148,7 +153,9 @@ import icon from '../assets/icon.png'
 						<h3 class="text-lg font-semibold mb-3 border-b inline-block">
 							Languages & Frameworks
 						</h3>
-						<ul class="list-disc list-inside text-gray-700 space-y-1">
+						<ul
+							class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1"
+						>
 							<li>TypeScript / JavaScript</li>
 							<li>React / Next.js</li>
 							<li>Vue.js</li>
@@ -162,7 +169,9 @@ import icon from '../assets/icon.png'
 						<h3 class="text-lg font-semibold mb-3 border-b inline-block">
 							Tools & Qualifications
 						</h3>
-						<ul class="list-disc list-inside text-gray-700 space-y-1">
+						<ul
+							class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1"
+						>
 							<li>PMP (Project Management Professional)</li>
 							<li>情報セキュリティスペシャリスト</li>
 							<li>応用情報技術者</li>
@@ -176,12 +185,12 @@ import icon from '../assets/icon.png'
 			{/* Contact Section */}
 			<section>
 				<h2 class="text-2xl font-bold mb-6">Contact</h2>
-				<p class="text-gray-700 mb-4">
+				<p class="text-gray-700 dark:text-gray-300 mb-4">
 					お仕事のご相談やお問い合わせは、SNSのDMまたはメールにてお願いいたします。
 				</p>
 				<a
 					href="mailto:milkmaccya@gmail.com"
-					class="inline-block bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition"
+					class="inline-block bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 transition"
 				>
 					Contact Me
 				</a>
