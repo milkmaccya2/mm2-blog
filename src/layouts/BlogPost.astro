@@ -10,10 +10,18 @@ import SiteLogo from '../assets/icon.png'
 
 type Props = CollectionEntry<'blog'>['data'] & {
 	headings?: { depth: number; slug: string; text: string }[]
+	postId?: string
 }
 
-const { title, description, pubDate, updatedDate, heroImage, headings } =
-	Astro.props
+const {
+	title,
+	description,
+	pubDate,
+	updatedDate,
+	heroImage,
+	headings,
+	postId,
+} = Astro.props
 
 const structuredData = {
 	'@context': 'https://schema.org',
@@ -59,6 +67,7 @@ const structuredData = {
 							class="block mx-auto rounded-xl shadow-md"
 							loading="eager"
 							fetchpriority="high"
+							transition:name={postId ? `hero-${postId}` : undefined}
 						/>
 					)
 				}
