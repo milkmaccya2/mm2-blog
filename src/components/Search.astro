@@ -112,6 +112,27 @@
     --pagefind-ui-tag: #374151; /* gray-700 */
   }
 
+  /* Ensure dark mode text colors are applied to PageFind results */
+  :global(.dark #pagefind-search) {
+    color: #e5e7eb;
+  }
+
+  :global(.dark .pagefind-ui__result-title),
+  :global(.dark .pagefind-ui__result-excerpt),
+  :global(.dark .pagefind-ui__result-link),
+  :global(.dark .pagefind-ui__message) {
+    color: #e5e7eb !important;
+  }
+
+  :global(.dark .pagefind-ui__result-nested) {
+    color: #d1d5db !important;
+  }
+
+  :global(.dark .pagefind-ui__search-input) {
+    color: #e5e7eb;
+    background-color: #1f2937;
+  }
+
   dialog {
     margin: auto;
     max-height: 90vh;
