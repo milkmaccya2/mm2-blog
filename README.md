@@ -17,8 +17,8 @@ Astroを使用しており、Markdownファイル (`src/content/blog/`) をベ�
 
 ```mermaid
 graph TD
-    A[Notion<br/>(メモ・日記・WebClip)] -->|蓄積| B(Notion AI<br/>週報作成)
-    B -->|下書き| C(Gemini Gem<br/>リライト)
+    A["Notion<br/>(メモ・日記・WebClip)"] -->|蓄積| B("Notion AI<br/>週報作成")
+    B -->|下書き| C("Gemini Gem<br/>リライト")
     C -->|リライト済み| D[目視確認・修正]
     D -->|投稿| E[mm2-blog]
 ```
