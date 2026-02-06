@@ -1,0 +1,2 @@
+- [x] `README.md` にブログの仕組みを表す mermaid 図を追加する
+- [/] `src/pages/projects.astro` にこのブログリポジトリを Personal Project として追加する
