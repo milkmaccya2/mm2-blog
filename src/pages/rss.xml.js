@@ -37,7 +37,7 @@ export async function GET(context) {
 		<description>${escapeXML(SITE_DESCRIPTION)}</description>
 		<link>${siteUrl}</link>
 		<language>ja</language>
-		<lastBuildDate>${new Date(posts.length > 0 ? posts[0].data.pubDate : new Date()).toUTCString()}</lastBuildDate>
+		${posts.length > 0 ? `<lastBuildDate>${new Date(posts[0].data.pubDate).toUTCString()}</lastBuildDate>` : ''}
 		<generator>Astro</generator>
 		${posts.map((post) => {
 			const postUrl = new URL(`blog/${post.id}/`, siteUrl).toString();
