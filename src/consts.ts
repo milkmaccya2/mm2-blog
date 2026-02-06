@@ -3,3 +3,4 @@
 
 export const SITE_TITLE = 'milkmaccya or something'
 export const SITE_DESCRIPTION = 'Welcome to my website!'
+export const SITE_AUTHOR = 'milkmaccya'

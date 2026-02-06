@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content'
 import FormattedDate from '../components/FormattedDate.astro'
 import BaseLayout from '../layouts/BaseLayout.astro'
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts'
+import { SITE_TITLE, SITE_DESCRIPTION, SITE_AUTHOR } from '../consts'
 
 const posts = (await getCollection('blog'))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -14,6 +14,14 @@ const structuredData = {
 	name: SITE_TITLE,
 	description: SITE_DESCRIPTION,
 	url: Astro.site?.toString() || Astro.url.origin,
+	author: {
+		'@type': 'Person',
+		name: SITE_AUTHOR,
+	},
+	publisher: {
+		'@type': 'Organization',
+		name: SITE_TITLE,
+	},
 }
 ---
 
