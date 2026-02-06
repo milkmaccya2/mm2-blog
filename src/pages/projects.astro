@@ -13,6 +13,14 @@ import ProjectCard from '../components/ProjectCard.astro'
       <h1 class="text-4xl font-bold mb-8 text-center">Personal Projects</h1>
       <div class="space-y-8">
         <ProjectCard
+          title="mm2-blog"
+          description="個人の雑記ブログ。Notionで書いた記事をAIでリライトして投稿するフローを構築。"
+          url="https://blog.milkmaccya.com"
+          repoUrl="https://github.com/milkmaccya2/mm2-blog"
+          tags={['Astro', 'Tailwind CSS', 'Cloudflare Workers', 'Notion API']}
+        />
+
+        <ProjectCard
           title="POS-80 Thermal Printer Controller"
           description="An Astro-based web interface for controlling a POS-80 thermal printer connected to a Raspberry Pi."
           url="https://github.com/milkmaccya2/thermal-printer-app/blob/main/README.md"

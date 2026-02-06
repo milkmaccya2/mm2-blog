@@ -13,6 +13,20 @@
 
 Astroを使用しており、Markdownファイル (`src/content/blog/`) をベースに記事を管理しています。
 
+### ブログ執筆・更新フロー
+
+Notionに蓄積した個人のメモや日記を元にNotion AIが週報を作成し、それをGeminiでリライトして公開しています。
+
+```mermaid
+graph TD
+    Input(スマホ・PC) -->|メモ・日記・WebClipを蓄積| Notion[(Notion)]
+    Notion -->|Notion AIが週報作成| Draft["週報下書き<br/>(Personalな情報含む)"]
+    Draft -->|Gemini Gemがリライト| Rewritten[リライト済みテキスト]
+    Rewritten -->|"目視確認・修正<br/>ファイル作成"| File["YYYY-MM-DD.md"]
+    File -->|Git Push| GH[GitHub]
+    GH -->|GitHub Actions| CF["Cloudflare Workers<br/>(公開)"]
+```
+
 ## 開発コマンド
 
 | コマンド | 説明 |
