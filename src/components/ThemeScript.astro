@@ -18,12 +18,19 @@
       return 'light'
     }
 
-    const theme = getTheme()
-
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
+    function applyTheme() {
+      const theme = getTheme()
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
     }
+
+    // 初回ロード時にテーマを適用
+    applyTheme()
+
+    // View Transitions使用時のページ遷移後にもテーマを適用
+    document.addEventListener('astro:after-swap', applyTheme)
   })()
 </script>

@@ -59,33 +59,68 @@
 <script src="/pagefind/pagefind-ui.js" is:inline></script>
 
 <script is:inline>
-  const searchButton = document.getElementById('search-button')
-  const searchDialog = document.getElementById('search-dialog')
-  const closeSearch = document.getElementById('close-search')
+  let controller = null
 
-  if (searchButton && searchDialog && closeSearch) {
-    searchButton.addEventListener('click', () => {
-      searchDialog.showModal()
-    })
+  function initSearch() {
+    // 既存のイベントリスナーをクリーンアップ
+    if (controller) {
+      controller.abort()
+    }
+    controller = new AbortController()
 
-    closeSearch.addEventListener('click', () => {
-      searchDialog.close()
-    })
+    const searchButton = document.getElementById('search-button')
+    const searchDialog = document.getElementById('search-dialog')
+    const closeSearch = document.getElementById('close-search')
 
-    searchDialog.addEventListener('click', (e) => {
-      if (e.target === searchDialog) {
-        searchDialog.close()
-      }
-    })
+    if (searchButton && searchDialog && closeSearch) {
+      searchButton.addEventListener(
+        'click',
+        () => {
+          searchDialog.showModal()
+        },
+        { signal: controller.signal },
+      )
+
+      closeSearch.addEventListener(
+        'click',
+        () => {
+          searchDialog.close()
+        },
+        { signal: controller.signal },
+      )
+
+      searchDialog.addEventListener(
+        'click',
+        (e) => {
+          if (e.target === searchDialog) {
+            searchDialog.close()
+          }
+        },
+        { signal: controller.signal },
+      )
+    }
+
+    // PagefindUIを再初期化
+    const container = document.getElementById('pagefind-search')
+    if (container && typeof PagefindUI !== 'undefined') {
+      container.innerHTML = ''
+      new PagefindUI({
+        element: '#pagefind-search',
+        showSubResults: true,
+        showImages: false,
+      })
+    }
   }
 
-  window.addEventListener('DOMContentLoaded', (event) => {
-    new PagefindUI({
-      element: '#pagefind-search',
-      showSubResults: true,
-      showImages: false,
-    })
-  })
+  // 初回ロード時に初期化
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSearch)
+  } else {
+    initSearch()
+  }
+
+  // View Transitions使用時のページ遷移後にも再初期化
+  document.addEventListener('astro:after-swap', initSearch)
 </script>
 
 <style>
