@@ -85,22 +85,17 @@
 
   // 初期表示
   const currentTheme = getStoredTheme()
-  applyTheme(currentTheme) // Apply theme on initial load
   updateIcon(currentTheme || 'system')
 
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', function () {
-      const current = getStoredTheme()
-      let nextTheme = 'light'
-
-      if (!current || current === 'system') {
-        nextTheme = 'light'
-      } else if (current === 'light') {
-        nextTheme = 'dark'
-      } else {
-        // dark -> system
-        nextTheme = 'system'
+      const themeCycle = {
+        system: 'light',
+        light: 'dark',
+        dark: 'system',
       }
+      const currentThemeName = getStoredTheme() || 'system'
+      const nextTheme = themeCycle[currentThemeName]
 
       if (nextTheme === 'system') {
         localStorage.removeItem('theme')
