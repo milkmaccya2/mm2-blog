@@ -6,6 +6,8 @@ import BaseLayout from './BaseLayout.astro'
 import { SITE_TITLE, SITE_AUTHOR } from '../consts'
 import FallbackImage from '../assets/blog-placeholder-1.jpg'
 
+import SiteLogo from '../assets/icon.png'
+
 type Props = CollectionEntry<'blog'>['data'] & {
 	headings?: { depth: number; slug: string; text: string }[]
 }
@@ -33,7 +35,7 @@ const structuredData = {
 		name: SITE_TITLE,
 		logo: {
 			'@type': 'ImageObject',
-			url: new URL(FallbackImage.src, Astro.url).toString(),
+			url: new URL(SiteLogo.src, Astro.url).toString(),
 		},
 	},
 }
