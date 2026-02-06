@@ -1,0 +1,25 @@
+---
+import { SOCIAL_LINKS } from '../consts'
+
+interface Props {
+  linkClass?: string
+}
+
+const { linkClass = 'p-2 text-black hover:text-gray-600' } = Astro.props
+---
+
+{
+  SOCIAL_LINKS.map((link) => (
+    <a
+      href={link.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      class={`flex no-underline ${linkClass}`}
+    >
+      <span class="sr-only">{link.srLabel}</span>
+      <svg viewBox={link.viewBox} aria-hidden="true" width="32" height="32">
+        <path fill="currentColor" d={link.iconPath} />
+      </svg>
+    </a>
+  ))
+}
