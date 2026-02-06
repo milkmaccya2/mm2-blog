@@ -5,7 +5,7 @@
 <button
   id="search-button"
   aria-label="Search"
-  class="p-2 text-black hover:text-gray-600"
+  class="p-2 text-black dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
 >
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -25,13 +25,16 @@
 
 <dialog
   id="search-dialog"
-  class="m-auto backdrop:bg-black/50 rounded-lg shadow-xl p-0 w-[90vw] max-w-2xl bg-white text-black"
+  class="m-auto backdrop:bg-black/50 rounded-lg shadow-xl p-0 w-[90vw] max-w-2xl bg-white dark:bg-gray-800 text-black dark:text-gray-100"
 >
   <div
-    class="p-4 border-b flex justify-between items-center bg-gray-50 rounded-t-lg"
+    class="p-4 border-b dark:border-gray-700 flex justify-between items-center bg-gray-50 dark:bg-gray-700/50 rounded-t-lg"
   >
     <h3 class="text-lg font-semibold">Search</h3>
-    <button id="close-search" class="text-gray-500 hover:text-gray-700">
+    <button
+      id="close-search"
+      class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -101,8 +104,24 @@
     --pagefind-ui-font: sans-serif;
   }
 
+  :global(.dark) {
+    --pagefind-ui-primary: #ffffff;
+    --pagefind-ui-text: #e5e7eb; /* gray-200 */
+    --pagefind-ui-background: #1f2937; /* gray-800 */
+    --pagefind-ui-border: #374151; /* gray-700 */
+    --pagefind-ui-tag: #374151; /* gray-700 */
+  }
+
+  dialog {
+    margin: auto;
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 100; /* Ensure it's above everything */
+  }
+
   dialog::backdrop {
     background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
   }
 
   dialog[open] {

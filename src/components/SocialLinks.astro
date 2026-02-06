@@ -5,7 +5,9 @@ interface Props {
   linkClass?: string
 }
 
-const { linkClass = 'p-2 text-black hover:text-gray-600' } = Astro.props
+const {
+  linkClass = 'p-2 text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300',
+} = Astro.props
 ---
 
 {
