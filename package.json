@@ -9,6 +9,8 @@
     "astro": "astro",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
     "prepare": "lefthook install"
   },
   "dependencies": {
