@@ -35,6 +35,27 @@ graph TD
 | `npm run dev` | ローカルサーバー起動 (`localhost:4321`) |
 | `npm run build` | 本番用ビルド (`./dist/` 生成) |
 | `npm run preview` | ビルド内容のプレビュー |
+| `npm run lint` | Biomeでコードチェック |
+| `npm run lint:fix` | Biomeでコードチェック＆自動修正 |
+
+## Git Hooks
+
+このプロジェクトでは[Lefthook](https://github.com/evilmartians/lefthook)を使用してGit hooksを管理しています。
+
+### 自動実行される処理
+
+- **pre-commit**: コミット前にステージされたファイルに対してBiomeによるlint/formatを自動実行
+  - エラーがある場合はコミットがブロックされます
+  - 自動修正可能な問題は自動的に修正され、再ステージングされます
+
+### hookのスキップ
+
+緊急時など、hookをスキップしてコミットしたい場合:
+
+```bash
+git commit --no-verify -m "commit message"
+```
+
 
 ## プロジェクト構成
 
@@ -56,4 +77,7 @@ graph TD
 
 - Astro
 - Tailwind CSS
+- Biome (Linter/Formatter)
+- Lefthook (Git Hooks)
 - Cloudflare Workers (Hosting)
+
