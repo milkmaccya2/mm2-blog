@@ -45,12 +45,13 @@
 </button>
 
 <script>
-  const themeToggleBtn = document.getElementById('theme-toggle')
-  const darkIcon = document.getElementById('theme-toggle-dark-icon')
-  const lightIcon = document.getElementById('theme-toggle-light-icon')
-  const systemIcon = document.getElementById('theme-toggle-system-icon')
+  let controller: AbortController | null = null
 
-  function updateIcon(theme) {
+  function updateIcon(theme: string | null) {
+    const darkIcon = document.getElementById('theme-toggle-dark-icon')
+    const lightIcon = document.getElementById('theme-toggle-light-icon')
+    const systemIcon = document.getElementById('theme-toggle-system-icon')
+
     darkIcon?.classList.add('hidden')
     lightIcon?.classList.add('hidden')
     systemIcon?.classList.add('hidden')
@@ -64,7 +65,7 @@
     }
   }
 
-  function applyTheme(theme) {
+  function applyTheme(theme: string | null) {
     if (theme === 'dark') {
       document.documentElement.classList.add('dark')
     } else if (theme === 'light') {
@@ -79,34 +80,52 @@
     }
   }
 
-  function getStoredTheme() {
+  function getStoredTheme(): string | null {
     return localStorage.getItem('theme')
   }
 
-  // 初期表示
-  const currentTheme = getStoredTheme()
-  updateIcon(currentTheme || 'system')
+  function initThemeToggle() {
+    // 既存のイベントリスナーをクリーンアップ
+    controller?.abort()
+    controller = new AbortController()
 
-  if (themeToggleBtn) {
-    themeToggleBtn.addEventListener('click', function () {
-      const themeCycle = {
-        system: 'light',
-        light: 'dark',
-        dark: 'system',
-      }
-      const currentThemeName = getStoredTheme() || 'system'
-      const nextTheme = themeCycle[currentThemeName]
+    const themeToggleBtn = document.getElementById('theme-toggle')
+    const currentTheme = getStoredTheme()
 
-      if (nextTheme === 'system') {
-        localStorage.removeItem('theme')
-      } else {
-        localStorage.setItem('theme', nextTheme)
-      }
+    // 初期表示
+    updateIcon(currentTheme || 'system')
 
-      applyTheme(nextTheme === 'system' ? null : nextTheme)
-      updateIcon(nextTheme)
-    })
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener(
+        'click',
+        function () {
+          const themeCycle: Record<string, string> = {
+            system: 'light',
+            light: 'dark',
+            dark: 'system',
+          }
+          const currentThemeName = getStoredTheme() || 'system'
+          const nextTheme = themeCycle[currentThemeName]
+
+          if (nextTheme === 'system') {
+            localStorage.removeItem('theme')
+          } else {
+            localStorage.setItem('theme', nextTheme)
+          }
+
+          applyTheme(nextTheme === 'system' ? null : nextTheme)
+          updateIcon(nextTheme)
+        },
+        { signal: controller.signal },
+      )
+    }
   }
+
+  // 初回ロード時に初期化
+  initThemeToggle()
+
+  // View Transitions使用時のページ遷移後にも再初期化
+  document.addEventListener('astro:after-swap', initThemeToggle)
 
   // システム設定の変更を監視して、設定が「system」の場合に反映
   window
