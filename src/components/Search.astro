@@ -55,6 +55,7 @@
   </div>
 </dialog>
 
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
 <script is:inline>
   let controller = null
 
@@ -106,11 +107,6 @@
         initializePagefind()
       }
       document.head.appendChild(script)
-
-      const link = document.createElement('link')
-      link.href = '/pagefind/pagefind-ui.css'
-      link.rel = 'stylesheet'
-      document.head.appendChild(link)
     } else {
       initializePagefind()
     }
