@@ -16,16 +16,20 @@
 - `.github/workflows/ci.yml` に `test` ジョブを追加
 - PR作成時やmainブランチへのプッシュ時に自動でE2Eテストが実行されるように設定
 
+### 4. その他修正
+- `package.json` に `"test": "playwright test"` スクリプトを追加
+- `.gitignore` にPlaywright生成ファイルを追加
+
 ## 検証結果
 
 ### ローカルでのテスト実行
-`npx playwright test` を実行し、全テストがパスすることを確認しました。
+`npx playwright test` および `npm test` を実行し、全テストがパスすることを確認しました。
 
 ```bash
 Running 3 tests using 3 workers
   3 passed (10.6s)
 ```
 
-### 次のステップ
-- GitHub Actions上での動作確認（コードをプッシュ後に確認）
-- 必要に応じてテストケースの追加（例: テーマ切り替え、検索機能など）
+### PR作成
+- GitHub PR: [feat: Setup Playwright E2E Tests](https://github.com/milkmaccya2/mm2-blog/pull/30)
+
