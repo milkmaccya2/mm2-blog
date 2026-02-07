@@ -1,5 +1,5 @@
 import { getCollection } from 'astro:content';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 // XML escape function
 function escapeXML(str) {
