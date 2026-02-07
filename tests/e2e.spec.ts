@@ -14,7 +14,7 @@ test('blog index page shows list of posts', async ({ page }) => {
 
 test('can navigate to about page', async ({ page }) => {
   await page.goto('/')
-  await page.getByRole('link', { name: 'About' }).first().click()
+  await page.getByRole('navigation').getByRole('link', { name: 'About' }).click()
   await expect(page).toHaveURL(/.*about/)
   await expect(page.getByRole('heading', { name: 'About' })).toBeVisible()
 })
