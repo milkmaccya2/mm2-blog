@@ -1,9 +1,9 @@
 // Place any global data in this file.
 // You can import this data from anywhere in your site by using the `import` keyword.
 
-export const SITE_TITLE = 'milkmaccya or something'
-export const SITE_DESCRIPTION = 'Welcome to my website!'
-export const SITE_AUTHOR = 'milkmaccya'
+export const SITE_TITLE = 'milkmaccya or something';
+export const SITE_DESCRIPTION = 'Welcome to my website!';
+export const SITE_AUTHOR = 'milkmaccya';
 export const SOCIAL_LINKS = [
   {
     href: 'https://x.com/milkmaccya',
@@ -26,4 +26,4 @@ export const SOCIAL_LINKS = [
     viewBox: '0 0 20 20',
     srLabel: 'Subscribe to RSS Feed',
   },
-]
+];

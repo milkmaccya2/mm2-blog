@@ -1,52 +1,44 @@
 ---
-import { Image } from 'astro:assets'
-import type { CollectionEntry } from 'astro:content'
-import FormattedDate from '../components/FormattedDate.astro'
-import BaseLayout from './BaseLayout.astro'
-import { SITE_TITLE, SITE_AUTHOR } from '../consts'
-import FallbackImage from '../assets/blog-placeholder-1.jpg'
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from '../components/FormattedDate.astro';
+import BaseLayout from './BaseLayout.astro';
+import { SITE_TITLE, SITE_AUTHOR } from '../consts';
+import FallbackImage from '../assets/blog-placeholder-1.jpg';
 
-import SiteLogo from '../assets/icon.png'
+import SiteLogo from '../assets/icon.png';
 
 type Props = CollectionEntry<'blog'>['data'] & {
-	headings?: { depth: number; slug: string; text: string }[]
-	postId?: string
-}
+  headings?: { depth: number; slug: string; text: string }[];
+  postId?: string;
+};
 
-const {
-	title,
-	description,
-	pubDate,
-	updatedDate,
-	heroImage,
-	headings,
-	postId,
-} = Astro.props
+const { title, description, pubDate, updatedDate, heroImage, headings, postId } = Astro.props;
 
 const structuredData = {
-	'@context': 'https://schema.org',
-	'@type': 'BlogPosting',
-	headline: title,
-	description: description,
-	image: [new URL(heroImage?.src || FallbackImage.src, Astro.url).toString()],
-	datePublished: pubDate.toISOString(),
-	...(updatedDate ? { dateModified: updatedDate.toISOString() } : {}),
-	author: [
-		{
-			'@type': 'Person',
-			name: SITE_AUTHOR,
-			url: new URL('/about', Astro.url).toString(),
-		},
-	],
-	publisher: {
-		'@type': 'Organization',
-		name: SITE_TITLE,
-		logo: {
-			'@type': 'ImageObject',
-			url: new URL(SiteLogo.src, Astro.url).toString(),
-		},
-	},
-}
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description: description,
+  image: [new URL(heroImage?.src || FallbackImage.src, Astro.url).toString()],
+  datePublished: pubDate.toISOString(),
+  ...(updatedDate ? { dateModified: updatedDate.toISOString() } : {}),
+  author: [
+    {
+      '@type': 'Person',
+      name: SITE_AUTHOR,
+      url: new URL('/about', Astro.url).toString(),
+    },
+  ],
+  publisher: {
+    '@type': 'Organization',
+    name: SITE_TITLE,
+    logo: {
+      '@type': 'ImageObject',
+      url: new URL(SiteLogo.src, Astro.url).toString(),
+    },
+  },
+};
 ---
 
 <BaseLayout

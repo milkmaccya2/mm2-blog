@@ -1,22 +1,15 @@
 ---
 interface Props {
-  title: string
-  description: string
-  url: string
-  repoUrl?: string
-  tags: string[]
-  linkText?: string
+  title: string;
+  description: string;
+  url: string;
+  repoUrl?: string;
+  tags: string[];
+  linkText?: string;
 }
 
-const {
-  title,
-  description,
-  url,
-  repoUrl,
-  tags,
-  linkText = 'View on GitHub',
-} = Astro.props
-const bottomLink = repoUrl || url
+const { title, description, url, repoUrl, tags, linkText = 'View on GitHub' } = Astro.props;
+const bottomLink = repoUrl || url;
 ---
 
 <div

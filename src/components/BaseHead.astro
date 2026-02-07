@@ -1,28 +1,23 @@
 ---
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
-import '../styles/global.css'
-import '@fontsource/line-seed-jp'
-import type { ImageMetadata } from 'astro'
-import FallbackImage from '../assets/blog-placeholder-1.jpg'
-import { SITE_TITLE } from '../consts'
-import StructuredData from './StructuredData.astro'
+import '../styles/global.css';
+import '@fontsource/line-seed-jp';
+import type { ImageMetadata } from 'astro';
+import FallbackImage from '../assets/blog-placeholder-1.jpg';
+import { SITE_TITLE } from '../consts';
+import StructuredData from './StructuredData.astro';
 
 interface Props {
-	title: string
-	description: string
-	image?: ImageMetadata
-	structuredData?: Record<string, any>
+  title: string;
+  description: string;
+  image?: ImageMetadata;
+  structuredData?: Record<string, any>;
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const {
-	title,
-	description,
-	image = FallbackImage,
-	structuredData,
-} = Astro.props
+const { title, description, image = FallbackImage, structuredData } = Astro.props;
 ---
 
 <!-- Global Metadata -->
