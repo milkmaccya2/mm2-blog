@@ -8,6 +8,8 @@ const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 5);
 
+const x =;
+
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
