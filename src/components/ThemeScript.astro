@@ -34,11 +34,7 @@
     document.addEventListener('astro:before-swap', (e) => {
       try {
         const theme = getTheme()
-        if (theme === 'dark') {
-          e.newDocument.documentElement.classList.add('dark')
-        } else {
-          e.newDocument.documentElement.classList.remove('dark')
-        }
+        e.newDocument.documentElement.classList.toggle('dark', theme === 'dark')
       } catch (err) {
         console.error('Theme application failed:', err)
       }
