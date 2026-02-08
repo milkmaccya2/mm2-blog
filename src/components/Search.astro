@@ -55,8 +55,8 @@
   </div>
 </dialog>
 
-<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
-<script is:inline>
+{import.meta.env.PROD && <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />}
+<script is:inline define:vars={{ isDev: import.meta.env.DEV }}>
   let controller = null
 
   function initSearch() {
@@ -99,16 +99,24 @@
     }
 
     // Pagefindのリソースを動的に読み込む
-    if (typeof PagefindUI === 'undefined') {
-      const script = document.createElement('script')
-      script.src = '/pagefind/pagefind-ui.js'
-      script.async = true
-      script.onload = () => {
+    if (!isDev) {
+      if (typeof PagefindUI === 'undefined') {
+        const script = document.createElement('script')
+        script.src = '/pagefind/pagefind-ui.js'
+        script.async = true
+        script.onload = () => {
+          initializePagefind()
+        }
+        document.head.appendChild(script)
+      } else {
         initializePagefind()
       }
-      document.head.appendChild(script)
     } else {
-      initializePagefind()
+      const container = document.getElementById('pagefind-search')
+      if (container) {
+        container.innerHTML =
+          '<p class="text-center text-gray-500 py-4">Search is available in production builds only.</p>'
+      }
     }
   }
 
