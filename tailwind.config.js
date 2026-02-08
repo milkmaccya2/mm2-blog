@@ -6,13 +6,12 @@ export default {
       fontFamily: {
         // 'sans' を上書きして、デフォルトのフォントを指定
         sans: [
+          'system-ui',
           '-apple-system',
           'BlinkMacSystemFont',
           '"Hiragino Sans"',
           '"Hiragino Kaku Gothic ProN"',
-          '"游ゴシック  Medium"',
-          '"Yu Gothic Medium"',
-          '"YuGothic"',
+          '"Yu Gothic"',
           'Meiryo',
           'sans-serif',
         ],
