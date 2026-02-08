@@ -1,0 +1,63 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  prevPost?: CollectionEntry<'blog'>;
+  nextPost?: CollectionEntry<'blog'>;
+}
+
+const { prevPost, nextPost } = Astro.props;
+---
+
+<div class="py-4 border-gray-200 dark:border-gray-700">
+	<div class="flex items-center justify-between gap-2 md:gap-4">
+		<div class="flex-1 text-left min-w-0">
+			{
+				prevPost ? (
+					<a
+						href={`/blog/${prevPost.id}/`}
+						class="group block p-2 -ml-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+					>
+						<div class="text-xs md:text-sm text-gray-500 mb-0.5 group-hover:text-blue-600 dark:group-hover:text-blue-400">
+							&laquo; <span class="hidden md:inline">前の記事</span><span class="md:hidden">前へ</span>
+						</div>
+						<div class="text-sm md:text-base font-medium text-gray-900 dark:text-gray-100 truncate leading-tight" title={prevPost.data.title}>
+							{prevPost.data.title}
+						</div>
+					</a>
+				) : (
+					<div class="p-2 -ml-2" /> 
+				)
+			}
+		</div>
+		
+		<div class="flex-none text-center">
+			<a
+				href="/blog/"
+				class="inline-block px-3 py-1 md:px-4 md:py-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors text-xs md:text-sm font-medium whitespace-nowrap"
+			>
+				一覧<span class="hidden md:inline">に戻る</span>
+			</a>
+		</div>
+
+		<div class="flex-1 text-right min-w-0">
+			{
+				nextPost ? (
+					<a
+						href={`/blog/${nextPost.id}/`}
+						class="group block p-2 -mr-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+					>
+						<div class="text-xs md:text-sm text-gray-500 mb-0.5 group-hover:text-blue-600 dark:group-hover:text-blue-400">
+							<span class="hidden md:inline">次の記事</span><span class="md:hidden">次へ</span> &raquo;
+						</div>
+						<div class="text-sm md:text-base font-medium text-gray-900 dark:text-gray-100 truncate leading-tight" title={nextPost.data.title}>
+							{nextPost.data.title}
+						</div>
+					</a>
+				) : (
+					<div class="p-2 -mr-2" />
+				)
+			}
+		</div>
+	</div>
+</div>
