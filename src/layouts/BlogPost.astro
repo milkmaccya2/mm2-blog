@@ -1,11 +1,11 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import FallbackImage from '../assets/blog-placeholder-1.jpg';
-import SiteLogo from '../assets/icon.png';
-import FormattedDate from '../components/FormattedDate.astro';
-import { SITE_AUTHOR, SITE_TITLE } from '../consts';
-import BaseLayout from './BaseLayout.astro';
+import FallbackImage from '@/assets/blog-placeholder-1.jpg';
+import SiteLogo from '@/assets/icon.png';
+import FormattedDate from '@/components/FormattedDate.astro';
+import { SITE_AUTHOR, SITE_TITLE } from '@/consts';
+import BaseLayout from '@/layouts/BaseLayout.astro';
 
 type Props = CollectionEntry<'blog'>['data'] & {
   headings?: { depth: number; slug: string; text: string }[];
