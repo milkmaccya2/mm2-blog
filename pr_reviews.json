@@ -1,0 +1,15 @@
+{
+  "reviews": [
+    {
+      "id": "PRR_kwDORGFzjM7gosga",
+      "author": { "login": "gemini-code-assist" },
+      "authorAssociation": "NONE",
+      "body": "## Code Review\n\nこのプルリクエストは、GSAPのアニメーションロジックを`animations.ts`に集約する素晴らしいリファクタリングです。これにより、コードの保守性が大幅に向上します。また、要素の存在チェックを追加することで、アニメーション要素がないページでのコンソール警告を解消しています。Astroのライフサイクルイベント(`astro:page-load`, `astro:before-swap`)や`gsap.matchMedia`を利用したクリーンアップ処理やアクセシビリティ対応も適切に実装されています。\n\n`src/scripts/animations.ts`について、汎用的なアニメーションをより堅牢で再利用しやすくするための提案をいくつか追加しました。各アニメーション要素が個別にトリガーされるようにすることで、将来的にサイトの様々なページでこれらのアニメーションクラスを使用する際の信頼性が向上します。",
+      "submittedAt": "2026-02-08T03:41:58Z",
+      "includesCreatedEdit": false,
+      "reactionGroups": [],
+      "state": "COMMENTED",
+      "commit": { "oid": "3ae28c6e9c338742e84b4c198fdbbdc70ca66c96" }
+    }
+  ]
+}

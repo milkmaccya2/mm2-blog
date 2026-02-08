@@ -5,7 +5,7 @@
 @variant dark (&:where(.dark, .dark *));
 
 :root {
-  --font-body: 'LINE Seed JP', sans-serif;
+  --font-body: 'Noto Sans JP Variable', sans-serif;
   --color-bg: #ffffff;
   --color-text: #1f2937; /* gray-800 */
 }

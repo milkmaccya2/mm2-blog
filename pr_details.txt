@@ -1,0 +1,28 @@
+title:	refactor: Centralize GSAP animations and fix page load warnings
+state:	OPEN
+author:	milkmaccya2
+labels:	
+assignees:	
+reviewers:	gemini-code-assist (Commented)
+projects:	
+milestone:	
+number:	36
+url:	https://github.com/milkmaccya2/mm2-blog/pull/36
+additions:	290
+deletions:	117
+auto-merge:	disabled
+--
+## 概要
+-  を作成し、GSAPのアニメーションロジックを集約しました。
+- 特定のページ（ホームページなど）以外のページ遷移時に「要素が見つかりません」という警告が出る問題を修正しました。
+-  で共通スクリプトを読み込むことで、どのページでもクラス名を付与するだけでアニメーションが使えるようになりました。
+
+## 変更点
+- : インラインスクリプトを削除し、共通スクリプトを利用するように変更。
+- :  の読み込みを追加。
+- : 新規作成。GSAPの初期化、レスポンシブ対応、各アニメーション定義（,  等）を実装。
+
+## 動作確認
+- ホームページのアニメーションが正常に動作すること。
+- 他ページ（About, Blogなど）に遷移した際、コンソールに警告が出ないこと。
+
