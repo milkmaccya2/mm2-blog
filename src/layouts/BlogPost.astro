@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import FallbackImage from '@/assets/blog-placeholder-1.jpg';
 import SiteLogo from '@/assets/icon.png';
+import BlogNavigation from '@/components/BlogNavigation.astro';
 import FormattedDate from '@/components/FormattedDate.astro';
 import { SITE_AUTHOR, SITE_TITLE } from '@/consts';
 import BaseLayout from '@/layouts/BaseLayout.astro';
@@ -10,9 +11,21 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 type Props = CollectionEntry<'blog'>['data'] & {
   headings?: { depth: number; slug: string; text: string }[];
   postId?: string;
+  nextPost?: CollectionEntry<'blog'>;
+  prevPost?: CollectionEntry<'blog'>;
 };
 
-const { title, description, pubDate, updatedDate, heroImage, headings, postId } = Astro.props;
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  heroImage,
+  headings,
+  postId,
+  nextPost,
+  prevPost,
+} = Astro.props;
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -39,7 +52,6 @@ const structuredData = {
   },
 };
 ---
-
 <BaseLayout
 	title={title}
 	description={description}
@@ -77,9 +89,12 @@ const structuredData = {
 							)
 						}
 					</div>
-					<h1 class="m-0 mb-2 scramble-text" data-original-text={title}>{title}</h1>
+					<h1 class="m-0 mb-2">{title}</h1>
 					<hr />
 				</div>
+
+				<BlogNavigation nextPost={nextPost} prevPost={prevPost} />
+
 				{
 					headings && headings.length > 0 && (
 						<nav class="mb-8 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
@@ -114,7 +129,12 @@ const structuredData = {
 					)
 				}
 				<slot />
+
+				<div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
+					<BlogNavigation nextPost={nextPost} prevPost={prevPost} />
+				</div>
 			</div>
 		</article>
 	</main>
 </BaseLayout>
+
