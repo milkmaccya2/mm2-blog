@@ -110,26 +110,24 @@ export function initAnimations() {
 
     // Scramble Text
     const scrambleElements = document.querySelectorAll('.scramble-text');
-    if (scrambleElements.length > 0) {
-      scrambleElements.forEach((element) => {
-        const target = element as HTMLElement;
-        const originalText = target.dataset.originalText || target.innerText;
+    scrambleElements.forEach((element) => {
+      const target = element as HTMLElement;
+      const originalText = target.dataset.originalText || target.innerText;
 
-        gsap.to(target, {
-          duration: 1.0,
-          scrambleText: {
-            text: originalText,
-            chars: '!<>-_\\/[]{}—=+*^?#________',
-            revealDelay: 0.5,
-            speed: 0.3,
-          },
-          scrollTrigger: {
-            trigger: target,
-            start: 'top 85%',
-          },
-        });
+      gsap.to(target, {
+        duration: 1.0,
+        scrambleText: {
+          text: originalText,
+          chars: '!<>-_\\/[]{}—=+*^?#________',
+          revealDelay: 0.5,
+          speed: 0.3,
+        },
+        scrollTrigger: {
+          trigger: target,
+          start: 'top 85%',
+        },
       });
-    }
+    });
 
     // Generalized List Item Animation Function
     const animateListItems = (itemSelector: string, sectionSelector: string) => {
