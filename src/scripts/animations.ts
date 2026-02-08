@@ -1,7 +1,8 @@
 import { gsap } from 'gsap';
+import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrambleTextPlugin);
 
 let mm: gsap.MatchMedia | undefined;
 
@@ -107,6 +108,27 @@ export function initAnimations() {
       });
     }
 
+    // Scramble Text
+    const scrambleElements = document.querySelectorAll('.scramble-text');
+    scrambleElements.forEach((element) => {
+      const target = element as HTMLElement;
+      const originalText = target.dataset.originalText || target.innerText;
+
+      gsap.to(target, {
+        duration: 1.0,
+        scrambleText: {
+          text: originalText,
+          chars: '!<>-_\\/[]{}—=+*^?#________',
+          revealDelay: 0.5,
+          speed: 0.3,
+        },
+        scrollTrigger: {
+          trigger: target,
+          start: 'top 85%',
+        },
+      });
+    });
+
     // Generalized List Item Animation Function
     const animateListItems = (itemSelector: string, sectionSelector: string) => {
       const items = document.querySelectorAll(itemSelector);
@@ -143,6 +165,14 @@ export function initAnimations() {
     gsap.set('.post-item', { opacity: 1, y: 0 });
     gsap.set('.project-item', { opacity: 1, y: 0 });
     gsap.set('.animate-blob', { opacity: 1 });
+
+    // Ensure scramble text matches final state
+    document.querySelectorAll('.scramble-text').forEach((el) => {
+      const target = el as HTMLElement;
+      if (target.dataset.originalText) {
+        target.innerText = target.dataset.originalText;
+      }
+    });
   });
 }
 
