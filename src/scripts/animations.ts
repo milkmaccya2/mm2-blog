@@ -118,34 +118,28 @@ export function initAnimations() {
       const rect = target.getBoundingClientRect();
       const isInViewport = rect.top < window.innerHeight * 0.85;
 
+      const tweenVars: gsap.TweenVars = {
+        duration: 1.0,
+        scrambleText: {
+          text: originalText,
+          chars: '!<>-_\\/[]{}—=+*^?#________',
+          revealDelay: 0.5,
+          speed: 0.3,
+        },
+      };
+
       if (isInViewport) {
-        // Element is already visible, start animation immediately
-        gsap.to(target, {
-          duration: 1.0,
-          delay: 0.2, // Small delay for better UX
-          scrambleText: {
-            text: originalText,
-            chars: '!<>-_\\/[]{}—=+*^?#________',
-            revealDelay: 0.5,
-            speed: 0.3,
-          },
-        });
+        // Element is already visible, start animation with a small delay
+        tweenVars.delay = 0.2;
       } else {
         // Element is below viewport, use scroll trigger
-        gsap.to(target, {
-          duration: 1.0,
-          scrambleText: {
-            text: originalText,
-            chars: '!<>-_\\/[]{}—=+*^?#________',
-            revealDelay: 0.5,
-            speed: 0.3,
-          },
-          scrollTrigger: {
-            trigger: target,
-            start: 'top 85%',
-          },
-        });
+        tweenVars.scrollTrigger = {
+          trigger: target,
+          start: 'top 85%',
+        };
       }
+
+      gsap.to(target, tweenVars);
     });
 
     // Generalized List Item Animation Function
