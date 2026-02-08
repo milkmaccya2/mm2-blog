@@ -1,18 +1,26 @@
 ---
 import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
+import type { GetStaticPaths, Page } from 'astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const allPosts = (await getCollection('blog')).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = (await getCollection('blog')).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  );
 
-// 1ページあたり10件の記事を表示
-const pageSize = 10;
-const posts = allPosts.slice(0, pageSize);
-const hasNextPage = allPosts.length > pageSize;
+  // 1ページあたり10件の記事を表示
+  return paginate(posts, { pageSize: 10 });
+}) satisfies GetStaticPaths;
+
+type Props = {
+  page: Page<CollectionEntry<'blog'>>;
+};
+
+const { page } = Astro.props;
 ---
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
@@ -21,7 +29,7 @@ const hasNextPage = allPosts.length > pageSize;
 			<h1 class="text-4xl font-bold mb-8 text-center scramble-text" data-original-text="Blog">Blog</h1>
 			<ul class="flex flex-wrap gap-2 list-none m-0 p-0 md:gap-8">
 				{
-					posts.map((post) => (
+					page.data.map((post) => (
 						<li class="w-full text-center md:w-[calc(50%-1rem)] md:text-left first:w-full first:mb-4 first:text-center">
 							<a
 								href={`/blog/${post.id}/`}
@@ -50,20 +58,29 @@ const hasNextPage = allPosts.length > pageSize;
 			</ul>
 			
 			<!-- ページネーション -->
-			{hasNextPage && (
-				<nav class="flex justify-center items-center gap-4 mt-12" aria-label="ページネーション">
-					<span class="text-gray-600 dark:text-gray-400">
-						ページ 1 / {Math.ceil(allPosts.length / pageSize)}
-					</span>
-					
+			<nav class="flex justify-center items-center gap-4 mt-12" aria-label="ページネーション">
+				{page.url.prev && (
 					<a
-						href="/blog/2/"
+						href={page.url.prev}
+						class="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition duration-200 no-underline text-black dark:text-white"
+					>
+						← 前のページ
+					</a>
+				)}
+				
+				<span class="text-gray-600 dark:text-gray-400">
+					ページ {page.currentPage} / {page.lastPage}
+				</span>
+				
+				{page.url.next && (
+					<a
+						href={page.url.next}
 						class="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition duration-200 no-underline text-black dark:text-white"
 					>
 						次のページ →
 					</a>
-				</nav>
-			)}
+				)}
+			</nav>
 		</section>
 	</main>
 </BaseLayout>
