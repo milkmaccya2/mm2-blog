@@ -13,6 +13,7 @@ const posts = (await getCollection('blog')).sort(
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
 	<main>
 		<section>
+			<h1 class="text-4xl font-bold mb-8 text-center scramble-text" data-original-text="Blog">Blog</h1>
 			<ul class="flex flex-wrap gap-2 list-none m-0 p-0 md:gap-8">
 				{
 					posts.map((post) => (

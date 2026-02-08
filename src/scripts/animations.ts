@@ -114,7 +114,11 @@ export function initAnimations() {
       const target = element as HTMLElement;
       const originalText = target.dataset.originalText || target.innerText;
 
-      gsap.to(target, {
+      // Check if element is already in viewport
+      const rect = target.getBoundingClientRect();
+      const isInViewport = rect.top < window.innerHeight * 0.85;
+
+      const tweenVars: gsap.TweenVars = {
         duration: 1.0,
         scrambleText: {
           text: originalText,
@@ -122,11 +126,20 @@ export function initAnimations() {
           revealDelay: 0.5,
           speed: 0.3,
         },
-        scrollTrigger: {
+      };
+
+      if (isInViewport) {
+        // Element is already visible, start animation with a small delay
+        tweenVars.delay = 0.2;
+      } else {
+        // Element is below viewport, use scroll trigger
+        tweenVars.scrollTrigger = {
           trigger: target,
           start: 'top 85%',
-        },
-      });
+        };
+      }
+
+      gsap.to(target, tweenVars);
     });
 
     // Generalized List Item Animation Function
