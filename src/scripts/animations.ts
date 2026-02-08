@@ -58,16 +58,18 @@ export function initAnimations() {
     // Secondary text fade in (Subtitle second line)
     const fadeIns = document.querySelectorAll('.fade-in-up');
     if (fadeIns.length > 0) {
-      gsap.to(fadeIns, {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.fade-in-up', // Note: Using selector here might trigger all at once if multiple exist. Consider specific iteration if needed.
-          start: 'top 90%',
-          toggleActions: 'play none none reverse',
-        },
+      fadeIns.forEach((fadeIn) => {
+        gsap.to(fadeIn, {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: fadeIn,
+            start: 'top 90%',
+            toggleActions: 'play none none reverse',
+          },
+        });
       });
     }
 
@@ -90,18 +92,18 @@ export function initAnimations() {
     // Section Header
     const sectionHeaders = document.querySelectorAll('.section-header');
     if (sectionHeaders.length > 0) {
-      // Assuming section header is usually related to a posts section, but we can make it more generic
-      // If .posts-section exists, trigger based on it, otherwise trigger based on self
-      const postsSection = document.querySelector('.posts-section');
-      const trigger = postsSection || '.section-header';
+      sectionHeaders.forEach((header) => {
+        // Trigger based on the closest posts-section if available, otherwise the header itself
+        const triggerElement = header.closest('.posts-section') || header;
 
-      gsap.to(sectionHeaders, {
-        opacity: 1,
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: trigger,
-          start: 'top 85%',
-        },
+        gsap.to(header, {
+          opacity: 1,
+          duration: 0.8,
+          scrollTrigger: {
+            trigger: triggerElement,
+            start: 'top 85%',
+          },
+        });
       });
     }
 
