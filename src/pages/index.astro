@@ -53,11 +53,14 @@ const structuredData = {
 						</p>
 						<div class="reveal-block bg-gray-600 dark:bg-gray-300"></div>
 					</div>
-					<p
-						class="text-gray-500 dark:text-gray-400 text-lg opacity-0 translate-y-4 fade-in-up"
-					>
-						日々の生活や考えたことを記録しています。
-					</p>
+					<div class="reveal-wrap">
+						<p
+							class="text-gray-500 dark:text-gray-400 text-lg reveal-content"
+						>
+							日々の生活や考えたことを記録しています。
+						</p>
+						<div class="reveal-block bg-gray-500 dark:bg-gray-400"></div>
+					</div>
 				</div>
 
 				<div
@@ -151,124 +154,7 @@ const structuredData = {
 	</div>
 </BaseLayout>
 
-<script>
-	import { gsap } from 'gsap'
-	import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-	gsap.registerPlugin(ScrollTrigger)
-
-	let mm: gsap.MatchMedia | undefined;
-
-	document.addEventListener('astro:page-load', () => {
-		// Clean up previous context if it exists (safety check)
-		if (mm) mm.revert();
-
-		mm = gsap.matchMedia();
-
-		// Only play animations if user has no preference for reduced motion
-		mm.add("(prefers-reduced-motion: no-preference)", () => {
-			// Background blob
-			gsap.to('.animate-blob', {
-				opacity: 1,
-				duration: 2,
-				ease: 'power2.inOut',
-			})
-
-			// Block Reveal Animations
-			const revealWraps = document.querySelectorAll('.reveal-wrap')
-
-			revealWraps.forEach((wrap, index) => {
-				const block = wrap.querySelector('.reveal-block')
-				const content = wrap.querySelector('.reveal-content')
-
-				const tl = gsap.timeline({
-					defaults: { ease: 'power2.inOut' },
-					scrollTrigger: {
-						trigger: wrap,
-						start: 'top 90%',
-					},
-				})
-
-				tl.to(block, {
-					scaleX: 1,
-					duration: 0.6,
-					transformOrigin: 'left',
-				})
-					.set(content, { opacity: 1 })
-					.to(block, {
-						scaleX: 0,
-						duration: 0.6,
-						transformOrigin: 'right',
-					})
-			})
-
-			// Secondary text fade in (Subtitle second line)
-			gsap.to('.fade-in-up', {
-				y: 0,
-				opacity: 1,
-				duration: 0.8,
-				ease: 'power2.out',
-				scrollTrigger: {
-					trigger: '.fade-in-up',
-					start: 'top 90%',
-					toggleActions: 'play none none reverse',
-				},
-			})
-
-			// Buttons animation
-			gsap.to('.hero-actions', {
-				y: 0,
-				opacity: 1,
-				duration: 0.8,
-				ease: 'power2.out',
-				scrollTrigger: {
-					trigger: '.hero-actions',
-					start: 'top 90%',
-					toggleActions: 'play none none reverse',
-				},
-			})
-
-			// Section Header
-			gsap.to('.section-header', {
-				opacity: 1,
-				duration: 0.8,
-				scrollTrigger: {
-					trigger: '.posts-section',
-					start: 'top 85%',
-				},
-			})
-
-			// Post List Interactions
-			const postItems = document.querySelectorAll('.post-item')
-
-			gsap.to(postItems, {
-				y: 0,
-				opacity: 1,
-				duration: 0.6,
-				stagger: 0.1,
-				scrollTrigger: {
-					trigger: '.posts-section',
-					start: 'top 80%',
-				},
-			})
-		});
-		
-		// Fallback for reduced motion: ensure content is visible
-		mm.add("(prefers-reduced-motion: reduce)", () => {
-			gsap.set('.reveal-content', { opacity: 1 });
-			gsap.set('.fade-in-up', { opacity: 1, y: 0 });
-			gsap.set('.hero-actions', { opacity: 1, y: 0 });
-			gsap.set('.section-header', { opacity: 1 });
-			gsap.set('.post-item', { opacity: 1, y: 0 });
-			gsap.set('.animate-blob', { opacity: 1 });
-		});
-	})
-
-	// Cleanup on page swap
-	document.addEventListener('astro:before-swap', () => {
-		mm && mm.revert();
-	});
-</script>
 
 <style>
 	/* Custom styles for gradients and details */
