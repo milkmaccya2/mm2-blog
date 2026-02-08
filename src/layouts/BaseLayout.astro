@@ -1,10 +1,10 @@
 ---
 import { ClientRouter } from 'astro:transitions';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import ThemeScript from '../components/ThemeScript.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import BaseHead from '@/components/BaseHead.astro';
+import Footer from '@/components/Footer.astro';
+import Header from '@/components/Header.astro';
+import ThemeScript from '@/components/ThemeScript.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
 
 interface Props {
   title?: string;
@@ -26,7 +26,7 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION, structuredData } = A
     <ClientRouter />
     <ThemeScript />
     <script>
-      import '../scripts/animations';
+      import '@/scripts/animations';
     </script>
   </head>
   <body>

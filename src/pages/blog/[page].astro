@@ -2,9 +2,9 @@
 import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
 import type { GetStaticPaths, Page } from 'astro';
-import BlogPostList from '../../components/BlogPostList.astro';
-import { BLOG_PAGE_SIZE, SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogPostList from '@/components/BlogPostList.astro';
+import { BLOG_PAGE_SIZE, SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
+import BaseLayout from '@/layouts/BaseLayout.astro';
 
 export const getStaticPaths = (async ({ paginate }) => {
   const posts = (await getCollection('blog')).sort(
