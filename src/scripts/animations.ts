@@ -93,8 +93,8 @@ export function initAnimations() {
     const sectionHeaders = document.querySelectorAll('.section-header');
     if (sectionHeaders.length > 0) {
       sectionHeaders.forEach((header) => {
-        // Trigger based on the closest posts-section if available, otherwise the header itself
-        const triggerElement = header.closest('.posts-section') || header;
+        // Trigger based on the closest parent section if available, otherwise the header itself
+        const triggerElement = header.closest('section') || header;
 
         gsap.to(header, {
           opacity: 1,
@@ -107,23 +107,31 @@ export function initAnimations() {
       });
     }
 
-    // Post List Interactions
-    const postItems = document.querySelectorAll('.post-item');
-    if (postItems.length > 0) {
-      const postsSection = document.querySelector('.posts-section');
-      const trigger = postsSection || postItems[0];
+    // Generalized List Item Animation Function
+    const animateListItems = (itemSelector: string, sectionSelector: string) => {
+      const items = document.querySelectorAll(itemSelector);
+      if (items.length > 0) {
+        const section = document.querySelector(sectionSelector);
+        const trigger = section || items[0];
 
-      gsap.to(postItems, {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: trigger,
-          start: 'top 80%',
-        },
-      });
-    }
+        gsap.to(items, {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: trigger,
+            start: 'top 80%',
+          },
+        });
+      }
+    };
+
+    // Post List Interactions
+    animateListItems('.post-item', '.posts-section');
+
+    // Project List Interactions
+    animateListItems('.project-item', '.projects-section');
   });
 
   // Fallback for reduced motion: ensure content is visible
@@ -133,6 +141,7 @@ export function initAnimations() {
     gsap.set('.hero-actions', { opacity: 1, y: 0 });
     gsap.set('.section-header', { opacity: 1 });
     gsap.set('.post-item', { opacity: 1, y: 0 });
+    gsap.set('.project-item', { opacity: 1, y: 0 });
     gsap.set('.animate-blob', { opacity: 1 });
   });
 }
