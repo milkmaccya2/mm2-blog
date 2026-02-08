@@ -10,12 +10,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   description="My personal projects"
 >
   <main class="max-w-4xl mx-auto px-4 py-8">
-    <section class="text-left">
+    <section class="projects-page-section text-left">
       <h1 class="text-4xl font-bold mb-8 text-center scramble-text" data-original-text="Personal Projects">Personal Projects</h1>
       <div class="space-y-8">
         {
           PROJECTS.map((project) => (
-            <ProjectCard {...project} />
+            <div class="project-item opacity-0 transform translate-y-4">
+              <ProjectCard {...project} />
+            </div>
           ))
         }
       </div>

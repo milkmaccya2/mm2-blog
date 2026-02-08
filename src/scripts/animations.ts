@@ -142,8 +142,8 @@ export function initAnimations() {
       gsap.to(target, tweenVars);
     });
 
-    // Generalized List Item Animation Function
-    const animateListItems = (itemSelector: string, sectionSelector: string) => {
+    // Generalized Slide-in Animation Function (Bottom to Top, like hero-actions)
+    const animateSlideInItems = (itemSelector: string, sectionSelector: string) => {
       const items = document.querySelectorAll(itemSelector);
       if (items.length > 0) {
         const section = document.querySelector(sectionSelector);
@@ -152,8 +152,9 @@ export function initAnimations() {
         gsap.to(items, {
           y: 0,
           opacity: 1,
-          duration: 0.6,
+          duration: 0.8,
           stagger: 0.1,
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: trigger,
             start: 'top 80%',
@@ -163,10 +164,19 @@ export function initAnimations() {
     };
 
     // Post List Interactions
-    animateListItems('.post-item', '.posts-section');
+    animateSlideInItems('.post-item', '.posts-section');
 
-    // Project List Interactions
-    animateListItems('.project-item', '.projects-section');
+    // Project List Interactions (Homepage)
+    animateSlideInItems('.project-item', '.projects-section');
+
+    // Projects Page - All Projects
+    animateSlideInItems('.project-item', '.projects-page-section');
+
+    // About Page - Experience Items
+    animateSlideInItems('.experience-item', '.experience-section');
+
+    // About Page - Skills Items
+    animateSlideInItems('.skills-item', '.skills-section');
   });
 
   // Fallback for reduced motion: ensure content is visible
@@ -177,6 +187,8 @@ export function initAnimations() {
     gsap.set('.section-header', { opacity: 1 });
     gsap.set('.post-item', { opacity: 1, y: 0 });
     gsap.set('.project-item', { opacity: 1, y: 0 });
+    gsap.set('.experience-item', { opacity: 1, y: 0 });
+    gsap.set('.skills-item', { opacity: 1, y: 0 });
     gsap.set('.animate-blob', { opacity: 1 });
 
     // Ensure scramble text matches final state
