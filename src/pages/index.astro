@@ -25,31 +25,53 @@ const structuredData = {
 <BaseLayout structuredData={structuredData}>
 	<div class="relative overflow-hidden">
 		<!-- Decorative Background Element -->
-		<div class="absolute top-0 right-0 -z-10 w-[800px] h-[800px] bg-gradient-to-br from-blue-100/40 to-purple-100/40 dark:from-blue-900/20 dark:to-purple-900/20 rounded-full blur-3xl opacity-0 animate-blob"></div>
-		
+		<div
+			class="absolute top-0 right-0 -z-10 w-[800px] h-[800px] bg-gradient-to-br from-blue-100/40 to-purple-100/40 dark:from-blue-900/20 dark:to-purple-900/20 rounded-full blur-3xl opacity-0 animate-blob"
+		>
+		</div>
+
 		<main class="max-w-4xl mx-auto px-4 py-12 md:py-20">
 			<!-- Hero Section -->
-			<section class="hero-section mb-20 relative">
-				<div>
-					<h1 class="hero-title text-5xl md:text-7xl font-extrabold mb-6 tracking-tight leading-tight text-gray-900 dark:text-white">
-						Milkmaccya's Log
-					</h1>
+			<section class="hero-section mb-20 relative px-4 md:px-0">
+				<div class="mb-6">
+					<div class="reveal-wrap">
+						<h1
+							class="hero-title text-5xl md:text-7xl font-extrabold tracking-tight leading-tight text-gray-900 dark:text-white reveal-content"
+						>
+							Milkmaccya's Log
+						</h1>
+						<div class="reveal-block bg-gray-900 dark:bg-white"></div>
+					</div>
 				</div>
-				
+
 				<div class="hero-subtitle-wrapper mb-8">
-					<p class="hero-subtitle text-xl md:text-2xl text-gray-600 dark:text-gray-300 font-light leading-relaxed max-w-2xl">
-						Tea break & Life Log.<br />
-						<span class="text-gray-500 dark:text-gray-400 text-lg">日々の生活や考えたことを記録しています。</span>
+					<div class="reveal-wrap mb-2">
+						<p
+							class="hero-subtitle text-xl md:text-2xl text-gray-600 dark:text-gray-300 font-light leading-relaxed reveal-content"
+						>
+							Tea break & Life Log.
+						</p>
+						<div class="reveal-block bg-gray-600 dark:bg-gray-300"></div>
+					</div>
+					<p
+						class="text-gray-500 dark:text-gray-400 text-lg opacity-0 translate-y-4 fade-in-up"
+					>
+						日々の生活や考えたことを記録しています。
 					</p>
 				</div>
 
-				<div class="hero-actions flex flex-col sm:flex-row gap-4 opacity-0 transform translate-y-4">
+				<div
+					class="hero-actions flex flex-col sm:flex-row gap-4 opacity-0 transform translate-y-4"
+				>
 					<a
 						href="/about"
 						class="group relative px-8 py-3 bg-gray-900 text-white dark:bg-white dark:text-gray-900 rounded-full font-medium overflow-hidden transition-all hover:scale-105 hover:shadow-lg"
 					>
 						<span class="relative z-10">About Me</span>
-						<div class="absolute inset-0 bg-gray-700 dark:bg-gray-200 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+						<div
+							class="absolute inset-0 bg-gray-700 dark:bg-gray-200 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"
+						>
+						</div>
 					</a>
 					<a
 						href="/blog"
@@ -62,14 +84,19 @@ const structuredData = {
 
 			<!-- Recent Posts Section -->
 			<section class="posts-section">
-				<div class="flex items-center justify-between mb-8 pb-4 border-b border-gray-100 dark:border-gray-800 opacity-0 section-header">
+				<div
+					class="flex items-center justify-between mb-8 pb-4 border-b border-gray-100 dark:border-gray-800 opacity-0 section-header"
+				>
 					<h2 class="section-title text-2xl font-bold">Recent Posts</h2>
 					<a
 						href="/blog"
 						class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 flex items-center gap-1 group"
 					>
-						View All 
-						<span class="transform group-hover:translate-x-1 transition-transform">&rarr;</span>
+						View All
+						<span
+							class="transform group-hover:translate-x-1 transition-transform"
+							>&rarr;</span
+						>
 					</a>
 				</div>
 
@@ -97,8 +124,19 @@ const structuredData = {
 										</div>
 										<div class="hidden md:block">
 											<div class="w-10 h-10 rounded-full border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 group-hover:text-blue-500 group-hover:border-blue-200 dark:group-hover:border-blue-800 transition-all">
-												<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transform group-hover:rotate-45 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													class="w-5 h-5 transform group-hover:rotate-45 transition-transform duration-300"
+													fill="none"
+													viewBox="0 0 24 24"
+													stroke="currentColor"
+												>
+													<path
+														stroke-linecap="round"
+														stroke-linejoin="round"
+														stroke-width="2"
+														d="M14 5l7 7m0 0l-7 7m7-7H3"
+													/>
 												</svg>
 											</div>
 										</div>
@@ -114,52 +152,86 @@ const structuredData = {
 </BaseLayout>
 
 <script>
-	import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
+	import { gsap } from 'gsap'
+	import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-    gsap.registerPlugin(ScrollTrigger);
+	gsap.registerPlugin(ScrollTrigger)
 
 	document.addEventListener('astro:page-load', () => {
-		// Hero Animations
-		const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
 		// Background blob
-		gsap.to('.animate-blob', { 
-			opacity: 1, 
-			duration: 2, 
-			ease: "power2.inOut" 
-		});
-
-		// Title animation
-		tl.from('.hero-title', {
-			y: 50,
-			opacity: 0,
-			duration: 1,
+		gsap.to('.animate-blob', {
+			opacity: 1,
+			duration: 2,
+			ease: 'power2.inOut',
 		})
-		.from('.hero-subtitle', {
-			y: 30,
-			opacity: 0,
-			duration: 0.8,
-		}, "-=0.6")
-		.to('.hero-actions', {
+
+		// Block Reveal Animations
+		const revealWraps = document.querySelectorAll('.reveal-wrap')
+
+		revealWraps.forEach((wrap, index) => {
+			const block = wrap.querySelector('.reveal-block')
+			const content = wrap.querySelector('.reveal-content')
+
+			const tl = gsap.timeline({
+				defaults: { ease: 'power2.inOut' },
+				scrollTrigger: {
+					trigger: wrap,
+					start: 'top 90%',
+				},
+			})
+
+			tl.to(block, {
+				scaleX: 1,
+				duration: 0.6,
+				transformOrigin: 'left',
+			})
+				.set(content, { opacity: 1 })
+				.to(block, {
+					scaleX: 0,
+					duration: 0.6,
+					transformOrigin: 'right',
+				})
+		})
+
+		// Secondary text fade in (Subtitle second line)
+		gsap.to('.fade-in-up', {
 			y: 0,
 			opacity: 1,
 			duration: 0.8,
-		}, "-=0.6");
-		
+			ease: 'power2.out',
+			scrollTrigger: {
+				trigger: '.fade-in-up',
+				start: 'top 90%',
+				toggleActions: 'play none none reverse',
+			},
+		})
+
+		// Buttons animation
+		gsap.to('.hero-actions', {
+			y: 0,
+			opacity: 1,
+			duration: 0.8,
+			ease: 'power2.out',
+			scrollTrigger: {
+				trigger: '.hero-actions',
+				start: 'top 90%',
+				toggleActions: 'play none none reverse',
+			},
+		})
+
 		// Section Header
 		gsap.to('.section-header', {
 			opacity: 1,
 			duration: 0.8,
 			scrollTrigger: {
 				trigger: '.posts-section',
-				start: "top 85%",
-			}
-		});
+				start: 'top 85%',
+			},
+		})
 
 		// Post List Interactions
-		const postItems = document.querySelectorAll('.post-item');
-		
+		const postItems = document.querySelectorAll('.post-item')
+
 		gsap.to(postItems, {
 			y: 0,
 			opacity: 1,
@@ -167,20 +239,20 @@ const structuredData = {
 			stagger: 0.1,
 			scrollTrigger: {
 				trigger: '.posts-section',
-				start: "top 80%",
-			}
-		});
+				start: 'top 80%',
+			},
+		})
 
 		// Hover effects for posts
 		postItems.forEach((item) => {
 			item.addEventListener('mouseenter', () => {
-				gsap.to(item, { scale: 1.02, duration: 0.3, ease: "power2.out" });
-			});
+				gsap.to(item, { scale: 1.02, duration: 0.3, ease: 'power2.out' })
+			})
 			item.addEventListener('mouseleave', () => {
-				gsap.to(item, { scale: 1, duration: 0.3, ease: "power2.out" });
-			});
-		});
-	});
+				gsap.to(item, { scale: 1, duration: 0.3, ease: 'power2.out' })
+			})
+		})
+	})
 </script>
 
 <style>
@@ -190,8 +262,34 @@ const structuredData = {
 		animation: blob-bounce 10s infinite alternate;
 	}
 
+	.reveal-wrap {
+		position: relative;
+		width: fit-content;
+		display: block;
+	}
+
+	.reveal-content {
+		opacity: 0;
+	}
+
+	.reveal-block {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		transform: scaleX(0);
+		transform-origin: left;
+		z-index: 10;
+		/* Background color is set via utility classes in HTML */
+	}
+
 	@keyframes blob-bounce {
-		0% { transform: translate(0, 0) scale(1); }
-		100% { transform: translate(-20px, 20px) scale(1.1); }
+		0% {
+			transform: translate(0, 0) scale(1);
+		}
+		100% {
+			transform: translate(-20px, 20px) scale(1.1);
+		}
 	}
 </style>
