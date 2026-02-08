@@ -23,64 +23,288 @@ const structuredData = {
 ---
 
 <BaseLayout structuredData={structuredData}>
-	<main class="max-w-4xl mx-auto px-4 py-8">
-		<section class="mb-12 text-center md:text-left">
-			<h1 class="text-4xl font-bold mb-4">Milkmaccya's Log</h1>
-			<p class="text-lg text-gray-700 dark:text-gray-300 mb-6">
-				Tea break & Life Log. 日々の生活や考えたことを記録しています。
-			</p>
-			<div
-				class="flex flex-col md:flex-row gap-4 justify-center md:justify-start"
-			>
-				<a
-					href="/about"
-					class="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 transition text-center"
-				>
-					About Me
-				</a>
-				<a
-					href="/blog"
-					class="px-6 py-2 border border-black text-black rounded-lg hover:bg-gray-100 dark:border-white dark:text-white dark:hover:bg-gray-800 transition text-center"
-				>
-					Read Blog
-				</a>
-			</div>
-		</section>
+	<div class="relative overflow-hidden">
+		<!-- Decorative Background Element -->
+		<div
+			class="absolute top-0 right-0 -z-10 w-[800px] h-[800px] bg-gradient-to-br from-blue-100/40 to-purple-100/40 dark:from-blue-900/20 dark:to-purple-900/20 rounded-full blur-3xl opacity-0 animate-blob"
+		>
+		</div>
 
-		<section>
-			<h2 class="text-2xl font-bold mb-6 border-b pb-2">Recent Posts</h2>
-			<ul class="space-y-6">
-				{
-					posts.map((post) => (
-						<li class="group">
-							<a
-								href={`/blog/${post.id}/`}
-								class="block p-4 -mx-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition"
-							>
-								<h3 class="text-xl font-semibold text-black dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition mb-1">
-									{post.data.title}
-								</h3>
-								<p class="text-sm text-gray-500 dark:text-gray-400 mb-2">
-									<FormattedDate date={post.data.pubDate} />
-								</p>
-								{post.data.description && (
-									<p class="text-gray-600 dark:text-gray-300 line-clamp-2">
-										{post.data.description}
-									</p>
-								)}
-							</a>
-						</li>
-					))
-				}
-			</ul>
-			<div class="mt-8 text-center md:text-left">
-				<a
-					href="/blog"
-					class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium"
+		<main class="max-w-4xl mx-auto px-4 py-12 md:py-20">
+			<!-- Hero Section -->
+			<section class="hero-section mb-20 relative px-4 md:px-0">
+				<div class="mb-6">
+					<div class="reveal-wrap">
+						<h1
+							class="hero-title text-5xl md:text-7xl font-extrabold tracking-tight leading-tight text-gray-900 dark:text-white reveal-content"
+						>
+							Milkmaccya's Log
+						</h1>
+						<div class="reveal-block bg-gray-900 dark:bg-white"></div>
+					</div>
+				</div>
+
+				<div class="hero-subtitle-wrapper mb-8">
+					<div class="reveal-wrap mb-2">
+						<p
+							class="hero-subtitle text-xl md:text-2xl text-gray-600 dark:text-gray-300 font-light leading-relaxed reveal-content"
+						>
+							Tea break & Life Log.
+						</p>
+						<div class="reveal-block bg-gray-600 dark:bg-gray-300"></div>
+					</div>
+					<p
+						class="text-gray-500 dark:text-gray-400 text-lg opacity-0 translate-y-4 fade-in-up"
+					>
+						日々の生活や考えたことを記録しています。
+					</p>
+				</div>
+
+				<div
+					class="hero-actions flex flex-col sm:flex-row gap-4 opacity-0 transform translate-y-4"
 				>
-					All Posts &rarr;
-				</a>
-			</div>
-		</section>
-	</main>
+					<a
+						href="/about"
+						class="group relative px-8 py-3 bg-gray-900 text-white dark:bg-white dark:text-gray-900 rounded-full font-medium overflow-hidden transition-all hover:scale-105 hover:shadow-lg"
+					>
+						<span class="relative z-10">About Me</span>
+						<div
+							class="absolute inset-0 bg-gray-700 dark:bg-gray-200 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"
+						>
+						</div>
+					</a>
+					<a
+						href="/blog"
+						class="group px-8 py-3 border border-gray-300 dark:border-gray-700 rounded-full font-medium hover:border-gray-900 dark:hover:border-white transition-all hover:bg-gray-50 dark:hover:bg-gray-800"
+					>
+						Read Blog
+					</a>
+				</div>
+			</section>
+
+			<!-- Recent Posts Section -->
+			<section class="posts-section">
+				<div
+					class="flex items-center justify-between mb-8 pb-4 border-b border-gray-100 dark:border-gray-800 opacity-0 section-header"
+				>
+					<h2 class="section-title text-2xl font-bold">Recent Posts</h2>
+					<a
+						href="/blog"
+						class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 flex items-center gap-1 group"
+					>
+						View All
+						<span
+							class="transform group-hover:translate-x-1 transition-transform"
+							>&rarr;</span
+						>
+					</a>
+				</div>
+
+				<ul class="space-y-4">
+					{
+						posts.map((post) => (
+							<li class="post-item opacity-0 transform translate-y-8">
+								<a
+									href={`/blog/${post.id}/`}
+									class="block group p-6 rounded-2xl bg-white dark:bg-gray-900 hover:shadow-xl dark:hover:bg-gray-800 transition-all duration-300 border border-gray-100 dark:border-gray-800 hover:border-blue-100 dark:hover:border-blue-900 hover:scale-[1.02]"
+								>
+									<article class="flex flex-col md:flex-row gap-4 md:items-center justify-between">
+										<div class="flex-1">
+											<h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-2">
+												{post.data.title}
+											</h3>
+											{post.data.description && (
+												<p class="text-gray-600 dark:text-gray-400 line-clamp-2 text-sm mb-3">
+													{post.data.description}
+												</p>
+											)}
+											<div class="flex items-center gap-3 text-xs text-gray-500 font-medium">
+												<FormattedDate date={post.data.pubDate} />
+											</div>
+										</div>
+										<div class="hidden md:block">
+											<div class="w-10 h-10 rounded-full border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 group-hover:text-blue-500 group-hover:border-blue-200 dark:group-hover:border-blue-800 transition-all">
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													class="w-5 h-5 transform group-hover:rotate-45 transition-transform duration-300"
+													fill="none"
+													viewBox="0 0 24 24"
+													stroke="currentColor"
+												>
+													<path
+														stroke-linecap="round"
+														stroke-linejoin="round"
+														stroke-width="2"
+														d="M14 5l7 7m0 0l-7 7m7-7H3"
+													/>
+												</svg>
+											</div>
+										</div>
+									</article>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+		</main>
+	</div>
 </BaseLayout>
+
+<script>
+	import { gsap } from 'gsap'
+	import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+	gsap.registerPlugin(ScrollTrigger)
+
+	let mm: gsap.MatchMedia | undefined;
+
+	document.addEventListener('astro:page-load', () => {
+		// Clean up previous context if it exists (safety check)
+		if (mm) mm.revert();
+
+		mm = gsap.matchMedia();
+
+		// Only play animations if user has no preference for reduced motion
+		mm.add("(prefers-reduced-motion: no-preference)", () => {
+			// Background blob
+			gsap.to('.animate-blob', {
+				opacity: 1,
+				duration: 2,
+				ease: 'power2.inOut',
+			})
+
+			// Block Reveal Animations
+			const revealWraps = document.querySelectorAll('.reveal-wrap')
+
+			revealWraps.forEach((wrap, index) => {
+				const block = wrap.querySelector('.reveal-block')
+				const content = wrap.querySelector('.reveal-content')
+
+				const tl = gsap.timeline({
+					defaults: { ease: 'power2.inOut' },
+					scrollTrigger: {
+						trigger: wrap,
+						start: 'top 90%',
+					},
+				})
+
+				tl.to(block, {
+					scaleX: 1,
+					duration: 0.6,
+					transformOrigin: 'left',
+				})
+					.set(content, { opacity: 1 })
+					.to(block, {
+						scaleX: 0,
+						duration: 0.6,
+						transformOrigin: 'right',
+					})
+			})
+
+			// Secondary text fade in (Subtitle second line)
+			gsap.to('.fade-in-up', {
+				y: 0,
+				opacity: 1,
+				duration: 0.8,
+				ease: 'power2.out',
+				scrollTrigger: {
+					trigger: '.fade-in-up',
+					start: 'top 90%',
+					toggleActions: 'play none none reverse',
+				},
+			})
+
+			// Buttons animation
+			gsap.to('.hero-actions', {
+				y: 0,
+				opacity: 1,
+				duration: 0.8,
+				ease: 'power2.out',
+				scrollTrigger: {
+					trigger: '.hero-actions',
+					start: 'top 90%',
+					toggleActions: 'play none none reverse',
+				},
+			})
+
+			// Section Header
+			gsap.to('.section-header', {
+				opacity: 1,
+				duration: 0.8,
+				scrollTrigger: {
+					trigger: '.posts-section',
+					start: 'top 85%',
+				},
+			})
+
+			// Post List Interactions
+			const postItems = document.querySelectorAll('.post-item')
+
+			gsap.to(postItems, {
+				y: 0,
+				opacity: 1,
+				duration: 0.6,
+				stagger: 0.1,
+				scrollTrigger: {
+					trigger: '.posts-section',
+					start: 'top 80%',
+				},
+			})
+		});
+		
+		// Fallback for reduced motion: ensure content is visible
+		mm.add("(prefers-reduced-motion: reduce)", () => {
+			gsap.set('.reveal-content', { opacity: 1 });
+			gsap.set('.fade-in-up', { opacity: 1, y: 0 });
+			gsap.set('.hero-actions', { opacity: 1, y: 0 });
+			gsap.set('.section-header', { opacity: 1 });
+			gsap.set('.post-item', { opacity: 1, y: 0 });
+			gsap.set('.animate-blob', { opacity: 1 });
+		});
+	})
+
+	// Cleanup on page swap
+	document.addEventListener('astro:before-swap', () => {
+		mm && mm.revert();
+	});
+</script>
+
+<style>
+	/* Custom styles for gradients and details */
+	.animate-blob {
+		filter: blur(80px);
+		animation: blob-bounce 10s infinite alternate;
+	}
+
+	.reveal-wrap {
+		position: relative;
+		width: fit-content;
+		display: block;
+	}
+
+	.reveal-content {
+		opacity: 0;
+	}
+
+	.reveal-block {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		transform: scaleX(0);
+		transform-origin: left;
+		z-index: 10;
+		/* Background color is set via utility classes in HTML */
+	}
+
+	@keyframes blob-bounce {
+		0% {
+			transform: translate(0, 0) scale(1);
+		}
+		100% {
+			transform: translate(-20px, 20px) scale(1.1);
+		}
+	}
+</style>
