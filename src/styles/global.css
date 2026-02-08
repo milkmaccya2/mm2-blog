@@ -5,7 +5,6 @@
 @variant dark (&:where(.dark, .dark *));
 
 :root {
-  --font-body: 'Noto Sans JP Variable', sans-serif;
   --color-bg: #ffffff;
   --color-text: #1f2937; /* gray-800 */
 }
@@ -16,7 +15,6 @@
 }
 
 body {
-  font-family: var(--font-body);
   background-color: var(--color-bg);
   color: var(--color-text);
   /* Smooth transition for theme switch */
