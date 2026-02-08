@@ -15,14 +15,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="space-y-8">
         {
           PROJECTS.map((project) => (
-            <ProjectCard
-              title={project.title}
-              description={project.description}
-              url={project.url}
-              repoUrl={project.repoUrl}
-              tags={project.tags}
-              linkText={project.linkText}
-            />
+            <ProjectCard {...project} />
           ))
         }
       </div>
