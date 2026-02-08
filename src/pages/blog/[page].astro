@@ -1,0 +1,56 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths, Page } from 'astro';
+import BlogPostList from '../../components/BlogPostList.astro';
+import { BLOG_PAGE_SIZE, SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = (await getCollection('blog')).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  );
+
+  return paginate(posts, { pageSize: BLOG_PAGE_SIZE });
+}) satisfies GetStaticPaths;
+
+type Props = {
+  page: Page<CollectionEntry<'blog'>>;
+};
+
+const { page } = Astro.props;
+---
+
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+	<main>
+		<section>
+			<h1 class="text-4xl font-bold mb-8 text-center scramble-text" data-original-text="Blog">Blog</h1>
+			<BlogPostList posts={page.data} />
+			
+			<!-- ページネーション -->
+			<nav class="flex justify-center items-center gap-4 mt-12" aria-label="ページネーション">
+				{page.url.prev && (
+					<a
+						href={page.url.prev}
+						class="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition duration-200 no-underline text-black dark:text-white"
+					>
+						← 前のページ
+					</a>
+				)}
+				
+				<span class="text-gray-600 dark:text-gray-400">
+					ページ {page.currentPage} / {page.lastPage}
+				</span>
+				
+				{page.url.next && (
+					<a
+						href={page.url.next}
+						class="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition duration-200 no-underline text-black dark:text-white"
+					>
+						次のページ →
+					</a>
+				)}
+			</nav>
+		</section>
+	</main>
+</BaseLayout>
