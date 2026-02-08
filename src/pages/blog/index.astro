@@ -1,59 +1,28 @@
 ---
-import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import FormattedDate from '../../components/FormattedDate.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import BlogPostList from '../../components/BlogPostList.astro';
+import { BLOG_PAGE_SIZE, SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const allPosts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
-// 1ページあたり10件の記事を表示
-const pageSize = 10;
-const posts = allPosts.slice(0, pageSize);
-const hasNextPage = allPosts.length > pageSize;
+const posts = allPosts.slice(0, BLOG_PAGE_SIZE);
+const hasNextPage = allPosts.length > BLOG_PAGE_SIZE;
 ---
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
 	<main>
 		<section>
 			<h1 class="text-4xl font-bold mb-8 text-center scramble-text" data-original-text="Blog">Blog</h1>
-			<ul class="flex flex-wrap gap-2 list-none m-0 p-0 md:gap-8">
-				{
-					posts.map((post) => (
-						<li class="w-full text-center md:w-[calc(50%-1rem)] md:text-left first:w-full first:mb-4 first:text-center">
-							<a
-								href={`/blog/${post.id}/`}
-								class="block group no-underline transition duration-200"
-							>
-								{post.data.heroImage && (
-									<Image
-										width={720}
-										height={360}
-										src={post.data.heroImage}
-										alt=""
-										class="w-full mb-2 rounded-xl group-hover:shadow-xl transition duration-200"
-										transition:name={`hero-${post.id}`}
-									/>
-								)}
-								<h4 class="m-0 text-black dark:text-white leading-tight text-xl first:text-4xl transition duration-200 title">
-									{post.data.title}
-								</h4>
-								<p class="m-0 text-gray-500 transition duration-200 date">
-									<FormattedDate date={post.data.pubDate} />
-								</p>
-							</a>
-						</li>
-					))
-				}
-			</ul>
+			<BlogPostList posts={posts} />
 			
 			<!-- ページネーション -->
 			{hasNextPage && (
 				<nav class="flex justify-center items-center gap-4 mt-12" aria-label="ページネーション">
 					<span class="text-gray-600 dark:text-gray-400">
-						ページ 1 / {Math.ceil(allPosts.length / pageSize)}
+						ページ 1 / {Math.ceil(allPosts.length / BLOG_PAGE_SIZE)}
 					</span>
 					
 					<a

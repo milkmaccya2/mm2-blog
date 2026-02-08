@@ -4,6 +4,7 @@
 export const SITE_TITLE = 'milkmaccya or something';
 export const SITE_DESCRIPTION = 'Welcome to my website!';
 export const SITE_AUTHOR = 'milkmaccya';
+export const BLOG_PAGE_SIZE = 10;
 export const SOCIAL_LINKS = [
   {
     href: 'https://x.com/milkmaccya',

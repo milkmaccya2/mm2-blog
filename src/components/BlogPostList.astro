@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+}
+
+const { posts } = Astro.props;
+---
+
+<ul class="flex flex-wrap gap-2 list-none m-0 p-0 md:gap-8">
+	{
+		posts.map((post) => (
+			<li class="w-full text-center md:w-[calc(50%-1rem)] md:text-left first:w-full first:mb-4 first:text-center">
+				<a
+					href={`/blog/${post.id}/`}
+					class="block group no-underline transition duration-200"
+				>
+					{post.data.heroImage && (
+						<Image
+							width={720}
+							height={360}
+							src={post.data.heroImage}
+							alt={`${post.data.title}のヒーロー画像`}
+							class="w-full mb-2 rounded-xl group-hover:shadow-xl transition duration-200"
+							transition:name={`hero-${post.id}`}
+						/>
+					)}
+					<h4 class="m-0 text-black dark:text-white leading-tight text-xl first:text-4xl transition duration-200 title">
+						{post.data.title}
+					</h4>
+					<p class="m-0 text-gray-500 transition duration-200 date">
+						<FormattedDate date={post.data.pubDate} />
+					</p>
+				</a>
+			</li>
+		))
+	}
+</ul>
