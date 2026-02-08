@@ -124,6 +124,24 @@ export function initAnimations() {
         },
       });
     }
+
+    // Project List Interactions
+    const projectItems = document.querySelectorAll('.project-item');
+    if (projectItems.length > 0) {
+      const projectsSection = document.querySelector('.projects-section');
+      const trigger = projectsSection || projectItems[0];
+
+      gsap.to(projectItems, {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: trigger,
+          start: 'top 80%',
+        },
+      });
+    }
   });
 
   // Fallback for reduced motion: ensure content is visible
@@ -133,6 +151,7 @@ export function initAnimations() {
     gsap.set('.hero-actions', { opacity: 1, y: 0 });
     gsap.set('.section-header', { opacity: 1 });
     gsap.set('.post-item', { opacity: 1, y: 0 });
+    gsap.set('.project-item', { opacity: 1, y: 0 });
     gsap.set('.animate-blob', { opacity: 1 });
   });
 }

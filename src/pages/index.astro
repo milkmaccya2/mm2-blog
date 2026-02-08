@@ -1,12 +1,18 @@
 ---
 import { getCollection } from 'astro:content';
+
 import FormattedDate from '../components/FormattedDate.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { PROJECTS } from '../data/projects';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+
   .slice(0, 5);
+
+const projects = PROJECTS.slice(0, 2);
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -82,6 +88,41 @@ const structuredData = {
 					>
 						Read Blog
 					</a>
+				</div>
+			</section>
+
+			<!-- Projects Section -->
+			<section class="projects-section mb-20">
+				<div
+					class="flex items-center justify-between mb-8 pb-4 border-b border-gray-100 dark:border-gray-800 opacity-0 section-header"
+				>
+					<h2 class="section-title text-2xl font-bold">Projects</h2>
+					<a
+						href="/projects"
+						class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 flex items-center gap-1 group"
+					>
+						View All
+						<span class="transform group-hover:translate-x-1 transition-transform"
+							>&rarr;</span
+						>
+					</a>
+				</div>
+
+				<div class="mb-8 opacity-0 section-header">
+					<p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+						個人的に開発しているWebアプリケーションやツールの一部です。<br />
+						技術的な実験や、日常の課題解決のために作っています。
+					</p>
+				</div>
+
+				<div class="grid md:grid-cols-2 gap-6">
+					{
+						projects.map((project) => (
+							<div class="project-item opacity-0 transform translate-y-8 p-6 bg-gray-50 dark:bg-gray-800/50 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-blue-100 dark:hover:border-blue-900 transition-colors">
+								<ProjectCard {...project} />
+							</div>
+						))
+					}
 				</div>
 			</section>
 
