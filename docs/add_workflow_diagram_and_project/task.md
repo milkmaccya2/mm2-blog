@@ -1,6 +1,0 @@
-- [x] `README.md` にブログの仕組みを表す mermaid 図を追加する
-- [x] `src/pages/projects.astro` にこのブログリポジトリを Personal Project として追加する
-- [x] `README.md` にブログの仕組みを表す mermaid 図を追加する
-- [x] `src/pages/projects.astro` にこのブログリポジトリを Personal Project として追加する
-- [x] `README.md` の Mermaid 図を修正し、デプロイフローを詳細化する（矢印＝アクション、箱＝成果物に修正）
-- [x] Mermaid 図の入力元を「スマホ・PC」に変更する
