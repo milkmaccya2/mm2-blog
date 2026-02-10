@@ -6,7 +6,7 @@ PageFindがプロジェクトの検索エンジンとして導入されている
 ## 変更内容
 1.  **README.md の更新**
     *   「技術スタック」セクションに `Pagefind (Search Indexing)` を追加する。
-    *   詳細すぎるセクション（「パフォーマンス監視」、「依存関係の自動更新」）を削除し、内容を整理する。
+    *   詳細すぎるセクション（「パフォーマンス監視」、「依存関係の自動更新」、「Git Hooks」）を削除し、内容を整理する。
     *   「プロジェクト構成」セクションに、`.github`, `docs`, `tests`, `src/data` 等のディレクトリに加え、`tailwind.config.js`, `sentry.*.config.js` などの重要な設定ファイルを追加する。
 2.  **src/data/projects.ts の更新**
     *   `mm2-blog` プロジェクトの `tags` 配列に `'Pagefind'` を追加する。
