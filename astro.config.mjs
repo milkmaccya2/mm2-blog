@@ -12,8 +12,8 @@ export default defineConfig({
   integrations: [
     sentry({
       sourceMapsUploadOptions: {
-        project: 'mm21-blog',
-        org: 'private-jh',
+        project: process.env.SENTRY_PROJECT,
+        org: process.env.SENTRY_ORG,
         authToken: process.env.SENTRY_AUTH_TOKEN,
       },
     }),

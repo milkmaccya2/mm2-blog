@@ -94,6 +94,8 @@ cp .env.example .env
 | :--- | :--- |
 | `PUBLIC_SENTRY_DSN` | Sentryのデータソース名 (DSN) |
 | `SENTRY_AUTH_TOKEN` | Sentryの認証トークン (ソースマップのアップロードに使用) |
+| `SENTRY_ORG` | Sentryの組織名 |
+| `SENTRY_PROJECT` | Sentryのプロジェクト名 |
 
 Cloudflare Pages/Workers でデプロイする場合も、同様の変数をダッシュボードから設定してください。
 

@@ -3,7 +3,12 @@ import * as Sentry from '@sentry/astro';
 Sentry.init({
   dsn: import.meta.env.PUBLIC_SENTRY_DSN,
   integrations: [
-    Sentry.replayIntegration(),
+    Sentry.replayIntegration({
+      // Mask all text input fields by default to protect PII
+      maskAllInputs: true,
+      // For additional security, block specific elements containing highly sensitive data
+      block: ['[data-sentry-mask]'],
+    }),
   ],
   // 1. Send all errors
   sampleRate: 1.0,
