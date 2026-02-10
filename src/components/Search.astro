@@ -61,7 +61,7 @@
   function loadPagefindResources() {
     if (isDev) {
       const container = document.getElementById('pagefind-search')
-      if (container && !container.hasChildNodes()) {
+      if (container && !container.firstElementChild) {
         container.innerHTML =
           '<p class="text-center text-gray-500 py-4">Search is available in production builds only.</p>'
       }
