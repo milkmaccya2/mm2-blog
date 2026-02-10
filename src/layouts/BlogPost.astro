@@ -7,12 +7,14 @@ import BlogNavigation from '@/components/BlogNavigation.astro';
 import FormattedDate from '@/components/FormattedDate.astro';
 import { SITE_AUTHOR, SITE_TITLE } from '@/consts';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import type { StructuredDataType } from '@/types/structured-data';
 
 type Props = CollectionEntry<'blog'>['data'] & {
   headings?: { depth: number; slug: string; text: string }[];
   postId?: string;
   nextPost?: CollectionEntry<'blog'>;
   prevPost?: CollectionEntry<'blog'>;
+  ogImage?: string;
 };
 
 const {
@@ -27,7 +29,9 @@ const {
   prevPost,
 } = Astro.props;
 
-const structuredData = {
+const ogImage = postId ? `/og/${postId}.png` : undefined;
+
+const structuredData: StructuredDataType = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   headline: title,
@@ -50,11 +54,12 @@ const structuredData = {
       url: new URL(SiteLogo.src, Astro.url).toString(),
     },
   },
-};
+} as StructuredDataType;
 ---
 <BaseLayout
 	title={title}
 	description={description}
+	ogImage={ogImage}
 	structuredData={structuredData}
 >
 	<main class="max-w-full! px-0! md:px-4!">

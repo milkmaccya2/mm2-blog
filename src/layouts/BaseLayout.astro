@@ -10,10 +10,11 @@ import type { StructuredDataType } from '@/types/structured-data';
 interface Props {
   title?: string;
   description?: string;
+  ogImage?: string;
   structuredData?: StructuredDataType;
 }
 
-const { title = SITE_TITLE, description = SITE_DESCRIPTION, structuredData } = Astro.props;
+const { title = SITE_TITLE, description = SITE_DESCRIPTION, ogImage, structuredData } = Astro.props;
 ---
 
 <!doctype html>
@@ -22,6 +23,7 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION, structuredData } = A
     <BaseHead
       title={title}
       description={description}
+      ogImage={ogImage}
       structuredData={structuredData}
     />
     <ClientRouter />

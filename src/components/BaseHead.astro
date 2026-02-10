@@ -15,12 +15,14 @@ interface Props {
   title: string;
   description: string;
   image?: ImageMetadata;
+  ogImage?: string;
   structuredData?: StructuredDataType;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = FallbackImage, structuredData } = Astro.props;
+const { title, description, image = FallbackImage, ogImage, structuredData } = Astro.props;
+const ogImageUrl = ogImage ? new URL(ogImage, Astro.site) : new URL(image.src, Astro.site);
 ---
 
 <!-- Global Metadata -->
@@ -51,14 +53,14 @@ const { title, description, image = FallbackImage, structuredData } = Astro.prop
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image.src, Astro.url)} />
+<meta property="og:image" content={ogImageUrl} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image.src, Astro.url)} />
+<meta property="twitter:image" content={ogImageUrl} />
 
 {structuredData && <StructuredData data={structuredData} />}
 

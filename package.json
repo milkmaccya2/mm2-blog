@@ -17,16 +17,19 @@
     "@astrojs/sitemap": "^3.7.0",
     "@sentry/astro": "^10.38.0",
     "astro": "^6.0.0-beta.6",
-    "gsap": "^3.14.2"
+    "gsap": "^3.14.2",
+    "satori": "^0.19.1"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.14",
     "@playwright/test": "1.58.2",
     "@tailwindcss/typography": "0.5.19",
     "@tailwindcss/vite": "4.1.18",
+    "@types/react": "^19.2.13",
     "astro-compress": "2.3.9",
     "lefthook": "2.1.0",
     "pagefind": "1.4.0",
+    "react": "^19.2.4",
     "schema-dts": "1.1.5",
     "sharp": "0.34.5",
     "tailwindcss": "4.1.18"
