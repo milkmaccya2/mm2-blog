@@ -57,19 +57,13 @@
 
 <script is:inline define:vars={{ isDev: import.meta.env.DEV }}>
   let controller = null
-  let pagefindCssLoaded = false
 
   function loadPagefindCss() {
-    if (pagefindCssLoaded) return
-    if (document.querySelector('link[href="/pagefind/pagefind-ui.css"]')) {
-      pagefindCssLoaded = true
-      return
-    }
+    if (document.querySelector('link[href="/pagefind/pagefind-ui.css"]')) return
     const link = document.createElement('link')
     link.rel = 'stylesheet'
     link.href = '/pagefind/pagefind-ui.css'
     document.head.appendChild(link)
-    pagefindCssLoaded = true
   }
 
   function initSearch() {
