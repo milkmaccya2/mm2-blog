@@ -60,17 +60,26 @@ git commit --no-verify -m "commit message"
 ## プロジェクト構成
 
 ```text
-├── public/          # 静的アセット（フォント、favicon等）
+├── .github/workflows/ # CI/CD定義（Lighthouse監視等）
+├── docs/             # 開発ドキュメント（実装計画等）
+├── public/           # 静的アセット（フォント、favicon等）
 ├── src/
-│   ├── assets/      # ビルド処理されるアセット（画像等）
-│   ├── components/  # Astroコンポーネント
-│   ├── content/     # 記事コンテンツ (Markdown)
-│   ├── layouts/     # ページレイアウト
-│   ├── pages/       # ルーティング定義
-│   └── styles/      # グローバルスタイル
-├── astro.config.mjs # Astro設定
+│   ├── assets/       # ビルド処理されるアセット（画像等）
+│   ├── components/   # Astroコンポーネント
+│   ├── content/      # 記事コンテンツ (Markdown)
+│   ├── data/         # プロジェクト情報などの静的データ
+│   ├── layouts/      # ページレイアウト
+│   ├── lib/          # ユーティリティ関数
+│   ├── pages/        # ルーティング定義
+│   ├── styles/       # グローバルスタイル
+│   └── consts.ts     # 共通定数定義
+├── tests/            # E2Eテスト (Playwright)
+├── astro.config.mjs  # Astro設定
+├── biome.json        # Biome設定（Lint/Format）
+├── tailwind.config.js # Tailwind CSS設定
+├── sentry.*.config.js # Sentry（エラー追跡）設定
 ├── package.json
-└── wrangler.jsonc   # Cloudflare Workers設定
+└── wrangler.json     # Cloudflare Workers設定
 ```
 
 ## 技術スタック
@@ -82,23 +91,8 @@ git commit --no-verify -m "commit message"
 - Sentry (Error Tracking)
 - Renovate (Dependency Updates)
 - Lighthouse CI (Performance Monitoring)
+- Pagefind (Search Indexing)
 - Cloudflare Workers (Hosting)
-
-## パフォーマンス監視
-
-GitHub Actions で本番サイトのパフォーマンスを週次で自動監視しています。
-
-- **ツール**: Lighthouse CI (`@lhci/cli`)
-- **スケジュール**: 毎週月曜 09:00 JST
-- **計測対象**: トップページ (3回計測の中央値)
-- **閾値**: Performance / Accessibility / Best Practices / SEO 各90点
-- **通知**: 閾値を下回った場合、`lighthouse` ラベル付きの GitHub Issue を自動起票
-
-手動実行: Actions タブ → 「Lighthouse Performance Monitor」→「Run workflow」
-
-## 依存関係の自動更新
-
-[Renovate](https://docs.renovatebot.com/) により依存パッケージの更新PRが自動作成されます。
 
 ## 環境変数
 
