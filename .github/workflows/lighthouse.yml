@@ -28,7 +28,7 @@ jobs:
         run: npm install -g @lhci/cli
 
       - name: Run Lighthouse
-        run: lhci collect --url="https://blog.milkmaccya.com" --numberOfRuns=3 --settings.chromeFlags="--no-sandbox"
+        run: lhci collect --url="https://blog.milkmaccya.com" --numberOfRuns=3 --settings.chromeFlags="--no-sandbox" --settings.throttling.cpuSlowdownMultiplier=1
 
       - name: Evaluate scores and create issue if needed
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
