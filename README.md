@@ -42,25 +42,25 @@ graph TD
 
 ```text
 ├── .github/workflows/ # CI/CD定義（Lighthouse監視等）
-├── docs/             # 開発ドキュメント（実装計画等）
-├── public/           # 静的アセット（フォント、favicon等）
+├── docs/              # 開発ドキュメント（実装計画等）
+├── public/            # 静的アセット（フォント、favicon等）
 ├── src/
-│   ├── assets/       # ビルド処理されるアセット（画像等）
-│   ├── components/   # Astroコンポーネント
-│   ├── content/      # 記事コンテンツ (Markdown)
-│   ├── data/         # プロジェクト情報などの静的データ
-│   ├── layouts/      # ページレイアウト
-│   ├── lib/          # ユーティリティ関数
-│   ├── pages/        # ルーティング定義
-│   ├── styles/       # グローバルスタイル
-│   └── consts.ts     # 共通定数定義
-├── tests/            # E2Eテスト (Playwright)
-├── astro.config.mjs  # Astro設定
-├── biome.json        # Biome設定（Lint/Format）
+│   ├── assets/        # ビルド処理されるアセット（画像等）
+│   ├── components/    # Astroコンポーネント
+│   ├── content/       # 記事コンテンツ (Markdown)
+│   ├── data/          # プロジェクト情報などの静的データ
+│   ├── layouts/       # ページレイアウト
+│   ├── lib/           # ユーティリティ関数
+│   ├── pages/         # ルーティング定義
+│   ├── styles/        # グローバルスタイル
+│   └── consts.ts      # 共通定数定義
+├── tests/             # E2Eテスト (Playwright)
+├── astro.config.mjs   # Astro設定
+├── biome.json         # Biome設定（Lint/Format）
 ├── tailwind.config.js # Tailwind CSS設定
 ├── sentry.*.config.js # Sentry（エラー追跡）設定
 ├── package.json
-└── wrangler.json     # Cloudflare Workers設定
+└── wrangler.json      # Cloudflare Workers設定
 ```
 
 ## 技術スタック
