@@ -22,7 +22,7 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = FallbackImage, ogImage, structuredData } = Astro.props;
-const ogImageUrl = ogImage ? new URL(ogImage, Astro.site) : new URL(image.src, Astro.url);
+const ogImageUrl = ogImage ? new URL(ogImage, Astro.site) : new URL(image.src, Astro.site);
 ---
 
 <!-- Global Metadata -->
