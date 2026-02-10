@@ -1,5 +1,6 @@
 import { getCollection } from 'astro:content';
 import type { APIRoute, GetStaticPaths } from 'astro';
+import type { ReactNode } from 'react';
 import satori from 'satori';
 import sharp from 'sharp';
 import { SITE_TITLE } from '@/consts';
@@ -13,7 +14,12 @@ function getFonts() {
     fontsPromise = Promise.all([
       loadGoogleFont('Noto Sans JP', 400),
       loadGoogleFont('Noto Sans JP', 700),
-    ]).then(([regular, bold]) => ({ regular, bold }));
+    ])
+      .then(([regular, bold]) => ({ regular, bold }))
+      .catch((error) => {
+        fontsPromise = null; // Reset on failure to allow retry
+        throw error;
+      });
   }
   return fontsPromise;
 }
@@ -42,7 +48,7 @@ export const GET: APIRoute = async ({ props }) => {
   const options = getSatoriOptions(fonts);
   const markup = getOgImage(title, formattedDate, SITE_TITLE);
 
-  const svg = await satori(markup as React.ReactNode, options);
+  const svg = await satori(markup as ReactNode, options);
   const png = await sharp(Buffer.from(svg)).png().toBuffer();
 
   return new Response(png, {
