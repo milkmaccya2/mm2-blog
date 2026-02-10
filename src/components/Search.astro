@@ -55,9 +55,22 @@
   </div>
 </dialog>
 
-{import.meta.env.PROD && <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />}
 <script is:inline define:vars={{ isDev: import.meta.env.DEV }}>
   let controller = null
+  let pagefindCssLoaded = false
+
+  function loadPagefindCss() {
+    if (pagefindCssLoaded) return
+    if (document.querySelector('link[href="/pagefind/pagefind-ui.css"]')) {
+      pagefindCssLoaded = true
+      return
+    }
+    const link = document.createElement('link')
+    link.rel = 'stylesheet'
+    link.href = '/pagefind/pagefind-ui.css'
+    document.head.appendChild(link)
+    pagefindCssLoaded = true
+  }
 
   function initSearch() {
     // 既存のイベントリスナーをクリーンアップ
@@ -100,6 +113,7 @@
 
     // Pagefindのリソースを動的に読み込む
     if (!isDev) {
+      loadPagefindCss()
       if (typeof PagefindUI === 'undefined') {
         const script = document.createElement('script')
         script.src = '/pagefind/pagefind-ui.js'
