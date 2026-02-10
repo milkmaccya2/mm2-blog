@@ -25,6 +25,7 @@ export const PROJECTS: Project[] = [
       'Renovate',
       'Lighthouse CI',
       'Pagefind',
+      'OGP',
     ],
   },
   {
