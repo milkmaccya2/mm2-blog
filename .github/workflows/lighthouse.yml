@@ -1,0 +1,142 @@
+name: Lighthouse Performance Monitor
+
+on:
+  schedule:
+    - cron: '0 0 * * 1' # 毎週月曜 09:00 JST (UTC 00:00)
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli
+
+      - name: Run Lighthouse
+        run: lhci collect --url="https://blog.milkmaccya.com" --numberOfRuns=3 --settings.chromeFlags="--no-sandbox"
+
+      - name: Evaluate scores and create issue if needed
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            const THRESHOLDS = {
+              performance: 90,
+              accessibility: 90,
+              'best-practices': 90,
+              seo: 90,
+            };
+
+            // .lighthouseci ディレクトリから LHR JSON を読み込み
+            const lhciDir = '.lighthouseci';
+            const files = fs.readdirSync(lhciDir).filter(f => f.startsWith('lhr-') && f.endsWith('.json'));
+
+            if (files.length === 0) {
+              core.setFailed('Lighthouse の結果ファイルが見つかりません');
+              return;
+            }
+
+            const results = files.map(f => JSON.parse(fs.readFileSync(path.join(lhciDir, f), 'utf8')));
+
+            // 各カテゴリの中央値を算出
+            function median(values) {
+              const sorted = [...values].sort((a, b) => a - b);
+              const mid = Math.floor(sorted.length / 2);
+              return sorted.length % 2 !== 0 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+            }
+
+            const categories = Object.keys(THRESHOLDS);
+            const scores = {};
+            for (const cat of categories) {
+              const values = results.map(r => Math.round(r.categories[cat].score * 100));
+              scores[cat] = median(values);
+            }
+
+            // ログ出力
+            core.info('=== Lighthouse Scores (中央値) ===');
+            for (const cat of categories) {
+              const status = scores[cat] >= THRESHOLDS[cat] ? '✅' : '❌';
+              core.info(`  ${cat}: ${scores[cat]} (閾値: ${THRESHOLDS[cat]}) ${status}`);
+            }
+
+            // 閾値チェック
+            const failures = categories.filter(cat => scores[cat] < THRESHOLDS[cat]);
+
+            if (failures.length === 0) {
+              core.info('すべてのスコアが閾値以上です');
+              return;
+            }
+
+            // 重複 Issue チェック
+            const issueTitle = '⚠️ Lighthouse スコア低下検知';
+            const existingIssues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'lighthouse',
+            });
+
+            const duplicate = existingIssues.data.find(issue => issue.title === issueTitle);
+            if (duplicate) {
+              core.info(`既存の Issue #${duplicate.number} があるためスキップします`);
+              return;
+            }
+
+            // Issue 作成
+            const now = new Date().toISOString().split('T')[0];
+            const scoreLines = categories.map(cat => {
+              const score = scores[cat];
+              const threshold = THRESHOLDS[cat];
+              const status = score >= threshold ? '✅' : '❌';
+              return `| ${cat} | ${score} | ${threshold} | ${status} |`;
+            });
+
+            const body = [
+              `## Lighthouse スコア低下検知`,
+              '',
+              `**計測日時**: ${now}`,
+              `**対象URL**: https://blog.milkmaccya.com`,
+              `**計測回数**: ${results.length}回 (中央値を使用)`,
+              '',
+              '| カテゴリ | スコア | 閾値 | 結果 |',
+              '|---|---|---|---|',
+              ...scoreLines,
+              '',
+              `> 詳細レポートは Actions の Artifact からダウンロードできます。`,
+              `> [ワークフロー実行結果](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})`,
+            ].join('\n');
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: issueTitle,
+              body: body,
+              labels: ['lighthouse'],
+            });
+
+            core.warning('スコアが閾値を下回ったため Issue を作成しました');
+
+      - name: Upload Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-report-${{ github.run_id }}
+          path: .lighthouseci/
+          retention-days: 30
