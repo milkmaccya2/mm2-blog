@@ -139,4 +139,5 @@ jobs:
         with:
           name: lighthouse-report-${{ github.run_id }}
           path: .lighthouseci/
+          include-hidden-files: true
           retention-days: 30
