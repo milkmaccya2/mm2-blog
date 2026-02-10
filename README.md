@@ -79,5 +79,23 @@ git commit --no-verify -m "commit message"
 - Tailwind CSS
 - Biome (Linter/Formatter)
 - Lefthook (Git Hooks)
+- Sentry (Error Tracking)
 - Cloudflare Workers (Hosting)
+
+## 環境変数
+
+ローカル開発には `.env` ファイルが必要です。`.env.example` を参考に作成してください。
+
+```bash
+cp .env.example .env
+```
+
+| 変数名 | 説明 |
+| :--- | :--- |
+| `PUBLIC_SENTRY_DSN` | Sentryのデータソース名 (DSN) |
+| `SENTRY_AUTH_TOKEN` | Sentryの認証トークン (ソースマップのアップロードに使用) |
+| `SENTRY_ORG` | Sentryの組織名 |
+| `SENTRY_PROJECT` | Sentryのプロジェクト名 |
+
+Cloudflare Pages/Workers でデプロイする場合も、同様の変数をダッシュボードから設定してください。
 
