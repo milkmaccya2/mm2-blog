@@ -8,6 +8,11 @@ import StructuredData from '@/components/StructuredData.astro';
 import { SITE_TITLE } from '@/consts';
 import type { StructuredDataType } from '@/types/structured-data';
 
+const sentryDsn = import.meta.env.PUBLIC_SENTRY_DSN;
+const sentryIngestOrigin = sentryDsn
+  ? new URL(sentryDsn).origin.replace(/^https:\/\/\w+@/, 'https://')
+  : null;
+
 interface Props {
   title: string;
   description: string;
@@ -58,3 +63,6 @@ const { title, description, image = FallbackImage, structuredData } = Astro.prop
 <meta property="twitter:image" content={new URL(image.src, Astro.url)} />
 
 {structuredData && <StructuredData data={structuredData} />}
+
+<!-- Sentry Preconnect -->
+{sentryIngestOrigin && <link rel="preconnect" href={sentryIngestOrigin} />}
