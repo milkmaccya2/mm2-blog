@@ -70,7 +70,7 @@ Lighthouse CI で本番サイトを計測 (3回実行して中央値を取得)
 
   詳細レポート: [Artifact リンク]
   計測日時: 2026-02-10
-  対象URL: https://...
+  対象URL: https://blog.milkmaccya.com
 ```
 
 ## 技術選定理由
