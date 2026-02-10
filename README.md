@@ -73,6 +73,7 @@ graph TD
 - Renovate (Dependency Updates)
 - Lighthouse CI (Performance Monitoring)
 - Pagefind (Search Indexing)
+- OGP Image Generation (Satori)
 - Cloudflare Workers (Hosting)
 
 ## 環境変数
