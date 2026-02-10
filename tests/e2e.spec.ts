@@ -1,20 +1,51 @@
-import { test, expect } from '@playwright/test'
+import { type Page, expect, test } from '@playwright/test'
 
-test('homepage has correct title', async ({ page }) => {
-  await page.goto('/')
-  await expect(page).toHaveTitle(/milkmaccya/)
-  await expect(page.getByRole('heading', { name: "Milkmaccya's Log" })).toBeVisible()
-})
+async function verifyLayout(page: Page) {
+  await expect(page).not.toHaveTitle('')
+  await expect(page.getByRole('navigation').first()).toBeVisible()
+  await expect(page.getByRole('main')).toBeVisible()
+  await expect(page.getByRole('contentinfo')).toBeVisible()
+}
 
-test('blog index page shows list of posts', async ({ page }) => {
-  await page.goto('/blog')
-  const listItems = page.getByRole('listitem')
-  await expect(listItems).not.toHaveCount(0)
-})
+test.describe('Smoke Tests', () => {
+  test('homepage', async ({ page }) => {
+    await page.goto('/')
+    await verifyLayout(page)
+    await expect(
+      page.getByRole('heading', { level: 1, name: "Milkmaccya's Log" }),
+    ).toBeVisible()
+  })
 
-test('can navigate to about page', async ({ page }) => {
-  await page.goto('/')
-  await page.getByRole('navigation').getByRole('link', { name: 'About' }).click()
-  await expect(page).toHaveURL(/.*about/)
-  await expect(page.getByRole('heading', { name: 'About' })).toBeVisible()
+  test('blog index', async ({ page }) => {
+    await page.goto('/blog')
+    await verifyLayout(page)
+    await expect(
+      page.getByRole('heading', { level: 1, name: 'Blog' }),
+    ).toBeVisible()
+    await expect(page.getByRole('listitem').first()).toBeVisible()
+  })
+
+  test('latest blog post', async ({ page }) => {
+    await page.goto('/blog')
+    await page.getByRole('listitem').first().getByRole('link').click();
+    await verifyLayout(page)
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+    await expect(page.locator('article')).toBeVisible()
+  })
+
+  test('about page', async ({ page }) => {
+    await page.goto('/about')
+    await verifyLayout(page)
+    await expect(
+      page.getByRole('heading', { level: 1, name: 'About Me' }),
+    ).toBeVisible()
+  })
+
+  test('projects page', async ({ page }) => {
+    await page.goto('/projects')
+    await verifyLayout(page)
+    await expect(
+      page.getByRole('heading', { level: 1, name: 'Personal Projects' }),
+    ).toBeVisible()
+  })
 })
