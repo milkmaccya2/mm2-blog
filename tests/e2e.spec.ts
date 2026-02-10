@@ -27,11 +27,7 @@ test.describe('Smoke Tests', () => {
 
   test('latest blog post', async ({ page }) => {
     await page.goto('/blog')
-    const firstPostLink = page.getByRole('listitem').first().getByRole('link')
-    const href = await firstPostLink.getAttribute('href')
-    expect(href).toBeTruthy()
-
-    await page.goto(href!)
+    await page.getByRole('listitem').first().getByRole('link').click();
     await verifyLayout(page)
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
     await expect(page.locator('article')).toBeVisible()
