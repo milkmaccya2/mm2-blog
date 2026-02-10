@@ -9,9 +9,7 @@ import { SITE_TITLE } from '@/consts';
 import type { StructuredDataType } from '@/types/structured-data';
 
 const sentryDsn = import.meta.env.PUBLIC_SENTRY_DSN;
-const sentryIngestOrigin = sentryDsn
-  ? new URL(sentryDsn).origin.replace(/^https:\/\/\w+@/, 'https://')
-  : null;
+const sentryIngestOrigin = sentryDsn ? new URL(sentryDsn).origin : null;
 
 interface Props {
   title: string;
