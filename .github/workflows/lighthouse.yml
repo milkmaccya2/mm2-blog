@@ -38,7 +38,7 @@ jobs:
             const path = require('path');
 
             const THRESHOLDS = {
-              performance: 70,
+              performance: 85,
               accessibility: 90,
               'best-practices': 90,
               seo: 90,
