@@ -80,7 +80,25 @@ git commit --no-verify -m "commit message"
 - Biome (Linter/Formatter)
 - Lefthook (Git Hooks)
 - Sentry (Error Tracking)
+- Renovate (Dependency Updates)
+- Lighthouse CI (Performance Monitoring)
 - Cloudflare Workers (Hosting)
+
+## パフォーマンス監視
+
+GitHub Actions で本番サイトのパフォーマンスを週次で自動監視しています。
+
+- **ツール**: Lighthouse CI (`@lhci/cli`)
+- **スケジュール**: 毎週月曜 09:00 JST
+- **計測対象**: トップページ (3回計測の中央値)
+- **閾値**: Performance / Accessibility / Best Practices / SEO 各90点
+- **通知**: 閾値を下回った場合、`lighthouse` ラベル付きの GitHub Issue を自動起票
+
+手動実行: Actions タブ → 「Lighthouse Performance Monitor」→「Run workflow」
+
+## 依存関係の自動更新
+
+[Renovate](https://docs.renovatebot.com/) により依存パッケージの更新PRが自動作成されます。
 
 ## 環境変数
 

@@ -14,7 +14,17 @@ export const PROJECTS: Project[] = [
       'A personal blog with an automated workflow that rewrites Notion drafts using AI. This is the blog you are currently viewing.',
     url: 'https://blog.milkmaccya.com',
     repoUrl: 'https://github.com/milkmaccya2/mm2-blog',
-    tags: ['Astro', 'Tailwind CSS', 'Biome', 'Lefthook', 'Cloudflare Workers', 'Playwright'],
+    tags: [
+      'Astro',
+      'Tailwind CSS',
+      'Biome',
+      'Lefthook',
+      'Cloudflare Workers',
+      'Playwright',
+      'Sentry',
+      'Renovate',
+      'Lighthouse CI',
+    ],
   },
   {
     title: 'POS-80 Thermal Printer Controller',
