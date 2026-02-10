@@ -63,4 +63,4 @@ const { title, description, image = FallbackImage, structuredData } = Astro.prop
 {structuredData && <StructuredData data={structuredData} />}
 
 <!-- Sentry Preconnect -->
-{sentryIngestOrigin && <link rel="preconnect" href={sentryIngestOrigin} />}
+{sentryIngestOrigin && <link rel="preconnect" href={sentryIngestOrigin} crossorigin />}
