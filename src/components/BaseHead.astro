@@ -8,6 +8,9 @@ import StructuredData from '@/components/StructuredData.astro';
 import { SITE_TITLE } from '@/consts';
 import type { StructuredDataType } from '@/types/structured-data';
 
+const sentryDsn = import.meta.env.PUBLIC_SENTRY_DSN;
+const sentryIngestOrigin = sentryDsn ? new URL(sentryDsn).origin : null;
+
 interface Props {
   title: string;
   description: string;
@@ -60,4 +63,4 @@ const { title, description, image = FallbackImage, structuredData } = Astro.prop
 {structuredData && <StructuredData data={structuredData} />}
 
 <!-- Sentry Preconnect -->
-<link rel="preconnect" href="https://o4510859209146368.ingest.us.sentry.io" crossorigin />
+{sentryIngestOrigin && <link rel="preconnect" href={sentryIngestOrigin} crossorigin />}
