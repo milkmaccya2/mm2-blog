@@ -58,12 +58,36 @@
 <script is:inline define:vars={{ isDev: import.meta.env.DEV }}>
   let controller = null
 
-  function loadPagefindCss() {
-    if (document.querySelector('link[href="/pagefind/pagefind-ui.css"]')) return
-    const link = document.createElement('link')
-    link.rel = 'stylesheet'
-    link.href = '/pagefind/pagefind-ui.css'
-    document.head.appendChild(link)
+  function loadPagefindResources() {
+    if (isDev) {
+      const container = document.getElementById('pagefind-search')
+      if (container && !container.firstElementChild) {
+        container.innerHTML =
+          '<p class="text-center text-gray-500 py-4">Search is available in production builds only.</p>'
+      }
+      return
+    }
+    // Load CSS if not already present
+    if (!document.querySelector('link[href="/pagefind/pagefind-ui.css"]')) {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = '/pagefind/pagefind-ui.css'
+      document.head.appendChild(link)
+    }
+    // Load JS and initialize
+    if (typeof PagefindUI === 'undefined') {
+      if (!document.querySelector('script[src="/pagefind/pagefind-ui.js"]')) {
+        const script = document.createElement('script')
+        script.src = '/pagefind/pagefind-ui.js'
+        script.async = true
+        script.onload = () => {
+          initializePagefind()
+        }
+        document.head.appendChild(script)
+      }
+    } else {
+      initializePagefind()
+    }
   }
 
   function initSearch() {
@@ -82,6 +106,7 @@
         'click',
         () => {
           searchDialog.showModal()
+          loadPagefindResources()
         },
         { signal: controller.signal },
       )
@@ -103,28 +128,6 @@
         },
         { signal: controller.signal },
       )
-    }
-
-    // Pagefindのリソースを動的に読み込む
-    if (!isDev) {
-      loadPagefindCss()
-      if (typeof PagefindUI === 'undefined') {
-        const script = document.createElement('script')
-        script.src = '/pagefind/pagefind-ui.js'
-        script.async = true
-        script.onload = () => {
-          initializePagefind()
-        }
-        document.head.appendChild(script)
-      } else {
-        initializePagefind()
-      }
-    } else {
-      const container = document.getElementById('pagefind-search')
-      if (container) {
-        container.innerHTML =
-          '<p class="text-center text-gray-500 py-4">Search is available in production builds only.</p>'
-      }
     }
   }
 
