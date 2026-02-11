@@ -1,0 +1,77 @@
+---
+---
+
+<section class="giscus-container mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
+  <h2 class="text-xl font-bold mb-4 text-black dark:text-white">Comments</h2>
+  <div class="giscus"></div>
+</section>
+
+<script>
+  function initGiscus() {
+    const container = document.querySelector('.giscus');
+    if (!container) return;
+
+    // Clear previous giscus instance (for View Transitions)
+    container.innerHTML = '';
+
+    const theme = document.documentElement.classList.contains('dark')
+      ? 'dark'
+      : 'light';
+
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.setAttribute('data-repo', 'milkmaccya2/mm2-blog');
+    script.setAttribute('data-repo-id', 'R_kgDORGFzjA');
+    script.setAttribute('data-category', 'General');
+    script.setAttribute('data-category-id', 'DIC_kwDORGFzjM4C2LqH');
+    script.setAttribute('data-mapping', 'pathname');
+    script.setAttribute('data-strict', '0');
+    script.setAttribute('data-reactions-enabled', '1');
+    script.setAttribute('data-emit-metadata', '0');
+    script.setAttribute('data-input-position', 'top');
+    script.setAttribute('data-theme', theme);
+    script.setAttribute('data-lang', 'ja');
+    script.setAttribute('data-loading', 'lazy');
+    script.crossOrigin = 'anonymous';
+    script.async = true;
+
+    container.appendChild(script);
+  }
+
+  // Sync theme changes with giscus
+  function updateGiscusTheme() {
+    const iframe = document.querySelector<HTMLIFrameElement>('iframe.giscus-frame');
+    if (!iframe) return;
+
+    const theme = document.documentElement.classList.contains('dark')
+      ? 'dark'
+      : 'light';
+
+    iframe.contentWindow?.postMessage(
+      { giscus: { setConfig: { theme } } },
+      'https://giscus.app',
+    );
+  }
+
+  // Watch for theme changes
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.attributeName === 'class') {
+        updateGiscusTheme();
+      }
+    }
+  });
+
+  function startObserver() {
+    observer.observe(document.documentElement, { attributes: true });
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    initGiscus();
+    startObserver();
+  });
+
+  document.addEventListener('astro:before-swap', () => {
+    observer.disconnect();
+  }, { once: true });
+</script>
