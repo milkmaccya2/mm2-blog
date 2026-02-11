@@ -5,6 +5,7 @@ import FallbackImage from '@/assets/blog-placeholder-1.jpg';
 import SiteLogo from '@/assets/icon.png';
 import BlogNavigation from '@/components/BlogNavigation.astro';
 import FormattedDate from '@/components/FormattedDate.astro';
+import ReadingProgress from '@/components/ReadingProgress.astro';
 import { SITE_AUTHOR, SITE_TITLE } from '@/consts';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import type { StructuredDataType } from '@/types/structured-data';
@@ -62,6 +63,7 @@ const structuredData: StructuredDataType = {
 	ogImage={ogImage}
 	structuredData={structuredData}
 >
+	<ReadingProgress />
 	<main class="max-w-full! px-0! md:px-4!">
 		<article>
 			<div class="w-full">

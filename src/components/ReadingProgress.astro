@@ -1,0 +1,79 @@
+---
+---
+
+<div id="reading-progress" class="reading-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="読了進捗">
+  <div id="reading-progress-bar" class="reading-progress-bar"></div>
+</div>
+
+<style>
+  .reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    z-index: 9999;
+    background: transparent;
+    pointer-events: none;
+  }
+
+  .reading-progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: var(--color-text);
+    opacity: 0.7;
+    transition: width 0.1s linear;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reading-progress-bar {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  function initReadingProgress() {
+    const bar = document.getElementById('reading-progress-bar');
+    const container = document.getElementById('reading-progress');
+    const article = document.querySelector('article');
+
+    if (!bar || !container || !article) return;
+
+    let ticking = false;
+
+    function updateProgress() {
+      const rect = article!.getBoundingClientRect();
+      const articleTop = rect.top + window.scrollY;
+      const articleHeight = rect.height;
+      const viewportHeight = window.innerHeight;
+      const scrollY = window.scrollY;
+
+      const start = articleTop;
+      const end = articleTop + articleHeight - viewportHeight;
+      const progress = Math.min(Math.max((scrollY - start) / (end - start), 0), 1) * 100;
+
+      bar!.style.width = `${progress}%`;
+      container!.setAttribute('aria-valuenow', String(Math.round(progress)));
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(updateProgress);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    updateProgress();
+
+    // Cleanup for View Transitions
+    document.addEventListener('astro:before-swap', () => {
+      window.removeEventListener('scroll', onScroll);
+    }, { once: true });
+  }
+
+  // Init on page load (including View Transitions navigation)
+  document.addEventListener('astro:page-load', initReadingProgress);
+</script>
