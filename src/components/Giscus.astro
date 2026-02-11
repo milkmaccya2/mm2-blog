@@ -7,6 +7,20 @@
 </section>
 
 <script>
+  const GISCUS_ATTRIBUTES = {
+    repo: import.meta.env.PUBLIC_GISCUS_REPO,
+    'repo-id': import.meta.env.PUBLIC_GISCUS_REPO_ID,
+    category: import.meta.env.PUBLIC_GISCUS_CATEGORY,
+    'category-id': import.meta.env.PUBLIC_GISCUS_CATEGORY_ID,
+    mapping: 'pathname',
+    strict: '0',
+    'reactions-enabled': '1',
+    'emit-metadata': '0',
+    'input-position': 'top',
+    lang: 'ja',
+    loading: 'lazy',
+  };
+
   function getTheme() {
     return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
   }
@@ -20,18 +34,11 @@
 
     const script = document.createElement('script');
     script.src = 'https://giscus.app/client.js';
-    script.setAttribute('data-repo', import.meta.env.PUBLIC_GISCUS_REPO);
-    script.setAttribute('data-repo-id', import.meta.env.PUBLIC_GISCUS_REPO_ID);
-    script.setAttribute('data-category', import.meta.env.PUBLIC_GISCUS_CATEGORY);
-    script.setAttribute('data-category-id', import.meta.env.PUBLIC_GISCUS_CATEGORY_ID);
-    script.setAttribute('data-mapping', 'pathname');
-    script.setAttribute('data-strict', '0');
-    script.setAttribute('data-reactions-enabled', '1');
-    script.setAttribute('data-emit-metadata', '0');
-    script.setAttribute('data-input-position', 'top');
+
+    for (const [key, value] of Object.entries(GISCUS_ATTRIBUTES)) {
+      script.setAttribute(`data-${key}`, value);
+    }
     script.setAttribute('data-theme', getTheme());
-    script.setAttribute('data-lang', 'ja');
-    script.setAttribute('data-loading', 'lazy');
     script.crossOrigin = 'anonymous';
     script.async = true;
 
@@ -51,10 +58,8 @@
 
   // Watch for theme changes
   const observer = new MutationObserver((mutations) => {
-    for (const mutation of mutations) {
-      if (mutation.attributeName === 'class') {
-        updateGiscusTheme();
-      }
+    if (mutations.some((m) => m.attributeName === 'class')) {
+      updateGiscusTheme();
     }
   });
 
