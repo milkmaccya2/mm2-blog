@@ -50,8 +50,16 @@
       const scrollY = window.scrollY;
 
       const start = articleTop;
-      const end = articleTop + articleHeight - viewportHeight;
-      const progress = Math.min(Math.max((scrollY - start) / (end - start), 0), 1) * 100;
+      const scrollRange = articleHeight - viewportHeight;
+
+      let progressRatio = 0;
+      if (scrollRange > 0) {
+        progressRatio = (scrollY - start) / scrollRange;
+      } else if (scrollY >= start) {
+        progressRatio = 1;
+      }
+
+      const progress = Math.min(Math.max(progressRatio, 0), 1) * 100;
 
       bar!.style.width = `${progress}%`;
       container!.setAttribute('aria-valuenow', String(Math.round(progress)));
