@@ -1,12 +1,30 @@
 ---
 ---
 
-<section class="giscus-container mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
+<section class="giscus-container">
   <h2 class="text-xl font-bold mb-4 text-black dark:text-white">Comments</h2>
   <div class="giscus"></div>
 </section>
 
 <script>
+  const GISCUS_CONFIG = {
+    repo: 'milkmaccya2/mm2-blog',
+    repoId: 'R_kgDORGFzjA',
+    category: 'General',
+    categoryId: 'DIC_kwDORGFzjM4C2LqH',
+    mapping: 'pathname',
+    strict: '0',
+    reactionsEnabled: '1',
+    emitMetadata: '0',
+    inputPosition: 'top',
+    lang: 'ja',
+    loading: 'lazy',
+  };
+
+  function getTheme() {
+    return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+  }
+
   function initGiscus() {
     const container = document.querySelector('.giscus');
     if (!container) return;
@@ -14,24 +32,20 @@
     // Clear previous giscus instance (for View Transitions)
     container.innerHTML = '';
 
-    const theme = document.documentElement.classList.contains('dark')
-      ? 'dark'
-      : 'light';
-
     const script = document.createElement('script');
     script.src = 'https://giscus.app/client.js';
-    script.setAttribute('data-repo', 'milkmaccya2/mm2-blog');
-    script.setAttribute('data-repo-id', 'R_kgDORGFzjA');
-    script.setAttribute('data-category', 'General');
-    script.setAttribute('data-category-id', 'DIC_kwDORGFzjM4C2LqH');
-    script.setAttribute('data-mapping', 'pathname');
-    script.setAttribute('data-strict', '0');
-    script.setAttribute('data-reactions-enabled', '1');
-    script.setAttribute('data-emit-metadata', '0');
-    script.setAttribute('data-input-position', 'top');
-    script.setAttribute('data-theme', theme);
-    script.setAttribute('data-lang', 'ja');
-    script.setAttribute('data-loading', 'lazy');
+    script.setAttribute('data-repo', GISCUS_CONFIG.repo);
+    script.setAttribute('data-repo-id', GISCUS_CONFIG.repoId);
+    script.setAttribute('data-category', GISCUS_CONFIG.category);
+    script.setAttribute('data-category-id', GISCUS_CONFIG.categoryId);
+    script.setAttribute('data-mapping', GISCUS_CONFIG.mapping);
+    script.setAttribute('data-strict', GISCUS_CONFIG.strict);
+    script.setAttribute('data-reactions-enabled', GISCUS_CONFIG.reactionsEnabled);
+    script.setAttribute('data-emit-metadata', GISCUS_CONFIG.emitMetadata);
+    script.setAttribute('data-input-position', GISCUS_CONFIG.inputPosition);
+    script.setAttribute('data-theme', getTheme());
+    script.setAttribute('data-lang', GISCUS_CONFIG.lang);
+    script.setAttribute('data-loading', GISCUS_CONFIG.loading);
     script.crossOrigin = 'anonymous';
     script.async = true;
 
@@ -40,15 +54,11 @@
 
   // Sync theme changes with giscus
   function updateGiscusTheme() {
-    const iframe = document.querySelector<HTMLIFrameElement>('iframe.giscus-frame');
+    const iframe = document.querySelector('iframe.giscus-frame');
     if (!iframe) return;
 
-    const theme = document.documentElement.classList.contains('dark')
-      ? 'dark'
-      : 'light';
-
     iframe.contentWindow?.postMessage(
-      { giscus: { setConfig: { theme } } },
+      { giscus: { setConfig: { theme: getTheme() } } },
       'https://giscus.app',
     );
   }
