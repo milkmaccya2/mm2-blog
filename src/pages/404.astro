@@ -1,0 +1,19 @@
+---
+import { SITE_TITLE } from '@/consts';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title={`404 Not Found | ${SITE_TITLE}`} description="Page not found">
+	<main class="max-w-4xl mx-auto px-4 py-24 text-center">
+		<h1 class="text-8xl font-bold mb-4">404</h1>
+		<p class="text-xl text-gray-600 dark:text-gray-400 mb-8">
+			お探しのページは見つかりませんでした。
+		</p>
+		<a
+			href="/"
+			class="inline-block bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 transition"
+		>
+			ホームに戻る
+		</a>
+	</main>
+</BaseLayout>
