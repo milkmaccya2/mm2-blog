@@ -26,6 +26,7 @@ export const PROJECTS: Project[] = [
       'Lighthouse CI',
       'Pagefind',
       'Satori',
+      'giscus',
     ],
   },
   {

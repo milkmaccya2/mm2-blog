@@ -74,6 +74,7 @@ graph TD
 - Lighthouse CI (Performance Monitoring)
 - Pagefind (Search Indexing)
 - OGP Image Generation (Satori)
+- giscus (Comments)
 - Cloudflare Workers (Hosting)
 
 ## 環境変数
@@ -90,6 +91,10 @@ cp .env.example .env
 | `SENTRY_AUTH_TOKEN` | Sentryの認証トークン (ソースマップのアップロードに使用) |
 | `SENTRY_ORG` | Sentryの組織名 |
 | `SENTRY_PROJECT` | Sentryのプロジェクト名 |
+| `PUBLIC_GISCUS_REPO` | giscus用リポジトリ名 (例: `owner/repo`) |
+| `PUBLIC_GISCUS_REPO_ID` | giscus用リポジトリID |
+| `PUBLIC_GISCUS_CATEGORY` | giscus用Discussionカテゴリ名 |
+| `PUBLIC_GISCUS_CATEGORY_ID` | giscus用DiscussionカテゴリID |
 
 Cloudflare Pages/Workers でデプロイする場合も、同様の変数をダッシュボードから設定してください。
 

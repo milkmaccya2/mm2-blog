@@ -5,6 +5,7 @@ import FallbackImage from '@/assets/blog-placeholder-1.jpg';
 import SiteLogo from '@/assets/icon.png';
 import BlogNavigation from '@/components/BlogNavigation.astro';
 import FormattedDate from '@/components/FormattedDate.astro';
+import Giscus from '@/components/Giscus.astro';
 import ReadingProgress from '@/components/ReadingProgress.astro';
 import { SITE_AUTHOR, SITE_TITLE } from '@/consts';
 import BaseLayout from '@/layouts/BaseLayout.astro';
@@ -136,6 +137,10 @@ const structuredData: StructuredDataType = {
 					)
 				}
 				<slot />
+
+				<div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
+					<Giscus />
+				</div>
 
 				<div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
 					<BlogNavigation nextPost={nextPost} prevPost={prevPost} />

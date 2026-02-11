@@ -1,0 +1,78 @@
+---
+---
+
+<section class="giscus-container">
+  <h2 class="text-xl font-bold mb-4 text-black dark:text-white">Comments</h2>
+  <div class="giscus"></div>
+</section>
+
+<script>
+  const GISCUS_ATTRIBUTES = {
+    repo: import.meta.env.PUBLIC_GISCUS_REPO,
+    'repo-id': import.meta.env.PUBLIC_GISCUS_REPO_ID,
+    category: import.meta.env.PUBLIC_GISCUS_CATEGORY,
+    'category-id': import.meta.env.PUBLIC_GISCUS_CATEGORY_ID,
+    mapping: 'pathname',
+    strict: '0',
+    'reactions-enabled': '1',
+    'emit-metadata': '0',
+    'input-position': 'top',
+    lang: 'ja',
+    loading: 'lazy',
+  };
+
+  function getTheme() {
+    return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+  }
+
+  function initGiscus() {
+    const container = document.querySelector('.giscus');
+    if (!container) return;
+
+    // Clear previous giscus instance (for View Transitions)
+    container.innerHTML = '';
+
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+
+    for (const [key, value] of Object.entries(GISCUS_ATTRIBUTES)) {
+      script.setAttribute(`data-${key}`, value);
+    }
+    script.setAttribute('data-theme', getTheme());
+    script.crossOrigin = 'anonymous';
+    script.async = true;
+
+    container.appendChild(script);
+  }
+
+  // Sync theme changes with giscus
+  function updateGiscusTheme() {
+    const iframe = document.querySelector('iframe.giscus-frame');
+    if (!iframe) return;
+
+    iframe.contentWindow?.postMessage(
+      { giscus: { setConfig: { theme: getTheme() } } },
+      'https://giscus.app',
+    );
+  }
+
+  // Watch for theme changes
+  const observer = new MutationObserver((mutations) => {
+    if (mutations.some((m) => m.attributeName === 'class')) {
+      updateGiscusTheme();
+    }
+  });
+
+  function startObserver() {
+    observer.observe(document.documentElement, { attributes: true });
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    initGiscus();
+    startObserver();
+  });
+
+  document.addEventListener('astro:before-swap', () => {
+    observer.disconnect();
+  }, { once: true });
+</script>
