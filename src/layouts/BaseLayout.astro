@@ -55,14 +55,19 @@ function buildBreadcrumbs(pathname: string, customLabel?: string): BreadcrumbIte
   // パスを分解: '/blog/weekly/2025-01-01' → ['blog', 'weekly', '2025-01-01']
   const segments = pathname.replace(/\/$/, '').split('/').filter(Boolean);
 
-  // スキップセグメントを除いた配列で処理
-  const visibleSegments = segments.filter((s) => !SKIP_SEGMENTS.has(s));
+  // スキップセグメントを除いた表示用のアイテムリストを、正しいhrefと共に生成
+  let currentPath = '';
+  const visibleItems: { segment: string; href: string }[] = [];
+  for (const segment of segments) {
+    currentPath += `/${segment}`;
+    if (!SKIP_SEGMENTS.has(segment)) {
+      visibleItems.push({ segment, href: `${currentPath}/` });
+    }
+  }
 
-  visibleSegments.forEach((segment, index) => {
-    const isLast = index === visibleSegments.length - 1;
-    // href は元の segments から再構築（スキップセグメントを含む実際のパス）
-    const segmentIndex = segments.indexOf(segment);
-    const href = `/${segments.slice(0, segmentIndex + 1).join('/')}/`;
+  visibleItems.forEach((item, index) => {
+    const isLast = index === visibleItems.length - 1;
+    const { segment, href } = item;
 
     if (isLast) {
       // 最終セグメント: カスタムラベル優先、なければセグメント名をラベル化

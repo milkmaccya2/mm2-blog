@@ -36,6 +36,9 @@ const jsonLd = {
 };
 
 const jsonString = JSON.stringify(jsonLd).replace(/</g, '\\u003C');
+
+// ホームアイコンSVG（重複回避のため定数化）
+const homeIconSvg = `<svg class="w-3 h-3 mr-1 inline" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg>`;
 ---
 
 {!isHomePage && (
@@ -50,7 +53,7 @@ const jsonString = JSON.stringify(jsonLd).replace(/</g, '\\u003C');
     >
       <ol
         class="flex items-center gap-1 whitespace-nowrap text-xs text-gray-400 dark:text-gray-500 py-2 px-4 mx-auto"
-        style="scrollbar-width: none; -ms-overflow-style: none; max-width: 960px;"
+        style="scrollbar-width: none; -ms-overflow-style: none;"
       >
         {items.map((item, index) => {
           const isLast = index === items.length - 1;
@@ -63,16 +66,7 @@ const jsonString = JSON.stringify(jsonLd).replace(/</g, '\\u003C');
                     class="text-gray-500 dark:text-gray-400"
                     aria-current="page"
                   >
-                    {index === 0 && (
-                      <svg
-                        class="w-3 h-3 mr-1 inline"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-                      </svg>
-                    )}
+                    {index === 0 && <span set:html={homeIconSvg} />}
                     {item.label}
                   </span>
                 ) : (
@@ -81,16 +75,7 @@ const jsonString = JSON.stringify(jsonLd).replace(/</g, '\\u003C');
                     href={item.href}
                     class="hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-150 underline-offset-2 hover:underline flex items-center"
                   >
-                    {index === 0 && (
-                      <svg
-                        class="w-3 h-3 mr-1"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-                      </svg>
-                    )}
+                    {index === 0 && <span set:html={homeIconSvg} />}
                     {item.label}
                   </a>
                 )}
