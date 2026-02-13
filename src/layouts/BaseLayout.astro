@@ -45,8 +45,6 @@ const SEGMENT_LABELS: Record<string, string> = {
 const SKIP_SEGMENTS = new Set(['weekly']);
 
 function buildBreadcrumbs(pathname: string, customLabel?: string): BreadcrumbItem[] {
-  const items: BreadcrumbItem[] = [{ label: 'Home', href: '/' }];
-
   // ホームページ: [Home] のみ
   if (pathname === '/') {
     return [{ label: 'Home' }]; // ホームは href なし（現在地）
@@ -54,6 +52,8 @@ function buildBreadcrumbs(pathname: string, customLabel?: string): BreadcrumbIte
 
   // パスを分解: '/blog/weekly/2025-01-01' → ['blog', 'weekly', '2025-01-01']
   const segments = pathname.replace(/\/$/, '').split('/').filter(Boolean);
+
+  const items: BreadcrumbItem[] = [{ label: 'Home', href: '/' }];
 
   // スキップセグメントを除いた表示用のアイテムリストを、正しいhrefと共に生成
   let currentPath = '';
