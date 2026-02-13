@@ -51,7 +51,7 @@ export const PROJECTS: Project[] = [
   {
     title: 'Unuseless Dashboard',
     description:
-      "A dashboard displaying trivial real-time data like today's blink count, breathing count, nail growth, and gyoza consumption.",
+      'A dashboard displaying trivial real-time data like today\'s blink count, breathing count, nail growth, and gyoza consumption.',
     url: 'https://unuseless.milkmaccya.com/',
     repoUrl: 'https://github.com/milkmaccya2/unuseless-dashboard/',
     tags: ['HonoX', 'React', 'Tailwind CSS', 'Cloudflare Pages'],
