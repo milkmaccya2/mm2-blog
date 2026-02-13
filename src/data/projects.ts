@@ -49,6 +49,14 @@ export const PROJECTS: Project[] = [
     linkText: 'View on GitHub',
   },
   {
+    title: 'Unuseless Dashboard',
+    description:
+      "A dashboard displaying trivial real-time data like today's blink count, breathing count, nail growth, and gyoza consumption.",
+    url: 'https://unuseless.milkmaccya.com/',
+    repoUrl: 'https://github.com/milkmaccya2/unuseless-dashboard/',
+    tags: ['HonoX', 'React', 'Tailwind CSS', 'Cloudflare Pages'],
+  },
+  {
     title: 'HostSwitch',
     description: 'A CLI tool for switching hosts file comfortably.',
     url: 'https://milkmaccya2.github.io/hostswitch/en/',
@@ -71,13 +79,5 @@ export const PROJECTS: Project[] = [
       'PWA',
       'TypeScript',
     ],
-  },
-  {
-    title: 'Unuseless Dashboard',
-    description:
-      '知っても何の役にも立たないダッシュボード。今日のまばたき回数、呼吸回数、爪の伸び、餃子消費量など、トリビアルなリアルタイムデータを表示する。',
-    url: 'https://unuseless.milkmaccya.com/',
-    repoUrl: 'https://github.com/milkmaccya2/unuseless-dashboard/',
-    tags: ['HonoX', 'React 19', 'Tailwind CSS 4', 'Cloudflare Pages', 'lucide-react'],
   },
 ];
