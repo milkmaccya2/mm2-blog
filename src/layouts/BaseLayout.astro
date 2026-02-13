@@ -1,6 +1,8 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import BaseHead from '@/components/BaseHead.astro';
+import type { BreadcrumbItem } from '@/components/Breadcrumb.astro';
+import Breadcrumb from '@/components/Breadcrumb.astro';
 import Footer from '@/components/Footer.astro';
 import Header from '@/components/Header.astro';
 import ThemeScript from '@/components/ThemeScript.astro';
@@ -12,9 +14,82 @@ interface Props {
   description?: string;
   ogImage?: string;
   structuredData?: StructuredDataType;
+  breadcrumbLabel?: string; // ページ固有の最終セグメントラベル上書き用
 }
 
-const { title = SITE_TITLE, description = SITE_DESCRIPTION, ogImage, structuredData } = Astro.props;
+const {
+  title = SITE_TITLE,
+  description = SITE_DESCRIPTION,
+  ogImage,
+  structuredData,
+  breadcrumbLabel,
+} = Astro.props;
+
+// ──────────────────────────────────────────────────
+// パンくずアイテム生成ロジック
+// ──────────────────────────────────────────────────
+
+/**
+ * URLセグメントをラベルに変換するマッピング。
+ * 新しいページを追加した際はここに追記するだけでよい。
+ */
+const SEGMENT_LABELS: Record<string, string> = {
+  blog: 'Blog',
+  about: 'About',
+  projects: 'Projects',
+};
+
+/**
+ * スキップするセグメント（URLには存在するがパンくずに表示しない）
+ */
+const SKIP_SEGMENTS = new Set(['weekly']);
+
+function buildBreadcrumbs(pathname: string, customLabel?: string): BreadcrumbItem[] {
+  // ホームページ: [Home] のみ
+  if (pathname === '/') {
+    return [{ label: 'Home' }]; // ホームは href なし（現在地）
+  }
+
+  // パスを分解: '/blog/weekly/2025-01-01' → ['blog', 'weekly', '2025-01-01']
+  const segments = pathname.replace(/\/$/, '').split('/').filter(Boolean);
+
+  const items: BreadcrumbItem[] = [{ label: 'Home', href: '/' }];
+
+  // スキップセグメントを除いた表示用のアイテムリストを、正しいhrefと共に生成
+  let currentPath = '';
+  const visibleItems: { segment: string; href: string }[] = [];
+  for (const segment of segments) {
+    currentPath += `/${segment}`;
+    if (!SKIP_SEGMENTS.has(segment)) {
+      visibleItems.push({ segment, href: `${currentPath}/` });
+    }
+  }
+
+  visibleItems.forEach((item, index) => {
+    const isLast = index === visibleItems.length - 1;
+    const { segment, href } = item;
+
+    if (isLast) {
+      // 最終セグメント: カスタムラベル優先、なければセグメント名をラベル化
+      const label =
+        customLabel ??
+        SEGMENT_LABELS[segment] ??
+        // 数値（ページ番号）はそのまま
+        (/^\d+$/.test(segment) ? `Page ${segment}` : decodeURIComponent(segment));
+      // 最終アイテムは href なし（リンク不可・現在地）
+      items.push({ label });
+    } else {
+      // 中間セグメント: リンクあり
+      const label = SEGMENT_LABELS[segment] ?? decodeURIComponent(segment);
+      items.push({ label, href });
+    }
+  });
+
+  return items;
+}
+
+const breadcrumbItems = buildBreadcrumbs(Astro.url.pathname, breadcrumbLabel);
+const siteOrigin = Astro.site?.origin ?? Astro.url.origin;
 ---
 
 <!doctype html>
@@ -34,6 +109,7 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION, ogImage, structuredD
   </head>
   <body>
     <Header />
+    <Breadcrumb items={breadcrumbItems} siteOrigin={siteOrigin} />
     <slot />
     <Footer />
   </body>

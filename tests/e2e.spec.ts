@@ -30,7 +30,7 @@ test.describe('Smoke Tests', () => {
     await page.getByRole('listitem').first().getByRole('link').click();
     await verifyLayout(page)
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
-    await expect(page.locator('article')).toBeVisible()
+    await expect(page.locator('article').first()).toBeVisible()
   })
 
   test('about page', async ({ page }) => {

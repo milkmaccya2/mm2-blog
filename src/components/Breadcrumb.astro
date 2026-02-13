@@ -1,0 +1,108 @@
+---
+/**
+ * Breadcrumb.astro
+ *
+ * パンくずリストコンポーネント。
+ * 自動生成されたアイテム配列を受け取り、
+ * ナビゲーションUIとJSON-LDを出力する。
+ */
+
+export interface BreadcrumbItem {
+  label: string;
+  href?: string; // 最後のアイテムはundefined（リンクなし）
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+  siteOrigin: string; // JSON-LD用の絶対URL生成に使用
+}
+
+const { items, siteOrigin } = Astro.props;
+
+// ホームページのみ（items.length === 1 && hrefなし）は何も表示しない
+const isHomePage = items.length === 1 && !items[0].href;
+
+// JSON-LD BreadcrumbList 構造化データ
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.label,
+    // 最後のアイテム（hrefなし）もJSON-LDではitemを含める（Google推奨）
+    item: item.href ? `${siteOrigin}${item.href}` : `${siteOrigin}${Astro.url.pathname}`,
+  })),
+};
+
+const jsonString = JSON.stringify(jsonLd).replace(/</g, '\\u003C');
+
+// ホームアイコンSVG（重複回避のため定数化）
+const homeIconSvg = `<svg class="w-3 h-3 mr-1 inline" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg>`;
+---
+
+{!isHomePage && (
+  <>
+    <!-- JSON-LD: BreadcrumbList 構造化データ -->
+    <script type="application/ld+json" set:html={jsonString} />
+
+    <!-- パンくずナビゲーション UI -->
+    <nav
+      aria-label="パンくずリスト"
+      class="w-full overflow-x-auto"
+    >
+      <ol
+        class="flex items-center gap-1 whitespace-nowrap text-xs text-gray-400 dark:text-gray-500 py-2 px-4 mx-auto"
+        style="scrollbar-width: none; -ms-overflow-style: none;"
+      >
+        {items.map((item, index) => {
+          const isLast = index === items.length - 1;
+          return (
+            <>
+              <li class="flex items-center shrink-0">
+                {isLast ? (
+                  // 最後のアイテム: リンクなし、やや濃い色
+                  <span
+                    class="text-gray-500 dark:text-gray-400"
+                    aria-current="page"
+                  >
+
+                    {item.label}
+                  </span>
+                ) : (
+                  // それ以外: リンクあり、ホバーで色変化
+                  <a
+                    href={item.href}
+                    class="hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-150 underline-offset-2 hover:underline flex items-center"
+                  >
+                    {index === 0 && <span set:html={homeIconSvg} />}
+                    {item.label}
+                  </a>
+                )}
+              </li>
+              {!isLast && (
+                <li
+                  class="shrink-0 select-none text-gray-300 dark:text-gray-600"
+                  aria-hidden="true"
+                >
+                  &gt;
+                </li>
+              )}
+            </>
+          );
+        })}
+      </ol>
+    </nav>
+  </>
+)}
+
+<style>
+  /* WebKitブラウザ用のスクロールバー非表示 */
+  ol::-webkit-scrollbar {
+    display: none;
+  }
+
+  nav ol {
+    max-width: 960px;
+  }
+</style>
