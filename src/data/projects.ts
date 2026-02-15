@@ -30,6 +30,23 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
+    title: 'WebP Converter Web',
+    description:
+      'A client-side image converter powered by WebAssembly that converts and resizes images to WebP directly in the browser.',
+    url: 'https://webp.milkmaccya.com',
+    repoUrl: 'https://github.com/milkmaccya2/webp-converter-web',
+    tags: [
+      'React',
+      'Vite',
+      'TypeScript',
+      'Tailwind CSS',
+      'shadcn/ui',
+      'WebAssembly',
+      'Cloudflare Workers',
+      'Vitest',
+    ],
+  },
+  {
     title: 'POS-80 Thermal Printer Controller',
     description:
       'An Astro-based web interface for controlling a POS-80 thermal printer connected to a Raspberry Pi.',
@@ -78,6 +95,7 @@ export const PROJECTS: Project[] = [
       'AWS S3',
       'PWA',
       'TypeScript',
+      'Vercel',
     ],
   },
 ];
