@@ -18,6 +18,7 @@ export const PROJECTS: Project[] = [
       'Astro',
       'Tailwind CSS',
       'Biome',
+      'textlint',
       'Lefthook',
       'Cloudflare Workers',
       'Playwright',

@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "@textlint/markdown": true
+  },
+  "rules": {
+    "@textlint-ja/preset-ai-writing": true
+  },
+  "overrides": [
+    {
+      "files": ["src/content/blog/**/*.md"],
+      "rules": {
+        "@textlint-ja/ai-writing/ai-tech-writing-guideline": false
+      }
+    }
+  ]
+}
