@@ -60,7 +60,8 @@ graph TD
 ├── tailwind.config.js # Tailwind CSS設定
 ├── sentry.*.config.js # Sentry（エラー追跡）設定
 ├── package.json
-└── wrangler.json      # Cloudflare Workers設定
+├── wrangler.json      # Cloudflare Workers設定
+└── .textlintrc.json   # textlint設定
 ```
 
 ## 技術スタック
@@ -68,6 +69,7 @@ graph TD
 - Astro
 - Tailwind CSS
 - Biome (Linter/Formatter)
+- textlint（Improve article text）
 - Lefthook (Git Hooks)
 - Sentry (Error Tracking)
 - Renovate (Dependency Updates)
