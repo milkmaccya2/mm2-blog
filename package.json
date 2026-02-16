@@ -7,8 +7,12 @@
     "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "biome check .",
-    "lint:fix": "biome check --write .",
+    "lint": "concurrently \"npm run lint:biome\" \"npm run lint:textlint\"",
+    "lint:biome": "biome check .",
+    "lint:biome:fix": "biome check --write .",
+    "lint:textlint": "textlint 'src/content/blog/**/*.md'",
+    "lint:textlint:fix": "textlint --fix 'src/content/blog/**/*.md'",
+    "lint:fix": "npm run lint:biome:fix && npm run lint:textlint:fix",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
     "prepare": "lefthook install"
@@ -27,12 +31,15 @@
     "@tailwindcss/vite": "4.1.18",
     "@types/react": "19.2.14",
     "astro-compress": "2.3.9",
+    "concurrently": "^8.2.2",
     "lefthook": "2.1.0",
     "pagefind": "1.4.0",
     "react": "19.2.4",
     "schema-dts": "1.1.5",
     "sharp": "0.34.5",
-    "tailwindcss": "4.1.18"
+    "tailwindcss": "4.1.18",
+    "textlint": "^14.2.4",
+    "@textlint-ja/textlint-rule-preset-ai-writing": "^1.6.1"
   },
   "overrides": {
     "@sentry/astro": {
