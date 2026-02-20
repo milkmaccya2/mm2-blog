@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && pagefind --site dist",
+    "build:refresh": "rm -rf public/remark-link-card-plus && npm run build",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "concurrently \"npm run lint:biome\" \"npm run lint:textlint\"",
@@ -22,6 +23,7 @@
     "@sentry/astro": "^10.38.0",
     "astro": "^6.0.0-beta.6",
     "gsap": "^3.14.2",
+    "remark-link-card-plus": "^0.7.3",
     "satori": "^0.19.1"
   },
   "devDependencies": {
@@ -29,6 +31,7 @@
     "@playwright/test": "1.58.2",
     "@tailwindcss/typography": "0.5.19",
     "@tailwindcss/vite": "4.1.18",
+    "@textlint-ja/textlint-rule-preset-ai-writing": "^1.6.1",
     "@types/react": "19.2.14",
     "astro-compress": "2.3.9",
     "concurrently": "^8.2.2",
@@ -38,8 +41,7 @@
     "schema-dts": "1.1.5",
     "sharp": "0.34.5",
     "tailwindcss": "4.1.18",
-    "textlint": "^14.2.4",
-    "@textlint-ja/textlint-rule-preset-ai-writing": "^1.6.1"
+    "textlint": "^14.2.4"
   },
   "overrides": {
     "@sentry/astro": {
