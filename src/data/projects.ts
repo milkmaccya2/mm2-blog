@@ -31,11 +31,11 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
-    title: 'WebP Converter Web',
+    title: 'WebP Converter',
     description:
-      'A client-side image converter powered by WebAssembly that converts and resizes images to WebP directly in the browser.',
+      'A monorepo providing two tools: a client-side Web app powered by WebAssembly that converts images to WebP directly in the browser, and a CLI tool (webp-convert) for batch conversion.',
     url: 'https://webp.milkmaccya.com',
-    repoUrl: 'https://github.com/milkmaccya2/webp-converter-web',
+    repoUrl: 'https://github.com/milkmaccya2/webp-converter',
     tags: [
       'React',
       'Vite',
@@ -45,6 +45,11 @@ export const PROJECTS: Project[] = [
       'WebAssembly',
       'Cloudflare Workers',
       'Vitest',
+      'Node.js',
+      'Sharp',
+      'tsup',
+      'CLI',
+      'Monorepo',
     ],
   },
   {
