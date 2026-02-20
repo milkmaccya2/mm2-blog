@@ -47,6 +47,7 @@ export const PROJECTS: Project[] = [
       'Vitest',
       'Node.js',
       'Sharp',
+      'tsup',
       'CLI',
       'Monorepo',
     ],
