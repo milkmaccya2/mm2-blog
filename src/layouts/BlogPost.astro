@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import FallbackImage from '@/assets/blog-placeholder-1.jpg';
 import SiteLogo from '@/assets/icon.png';
+import AffiliateBanner from '@/components/AffiliateBanner.astro';
 import BlogNavigation from '@/components/BlogNavigation.astro';
 import FormattedDate from '@/components/FormattedDate.astro';
 import Giscus from '@/components/Giscus.astro';
@@ -136,6 +137,8 @@ const structuredData: StructuredDataType = {
 					)
 				}
 				<slot />
+
+				<AffiliateBanner />
 
 				<div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
 					<Giscus />
