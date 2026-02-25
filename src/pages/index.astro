@@ -1,6 +1,7 @@
 ---
 import FormattedDate from '@/components/FormattedDate.astro';
 import NoteCard from '@/components/NoteCard.astro';
+import NoteIcon from '@/components/NoteIcon.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
 import { NOTES } from '@/data/notes';
@@ -135,7 +136,10 @@ const structuredData = {
 				<div
 					class="flex items-center justify-between mb-8 pb-4 border-b border-gray-100 dark:border-gray-800 opacity-0 section-header"
 				>
-					<h2 class="section-title text-2xl font-bold scramble-text" data-original-text="Note">Note</h2>
+					<div class="flex items-center gap-2">
+						<NoteIcon class="h-7 w-7 text-black dark:text-white flex-shrink-0" />
+						<h2 class="section-title text-2xl font-bold scramble-text" data-original-text="Note">Note</h2>
+					</div>
 					<a
 						href="https://note.com/milkmaccya2"
 						target="_blank"
