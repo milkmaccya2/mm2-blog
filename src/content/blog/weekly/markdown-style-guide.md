@@ -212,3 +212,31 @@ X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
 Press <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> to end the session.
 
 Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.
+
+## AffiliateCard（カスタムコンポーネント）
+
+商品へのアフィリエイトリンクをカード形式で表示する。`.mdx` ファイルのみ使用可。
+
+### Syntax
+
+````mdx
+import AffiliateCard from '@/components/AffiliateCard.astro';
+
+<AffiliateCard
+  name="商品名"
+  brand="ブランド名"
+  amazonUrl="https://www.amazon.co.jp/dp/ASIN?tag=ASSOCIATE_TAG"
+  rakutenUrl="https://item.rakuten.co.jp/..."
+  imageUrl="https://example.com/image.jpg"
+/>
+````
+
+### Props
+
+| Prop | 必須 | 説明 |
+| --- | --- | --- |
+| `name` | ✓ | 商品名 |
+| `brand` | | ブランド名 |
+| `amazonUrl` | | Amazon 商品 URL（`rel="nofollow sponsored"` 付き） |
+| `rakutenUrl` | | 楽天商品 URL（`rel="nofollow sponsored"` 付き） |
+| `imageUrl` | | 商品画像 URL |
