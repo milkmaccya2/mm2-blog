@@ -1,17 +1,12 @@
 ---
-import { getCollection } from 'astro:content';
-
 import FormattedDate from '@/components/FormattedDate.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
 import { PROJECTS } from '@/data/projects';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getPublishedPosts } from '@/lib/posts';
 
-const posts = (await getCollection('blog'))
-  .filter((post) => !post.data.hidden)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-
-  .slice(0, 5);
+const posts = (await getPublishedPosts()).slice(0, 5);
 
 const projects = PROJECTS.slice(0, 2);
 

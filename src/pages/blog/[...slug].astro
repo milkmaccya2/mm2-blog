@@ -1,11 +1,10 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { render } from 'astro:content';
 import BlogPost from '@/layouts/BlogPost.astro';
+import { getPublishedPosts } from '@/lib/posts';
 
 export async function getStaticPaths() {
-  const posts = (await getCollection('blog'))
-    .filter((post) => !post.data.hidden)
-    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  const posts = await getPublishedPosts();
   return posts.map((post, index) => ({
     params: { slug: post.id },
     props: {

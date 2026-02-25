@@ -1,10 +1,10 @@
-import { getCollection } from 'astro:content';
 import type { APIRoute, GetStaticPaths } from 'astro';
 import type { ReactNode } from 'react';
 import satori from 'satori';
 import sharp from 'sharp';
 import { SITE_TITLE } from '@/consts';
 import { getOgImage, getSatoriOptions, loadGoogleFont } from '@/lib/og-image';
+import { getPublishedPosts } from '@/lib/posts';
 
 // Load fonts once and cache for all pages
 let fontsPromise: Promise<{ regular: ArrayBuffer; bold: ArrayBuffer }> | null = null;
@@ -25,7 +25,7 @@ function getFonts() {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = (await getCollection('blog')).filter((post) => !post.data.hidden);
+  const posts = await getPublishedPosts();
   return posts.map((post) => ({
     params: { slug: post.id },
     props: {
