@@ -1,0 +1,39 @@
+---
+interface Props {
+  amazonUrl?: string;
+  rakutenUrl?: string;
+}
+const {
+  amazonUrl = import.meta.env.PUBLIC_AMAZON_URL || 'https://www.amazon.co.jp/',
+  rakutenUrl = import.meta.env.PUBLIC_RAKUTEN_URL || 'https://www.rakuten.co.jp/',
+} = Astro.props;
+---
+
+<div
+  class="not-prose my-8 p-5 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-center"
+>
+  <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 m-0">
+    お買い物の際はこちらのリンクを使っていただけると励みになります
+  </p>
+  <div class="flex gap-3 justify-center flex-wrap">
+    <a
+      href={amazonUrl}
+      target="_blank"
+      rel="nofollow sponsored noopener noreferrer"
+      class="inline-flex items-center gap-2 px-5 py-2 text-sm bg-[#FF9900] text-black font-semibold rounded-lg hover:bg-[#e88a00] transition-colors"
+    >
+      Amazon で探す
+    </a>
+    <a
+      href={rakutenUrl}
+      target="_blank"
+      rel="nofollow sponsored noopener noreferrer"
+      class="inline-flex items-center gap-2 px-5 py-2 text-sm bg-[#BF0000] text-white font-semibold rounded-lg hover:bg-[#a00000] transition-colors"
+    >
+      楽天市場で探す
+    </a>
+  </div>
+  <p class="text-xs text-gray-400 dark:text-gray-500 mt-3 mb-0">
+    ※ アフィリエイトリンクを含みます
+  </p>
+</div>
