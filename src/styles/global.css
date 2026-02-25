@@ -148,3 +148,65 @@ main {
     display: none;
   }
 }
+
+/* ============================================
+   Scroll Animations (CSS transitions + IntersectionObserver)
+   ============================================ */
+
+/* animate-blob */
+.animate-blob {
+  opacity: 0;
+}
+
+.animate-blob.is-visible {
+  opacity: 1;
+  transition: opacity 2s ease-in-out;
+}
+
+/* Fade-in-up + hero-actions */
+.fade-in-up,
+.hero-actions {
+  opacity: 0;
+  transform: translateY(1rem);
+  transition:
+    opacity 0.8s ease-out,
+    transform 0.8s ease-out;
+}
+
+.fade-in-up.is-visible,
+.hero-actions.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Section headers */
+.section-header {
+  opacity: 0;
+  transition: opacity 0.8s ease-out;
+}
+
+.section-header.is-visible {
+  opacity: 1;
+}
+
+/* Staggered items */
+.post-item,
+.project-item,
+.note-item,
+.experience-item,
+.skills-item {
+  opacity: 0;
+  transform: translateY(1rem);
+  transition:
+    opacity 0.8s ease-out var(--stagger-delay, 0s),
+    transform 0.8s ease-out var(--stagger-delay, 0s);
+}
+
+.post-item.is-visible,
+.project-item.is-visible,
+.note-item.is-visible,
+.experience-item.is-visible,
+.skills-item.is-visible {
+  opacity: 1;
+  transform: none;
+}
