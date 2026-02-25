@@ -1,7 +1,9 @@
 ---
 import FormattedDate from '@/components/FormattedDate.astro';
+import NoteCard from '@/components/NoteCard.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
+import { NOTES } from '@/data/notes';
 import { PROJECTS } from '@/data/projects';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { getPublishedPosts } from '@/lib/posts';
@@ -122,6 +124,34 @@ const structuredData = {
 						projects.map((project) => (
 							<div class="project-item opacity-0 transform translate-y-4 p-6 bg-gray-50 dark:bg-gray-800/50 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-blue-100 dark:hover:border-blue-900 transition-colors">
 								<ProjectCard {...project} />
+							</div>
+						))
+					}
+				</div>
+			</section>
+
+			<!-- Note Section -->
+			<section class="note-section mb-20">
+				<div
+					class="flex items-center justify-between mb-8 pb-4 border-b border-gray-100 dark:border-gray-800 opacity-0 section-header"
+				>
+					<h2 class="section-title text-2xl font-bold scramble-text" data-original-text="Note">Note</h2>
+					<a
+						href="https://note.com/milkmaccya2"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 flex items-center gap-1 group"
+					>
+						View All
+						<span class="transform group-hover:translate-x-1 transition-transform">&rarr;</span>
+					</a>
+				</div>
+
+				<div class="grid md:grid-cols-2 gap-6">
+					{
+						NOTES.map((article) => (
+							<div class="note-item opacity-0 transform translate-y-4 p-6 bg-gray-50 dark:bg-gray-800/50 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-blue-100 dark:hover:border-blue-900 transition-colors">
+								<NoteCard article={article} />
 							</div>
 						))
 					}
