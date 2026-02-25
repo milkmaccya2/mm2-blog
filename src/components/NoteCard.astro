@@ -1,0 +1,44 @@
+---
+import FormattedDate from '@/components/FormattedDate.astro';
+import type { NoteArticle } from '@/data/notes';
+
+interface Props {
+  article: NoteArticle;
+  class?: string;
+}
+
+const { article, class: className } = Astro.props;
+---
+
+<div
+  class:list={[
+    'p-6 bg-gray-50 dark:bg-gray-800/50 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-blue-100 dark:hover:border-blue-900 transition-colors',
+    className,
+  ]}
+>
+  <div class="border-l-4 border-gray-200 dark:border-gray-700 pl-4 hover:border-black dark:hover:border-white transition">
+    <div class="flex items-start gap-2 mb-1">
+      <h3 class="text-xl font-bold min-w-0 flex-1">
+        <a
+          href={article.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:underline"
+        >
+          {article.title}<span class="sr-only">（外部リンク）</span>
+        </a>
+      </h3>
+      {article.isPaid && (
+        <span class="flex-shrink-0 whitespace-nowrap text-xs font-medium px-2 py-0.5 rounded bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-300 mt-1">
+          有料
+        </span>
+      )}
+    </div>
+    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">
+      <FormattedDate date={new Date(article.pubDate)} />
+    </p>
+    {article.description && (
+      <p class="text-gray-700 dark:text-gray-300 text-sm mb-3">{article.description}</p>
+    )}
+  </div>
+</div>
