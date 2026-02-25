@@ -3,9 +3,9 @@ import { getCollection, render } from 'astro:content';
 import BlogPost from '@/layouts/BlogPost.astro';
 
 export async function getStaticPaths() {
-  const posts = (await getCollection('blog')).sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-  );
+  const posts = (await getCollection('blog'))
+    .filter((post) => !post.data.hidden)
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
   return posts.map((post, index) => ({
     params: { slug: post.id },
     props: {

@@ -25,7 +25,7 @@ function getFonts() {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await getCollection('blog');
+  const posts = (await getCollection('blog')).filter((post) => !post.data.hidden);
   return posts.map((post) => ({
     params: { slug: post.id },
     props: {

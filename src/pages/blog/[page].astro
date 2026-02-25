@@ -7,9 +7,9 @@ import { BLOG_PAGE_SIZE, SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 export const getStaticPaths = (async ({ paginate }) => {
-  const posts = (await getCollection('blog')).sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-  );
+  const posts = (await getCollection('blog'))
+    .filter((post) => !post.data.hidden)
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
   return paginate(posts, { pageSize: BLOG_PAGE_SIZE });
 }) satisfies GetStaticPaths;
