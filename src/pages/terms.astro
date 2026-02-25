@@ -1,0 +1,50 @@
+---
+import { SITE_TITLE } from '@/consts';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title={`利用規約 | ${SITE_TITLE}`}
+  description="milkmaccya or something の利用規約です。"
+>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <div class="space-y-10">
+      <h1 class="text-4xl font-bold">利用規約</h1>
+
+      <section class="space-y-3">
+        <h2 class="text-2xl font-bold border-b pb-2">免責事項</h2>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+          当サイトのコンテンツ・情報については、できる限り正確な情報を提供するよう努めておりますが、
+          正確性や安全性を保証するものではありません。
+          当サイトの情報をもとに行動した結果、損害が生じた場合でも、当サイトは一切の責任を負いません。
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-2xl font-bold border-b pb-2">著作権について</h2>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+          当サイトに掲載されている文章・画像・その他コンテンツの著作権は、特別な記載がない限り運営者（milkmaccya）に帰属します。
+          無断転載・複製は禁止します。引用の場合は出典を明示してください。
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-2xl font-bold border-b pb-2">リンクについて</h2>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+          当サイトからリンクしている外部サイトの内容について、当サイトは一切の責任を負いません。
+          また、外部サイトの情報が変更・削除された場合もその責任を負いかねます。
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-2xl font-bold border-b pb-2">規約の変更について</h2>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+          当サイトは、必要と判断した場合には事前の告知なく本規約を変更することがあります。
+          変更後は当ページへの掲載をもって告知に代えさせていただきます。
+        </p>
+      </section>
+
+      <p class="text-sm text-gray-500 dark:text-gray-400">制定日：2026年2月25日</p>
+    </div>
+  </main>
+</BaseLayout>
