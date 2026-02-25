@@ -97,6 +97,9 @@ cp .env.example .env
 | `PUBLIC_GISCUS_REPO_ID` | giscus用リポジトリID |
 | `PUBLIC_GISCUS_CATEGORY` | giscus用Discussionカテゴリ名 |
 | `PUBLIC_GISCUS_CATEGORY_ID` | giscus用DiscussionカテゴリID |
+| `PUBLIC_AMAZON_URL` | Amazonアフィリエイトのベースリンク |
+| `PUBLIC_RAKUTEN_URL` | 楽天アフィリエイトのベースリンク |
+| `PUBLIC_GTM_ID` | Google Tag Manager のコンテナID (例: `GTM-XXXXXXX`) |
 
 Cloudflare Pages/Workers でデプロイする場合も、同様の変数をダッシュボードから設定してください。
 
