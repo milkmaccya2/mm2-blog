@@ -115,12 +115,10 @@ export function initAnimations() {
       staggerObserver.observe(el);
     });
 
-  // Scramble Text (GSAP core, triggered by IntersectionObserver)
-  document.querySelectorAll('.scramble-text').forEach((element) => {
-    const target = element as HTMLElement;
+  // Scramble Text (GSAP core, triggered by single shared IntersectionObserver)
+  const scrambleAndAnimate = (target: HTMLElement, delay = 0) => {
     const originalText = target.dataset.originalText || target.innerText;
-
-    const tweenVars: gsap.TweenVars = {
+    gsap.to(target, {
       duration: 1.0,
       scrambleText: {
         text: originalText,
@@ -128,21 +126,25 @@ export function initAnimations() {
         revealDelay: 0.5,
         speed: 0.3,
       },
-    };
+      delay,
+    });
+  };
 
+  const scrambleObserver = createObserver(
+    (entry) => {
+      scrambleAndAnimate(entry.target as HTMLElement);
+    },
+    { rootMargin: '0px 0px -15% 0px' }
+  );
+
+  document.querySelectorAll('.scramble-text').forEach((element) => {
+    const target = element as HTMLElement;
     const rect = target.getBoundingClientRect();
     const isInViewport = rect.top < window.innerHeight * 0.85;
 
     if (isInViewport) {
-      tweenVars.delay = 0.2;
-      gsap.to(target, tweenVars);
+      scrambleAndAnimate(target, 0.2);
     } else {
-      const scrambleObserver = createObserver(
-        () => {
-          gsap.to(target, tweenVars);
-        },
-        { rootMargin: '0px 0px -15% 0px' }
-      );
       scrambleObserver.observe(target);
     }
   });

@@ -31,7 +31,7 @@ const structuredData = {
 	<div class="relative overflow-hidden">
 		<!-- Decorative Background Element -->
 		<div
-			class="absolute top-0 right-0 -z-10 w-[800px] h-[800px] bg-gradient-to-br from-blue-100/40 to-purple-100/40 dark:from-blue-900/20 dark:to-purple-900/20 rounded-full blur-3xl opacity-0 animate-blob"
+			class="absolute top-0 right-0 -z-10 w-[800px] h-[800px] bg-gradient-to-br from-blue-100/40 to-purple-100/40 dark:from-blue-900/20 dark:to-purple-900/20 rounded-full blur-3xl animate-blob"
 		>
 		</div>
 
@@ -69,7 +69,7 @@ const structuredData = {
 				</div>
 
 				<div
-					class="hero-actions flex flex-col sm:flex-row gap-4 opacity-0 transform translate-y-4"
+					class="hero-actions flex flex-col sm:flex-row gap-4"
 				>
 					<a
 						href="/about"
@@ -99,7 +99,7 @@ const structuredData = {
 			<!-- Projects Section -->
 			<section class="projects-section mb-20">
 				<div
-					class="flex items-center justify-between mb-8 pb-4 border-b border-gray-100 dark:border-gray-800 opacity-0 section-header"
+					class="flex items-center justify-between mb-8 pb-4 border-b border-gray-100 dark:border-gray-800 section-header"
 				>
 					<h2 class="section-title text-2xl font-bold scramble-text" data-original-text="Projects">Projects</h2>
 					<a
@@ -113,7 +113,7 @@ const structuredData = {
 					</a>
 				</div>
 
-				<div class="mb-8 opacity-0 section-header">
+				<div class="mb-8 section-header">
 					<p class="text-gray-600 dark:text-gray-300 leading-relaxed">
 						個人的に開発しているWebアプリケーションやツールの一部です。<br />
 						技術的な実験や、日常の課題解決のために作っています。
@@ -123,7 +123,7 @@ const structuredData = {
 				<div class="grid md:grid-cols-2 gap-6">
 					{
 						projects.map((project) => (
-							<div class="project-item opacity-0 transform translate-y-4 p-6 bg-gray-50 dark:bg-gray-800/50 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-blue-100 dark:hover:border-blue-900 transition-colors">
+							<div class="project-item p-6 bg-gray-50 dark:bg-gray-800/50 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-blue-100 dark:hover:border-blue-900 transition-colors">
 								<ProjectCard {...project} />
 							</div>
 						))
@@ -134,7 +134,7 @@ const structuredData = {
 			<!-- Note Section -->
 			<section class="note-section mb-20">
 				<div
-					class="flex items-center justify-between mb-8 pb-4 border-b border-gray-100 dark:border-gray-800 opacity-0 section-header"
+					class="flex items-center justify-between mb-8 pb-4 border-b border-gray-100 dark:border-gray-800 section-header"
 				>
 					<NoteIcon class="h-8 w-auto text-black dark:text-white" />
 					<a
@@ -151,7 +151,7 @@ const structuredData = {
 				<div class="grid md:grid-cols-2 gap-6">
 					{
 						NOTES.map((article) => (
-							<NoteCard article={article} class="note-item opacity-0 transform translate-y-4" />
+							<NoteCard article={article} class="note-item" />
 						))
 					}
 				</div>
@@ -160,7 +160,7 @@ const structuredData = {
 			<!-- Recent Posts Section -->
 			<section class="posts-section">
 				<div
-					class="flex items-center justify-between mb-8 pb-4 border-b border-gray-100 dark:border-gray-800 opacity-0 section-header"
+					class="flex items-center justify-between mb-8 pb-4 border-b border-gray-100 dark:border-gray-800 section-header"
 				>
 					<h2 class="section-title text-2xl font-bold scramble-text" data-original-text="Recent Posts">Recent Posts</h2>
 					<a
@@ -178,7 +178,7 @@ const structuredData = {
 				<ul class="space-y-4">
 					{
 						posts.map((post) => (
-							<li class="post-item opacity-0 transform translate-y-4">
+							<li class="post-item">
 								<a
 									href={`/blog/${post.id}/`}
 									class="block group p-6 rounded-2xl bg-white dark:bg-gray-900 hover:shadow-xl dark:hover:bg-gray-800 transition-all duration-300 border border-gray-100 dark:border-gray-800 hover:border-blue-100 dark:hover:border-blue-900 hover:scale-[1.02]"

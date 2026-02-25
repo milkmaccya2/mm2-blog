@@ -154,6 +154,10 @@ main {
    ============================================ */
 
 /* animate-blob */
+.animate-blob {
+  opacity: 0;
+}
+
 .animate-blob.is-visible {
   opacity: 1;
   transition: opacity 2s ease-in-out;
@@ -162,26 +166,27 @@ main {
 /* Fade-in-up + hero-actions */
 .fade-in-up,
 .hero-actions {
+  opacity: 0;
+  transform: translateY(1rem);
   transition:
     opacity 0.8s ease-out,
-    transform 0.8s ease-out,
-    translate 0.8s ease-out;
+    transform 0.8s ease-out;
 }
 
 .fade-in-up.is-visible,
 .hero-actions.is-visible {
-  opacity: 1 !important;
-  transform: none !important;
-  translate: none !important;
+  opacity: 1;
+  transform: none;
 }
 
 /* Section headers */
 .section-header {
+  opacity: 0;
   transition: opacity 0.8s ease-out;
 }
 
 .section-header.is-visible {
-  opacity: 1 !important;
+  opacity: 1;
 }
 
 /* Staggered items */
@@ -190,10 +195,11 @@ main {
 .note-item,
 .experience-item,
 .skills-item {
+  opacity: 0;
+  transform: translateY(1rem);
   transition:
     opacity 0.8s ease-out var(--stagger-delay, 0s),
-    transform 0.8s ease-out var(--stagger-delay, 0s),
-    translate 0.8s ease-out var(--stagger-delay, 0s);
+    transform 0.8s ease-out var(--stagger-delay, 0s);
 }
 
 .post-item.is-visible,
@@ -201,7 +207,6 @@ main {
 .note-item.is-visible,
 .experience-item.is-visible,
 .skills-item.is-visible {
-  opacity: 1 !important;
-  transform: none !important;
-  translate: none !important;
+  opacity: 1;
+  transform: none;
 }
