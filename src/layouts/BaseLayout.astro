@@ -4,6 +4,7 @@ import BaseHead from '@/components/BaseHead.astro';
 import type { BreadcrumbItem } from '@/components/Breadcrumb.astro';
 import Breadcrumb from '@/components/Breadcrumb.astro';
 import Footer from '@/components/Footer.astro';
+import GoogleTagManager from '@/components/GoogleTagManager.astro';
 import Header from '@/components/Header.astro';
 import ReadingProgress from '@/components/ReadingProgress.astro';
 import ThemeScript from '@/components/ThemeScript.astro';
@@ -93,6 +94,7 @@ function buildBreadcrumbs(pathname: string, customLabel?: string): BreadcrumbIte
 
 const breadcrumbItems = buildBreadcrumbs(Astro.url.pathname, breadcrumbLabel);
 const siteOrigin = Astro.site?.origin ?? Astro.url.origin;
+const gtmId = import.meta.env.PUBLIC_GTM_ID;
 ---
 
 <!doctype html>
@@ -109,8 +111,10 @@ const siteOrigin = Astro.site?.origin ?? Astro.url.origin;
     <script>
       import '@/scripts/animations';
     </script>
+    {gtmId && <GoogleTagManager id={gtmId} part="head" />}
   </head>
   <body>
+    {gtmId && <GoogleTagManager id={gtmId} part="body" />}
     <ReadingProgress />
     <Header />
     <Breadcrumb items={breadcrumbItems} siteOrigin={siteOrigin} />
