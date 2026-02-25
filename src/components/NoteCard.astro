@@ -1,6 +1,5 @@
 ---
 import FormattedDate from '@/components/FormattedDate.astro';
-import NoteIcon from '@/components/NoteIcon.astro';
 import type { NoteArticle } from '@/data/notes';
 
 interface Props {
@@ -35,12 +34,9 @@ const { article, class: className } = Astro.props;
         </span>
       )}
     </div>
-    <div class="flex items-center gap-1.5 mb-2">
-      <NoteIcon class="h-3.5 w-3.5 text-gray-400 dark:text-gray-500 flex-shrink-0" />
-      <p class="text-sm text-gray-500 dark:text-gray-400">
-        <FormattedDate date={new Date(article.pubDate)} />
-      </p>
-    </div>
+    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">
+      <FormattedDate date={new Date(article.pubDate)} />
+    </p>
     {article.description && (
       <p class="text-gray-700 dark:text-gray-300 text-sm mb-3">{article.description}</p>
     )}

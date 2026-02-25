@@ -17,9 +17,7 @@ test.describe('Smoke Tests', () => {
     await expect(
       page.getByRole('heading', { level: 2, name: 'Projects' }),
     ).toBeVisible()
-    await expect(
-      page.getByRole('heading', { level: 2, name: 'Note' }),
-    ).toBeVisible()
+    await expect(page.locator('.note-section')).toBeVisible()
     await expect(
       page.getByRole('heading', { level: 2, name: 'Recent Posts' }),
     ).toBeVisible()
