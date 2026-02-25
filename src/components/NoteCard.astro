@@ -1,0 +1,46 @@
+---
+import FormattedDate from '@/components/FormattedDate.astro';
+import type { NoteArticle } from '@/data/notes';
+
+interface Props {
+  article: NoteArticle;
+}
+
+const { article } = Astro.props;
+---
+
+<div
+  class="border-l-4 border-gray-200 dark:border-gray-700 pl-4 hover:border-black dark:hover:border-white transition"
+>
+  <div class="flex items-center gap-2 mb-1">
+    <h2 class="text-xl font-bold">
+      <a
+        href={article.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:underline"
+      >
+        {article.title}
+      </a>
+    </h2>
+    {article.isPaid && (
+      <span class="text-xs font-medium px-2 py-0.5 rounded bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-300">
+        有料
+      </span>
+    )}
+  </div>
+  <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">
+    <FormattedDate date={new Date(article.pubDate)} />
+  </p>
+  {article.description && (
+    <p class="text-gray-700 dark:text-gray-300 text-sm mb-3">{article.description}</p>
+  )}
+  <a
+    href={article.url}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium text-sm inline-block"
+  >
+    noteで読む &rarr;
+  </a>
+</div>
