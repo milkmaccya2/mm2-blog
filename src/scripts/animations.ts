@@ -177,6 +177,9 @@ export function initAnimations() {
 
     // About Page - Skills Items
     animateSlideInItems('.skills-item', '.skills-section');
+
+    // Note List Interactions (Homepage)
+    animateSlideInItems('.note-item', '.note-section');
   });
 
   // Fallback for reduced motion: ensure content is visible
@@ -187,6 +190,7 @@ export function initAnimations() {
     gsap.set('.section-header', { opacity: 1 });
     gsap.set('.post-item', { opacity: 1, y: 0 });
     gsap.set('.project-item', { opacity: 1, y: 0 });
+    gsap.set('.note-item', { opacity: 1, y: 0 });
     gsap.set('.experience-item', { opacity: 1, y: 0 });
     gsap.set('.skills-item', { opacity: 1, y: 0 });
     gsap.set('.animate-blob', { opacity: 1 });
