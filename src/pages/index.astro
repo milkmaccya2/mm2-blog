@@ -150,9 +150,7 @@ const structuredData = {
 				<div class="grid md:grid-cols-2 gap-6">
 					{
 						NOTES.map((article) => (
-							<div class="note-item opacity-0 transform translate-y-4 p-6 bg-gray-50 dark:bg-gray-800/50 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-blue-100 dark:hover:border-blue-900 transition-colors">
-								<NoteCard article={article} />
-							</div>
+							<NoteCard article={article} class="note-item opacity-0 transform translate-y-4" />
 						))
 					}
 				</div>
