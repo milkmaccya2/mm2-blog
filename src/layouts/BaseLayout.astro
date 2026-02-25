@@ -111,10 +111,10 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID;
     <script>
       import '@/scripts/animations';
     </script>
-    {gtmId && <GoogleTagManager id={gtmId} slot="head" />}
+    {gtmId && <GoogleTagManager id={gtmId} part="head" />}
   </head>
   <body>
-    {gtmId && <GoogleTagManager id={gtmId} slot="body" />}
+    {gtmId && <GoogleTagManager id={gtmId} part="body" />}
     <ReadingProgress />
     <Header />
     <Breadcrumb items={breadcrumbItems} siteOrigin={siteOrigin} />

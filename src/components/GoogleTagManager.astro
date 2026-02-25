@@ -1,13 +1,13 @@
 ---
 interface Props {
   id: string;
-  slot?: 'head' | 'body';
+  part?: 'head' | 'body';
 }
 
-const { id, slot = 'head' } = Astro.props;
+const { id, part = 'head' } = Astro.props;
 ---
 
-{slot === 'head' && (
+{part === 'head' && (
   <!-- Google Tag Manager -->
   <script is:inline define:vars={{ id }}>
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -19,7 +19,7 @@ const { id, slot = 'head' } = Astro.props;
   <!-- End Google Tag Manager -->
 )}
 
-{slot === 'body' && (
+{part === 'body' && (
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${id}`}
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
