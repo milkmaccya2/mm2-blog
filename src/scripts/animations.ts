@@ -1,199 +1,50 @@
 import { gsap } from 'gsap';
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger, ScrambleTextPlugin);
+gsap.registerPlugin(ScrambleTextPlugin);
 
-let mm: gsap.MatchMedia | undefined;
+let observers: IntersectionObserver[] = [];
+
+function createObserver(
+  callback: (entry: IntersectionObserverEntry) => void,
+  options?: IntersectionObserverInit
+): IntersectionObserver {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        callback(entry);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, options);
+  observers.push(obs);
+  return obs;
+}
 
 export function initAnimations() {
-  // Clean up previous context if it needs a full reset
-  if (mm) mm.revert();
-
-  mm = gsap.matchMedia();
-
-  // Only play animations if user has no preference for reduced motion
-  mm.add('(prefers-reduced-motion: no-preference)', () => {
-    // Background blob
-    const blobs = document.querySelectorAll('.animate-blob');
-    if (blobs.length > 0) {
-      gsap.to(blobs, {
-        opacity: 1,
-        duration: 2,
-        ease: 'power2.inOut',
-      });
-    }
-
-    // Block Reveal Animations
-    const revealWraps = document.querySelectorAll('.reveal-wrap');
-    if (revealWraps.length > 0) {
-      revealWraps.forEach((wrap) => {
-        const block = wrap.querySelector('.reveal-block');
-        const content = wrap.querySelector('.reveal-content');
-
-        // Skip if required children are missing
-        if (!block || !content) return;
-
-        const tl = gsap.timeline({
-          defaults: { ease: 'power2.inOut' },
-          scrollTrigger: {
-            trigger: wrap,
-            start: 'top 90%',
-          },
-        });
-
-        tl.to(block, {
-          scaleX: 1,
-          duration: 0.6,
-          transformOrigin: 'left',
-        })
-          .set(content, { opacity: 1 })
-          .to(block, {
-            scaleX: 0,
-            duration: 0.6,
-            transformOrigin: 'right',
-          });
-      });
-    }
-
-    // Secondary text fade in (Subtitle second line)
-    const fadeIns = document.querySelectorAll('.fade-in-up');
-    if (fadeIns.length > 0) {
-      fadeIns.forEach((fadeIn) => {
-        gsap.to(fadeIn, {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: fadeIn,
-            start: 'top 90%',
-            toggleActions: 'play none none reverse',
-          },
-        });
-      });
-    }
-
-    // Buttons animation
-    const heroActions = document.querySelectorAll('.hero-actions');
-    if (heroActions.length > 0) {
-      gsap.to(heroActions, {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.hero-actions',
-          start: 'top 90%',
-          toggleActions: 'play none none reverse',
-        },
-      });
-    }
-
-    // Section Header
-    const sectionHeaders = document.querySelectorAll('.section-header');
-    if (sectionHeaders.length > 0) {
-      sectionHeaders.forEach((header) => {
-        // Trigger based on the closest parent section if available, otherwise the header itself
-        const triggerElement = header.closest('section') || header;
-
-        gsap.to(header, {
-          opacity: 1,
-          duration: 0.8,
-          scrollTrigger: {
-            trigger: triggerElement,
-            start: 'top 85%',
-          },
-        });
-      });
-    }
-
-    // Scramble Text
-    const scrambleElements = document.querySelectorAll('.scramble-text');
-    scrambleElements.forEach((element) => {
-      const target = element as HTMLElement;
-      const originalText = target.dataset.originalText || target.innerText;
-
-      // Check if element is already in viewport
-      const rect = target.getBoundingClientRect();
-      const isInViewport = rect.top < window.innerHeight * 0.85;
-
-      const tweenVars: gsap.TweenVars = {
-        duration: 1.0,
-        scrambleText: {
-          text: originalText,
-          chars: '!<>-_\\/[]{}—=+*^?#________',
-          revealDelay: 0.5,
-          speed: 0.3,
-        },
-      };
-
-      if (isInViewport) {
-        // Element is already visible, start animation with a small delay
-        tweenVars.delay = 0.2;
-      } else {
-        // Element is below viewport, use scroll trigger
-        tweenVars.scrollTrigger = {
-          trigger: target,
-          start: 'top 85%',
-        };
-      }
-
-      gsap.to(target, tweenVars);
-    });
-
-    // Generalized Slide-in Animation Function (Bottom to Top, like hero-actions)
-    const animateSlideInItems = (itemSelector: string, sectionSelector: string) => {
-      const items = document.querySelectorAll(itemSelector);
-      if (items.length > 0) {
-        const section = document.querySelector(sectionSelector);
-        const trigger = section || items[0];
-
-        gsap.to(items, {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: trigger,
-            start: 'top 80%',
-          },
-        });
-      }
-    };
-
-    // Post List Interactions
-    animateSlideInItems('.post-item', '.posts-section');
-
-    // Project List Interactions (Homepage)
-    animateSlideInItems('.project-item', '.projects-section');
-
-    // Projects Page - All Projects
-    animateSlideInItems('.project-item', '.projects-page-section');
-
-    // About Page - Experience Items
-    animateSlideInItems('.experience-item', '.experience-section');
-
-    // About Page - Skills Items
-    animateSlideInItems('.skills-item', '.skills-section');
-
-    // Note List Interactions (Homepage)
-    animateSlideInItems('.note-item', '.note-section');
+  // Clean up previous observers
+  observers.forEach((obs) => {
+    obs.disconnect();
   });
+  observers = [];
 
   // Fallback for reduced motion: ensure content is visible
-  mm.add('(prefers-reduced-motion: reduce)', () => {
-    gsap.set('.reveal-content', { opacity: 1 });
-    gsap.set('.fade-in-up', { opacity: 1, y: 0 });
-    gsap.set('.hero-actions', { opacity: 1, y: 0 });
-    gsap.set('.section-header', { opacity: 1 });
-    gsap.set('.post-item', { opacity: 1, y: 0 });
-    gsap.set('.project-item', { opacity: 1, y: 0 });
-    gsap.set('.note-item', { opacity: 1, y: 0 });
-    gsap.set('.experience-item', { opacity: 1, y: 0 });
-    gsap.set('.skills-item', { opacity: 1, y: 0 });
-    gsap.set('.animate-blob', { opacity: 1 });
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.reveal-content').forEach((el) => {
+      (el as HTMLElement).style.opacity = '1';
+    });
+    document
+      .querySelectorAll(
+        '.fade-in-up, .hero-actions, .post-item, .project-item, .note-item, .experience-item, .skills-item'
+      )
+      .forEach((el) => {
+        (el as HTMLElement).style.opacity = '1';
+        (el as HTMLElement).style.transform = 'none';
+        (el as HTMLElement).style.translate = 'none';
+      });
+    document.querySelectorAll('.section-header, .animate-blob').forEach((el) => {
+      (el as HTMLElement).style.opacity = '1';
+    });
 
     // Ensure scramble text matches final state
     document.querySelectorAll('.scramble-text').forEach((el) => {
@@ -202,11 +53,106 @@ export function initAnimations() {
         target.innerText = target.dataset.originalText;
       }
     });
+    return;
+  }
+
+  // Background blob
+  document.querySelectorAll('.animate-blob').forEach((el) => {
+    el.classList.add('is-visible');
+  });
+
+  // Block Reveal Animations (GSAP timeline triggered by IntersectionObserver)
+  const revealWraps = document.querySelectorAll('.reveal-wrap');
+  if (revealWraps.length > 0) {
+    const revealObserver = createObserver(
+      (entry) => {
+        const wrap = entry.target;
+        const block = wrap.querySelector('.reveal-block');
+        const content = wrap.querySelector('.reveal-content');
+        if (!block || !content) return;
+
+        const tl = gsap.timeline({ defaults: { ease: 'power2.inOut' } });
+        tl.to(block, { scaleX: 1, duration: 0.6, transformOrigin: 'left' })
+          .set(content, { opacity: 1 })
+          .to(block, { scaleX: 0, duration: 0.6, transformOrigin: 'right' });
+      },
+      { rootMargin: '0px 0px -10% 0px' }
+    );
+    revealWraps.forEach((el) => {
+      revealObserver.observe(el);
+    });
+  }
+
+  // Fade / slide-up elements (CSS transition via .is-visible class)
+  const fadeObserver = createObserver(
+    (entry) => {
+      entry.target.classList.add('is-visible');
+    },
+    { rootMargin: '0px 0px -10% 0px' }
+  );
+  document.querySelectorAll('.fade-in-up, .hero-actions, .section-header').forEach((el) => {
+    fadeObserver.observe(el);
+  });
+
+  // Staggered list items (observe sections, then animate children with delay)
+  const staggerObserver = createObserver(
+    (entry) => {
+      const items = entry.target.querySelectorAll(
+        '.post-item, .project-item, .note-item, .experience-item, .skills-item'
+      );
+      items.forEach((item, i) => {
+        (item as HTMLElement).style.setProperty('--stagger-delay', `${i * 0.1}s`);
+        item.classList.add('is-visible');
+      });
+    },
+    { rootMargin: '0px 0px -20% 0px' }
+  );
+  document
+    .querySelectorAll(
+      '.posts-section, .projects-section, .projects-page-section, .experience-section, .skills-section, .note-section'
+    )
+    .forEach((el) => {
+      staggerObserver.observe(el);
+    });
+
+  // Scramble Text (GSAP core, triggered by IntersectionObserver)
+  document.querySelectorAll('.scramble-text').forEach((element) => {
+    const target = element as HTMLElement;
+    const originalText = target.dataset.originalText || target.innerText;
+
+    const tweenVars: gsap.TweenVars = {
+      duration: 1.0,
+      scrambleText: {
+        text: originalText,
+        chars: '!<>-_\\/[]{}—=+*^?#________',
+        revealDelay: 0.5,
+        speed: 0.3,
+      },
+    };
+
+    const rect = target.getBoundingClientRect();
+    const isInViewport = rect.top < window.innerHeight * 0.85;
+
+    if (isInViewport) {
+      tweenVars.delay = 0.2;
+      gsap.to(target, tweenVars);
+    } else {
+      const scrambleObserver = createObserver(
+        () => {
+          gsap.to(target, tweenVars);
+        },
+        { rootMargin: '0px 0px -15% 0px' }
+      );
+      scrambleObserver.observe(target);
+    }
   });
 }
 
 // Global listeners for Astro View Transitions
 document.addEventListener('astro:page-load', initAnimations);
 document.addEventListener('astro:before-swap', () => {
-  if (mm) mm.revert();
+  observers.forEach((obs) => {
+    obs.disconnect();
+  });
+  observers = [];
 });
