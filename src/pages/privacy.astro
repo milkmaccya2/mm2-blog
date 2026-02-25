@@ -1,0 +1,75 @@
+---
+import { SITE_TITLE } from '@/consts';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title={`プライバシーポリシー | ${SITE_TITLE}`}
+  description="milkmaccya or something のプライバシーポリシーです。"
+>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <div class="space-y-10">
+      <h1 class="text-4xl font-bold">プライバシーポリシー</h1>
+
+      <section class="space-y-3">
+        <h2 class="text-2xl font-bold border-b pb-2">個人情報の取得について</h2>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+          当サイトでは、アクセス解析ツールの利用に際し、Cookie を通じてアクセス情報（IPアドレス、ブラウザ種別、閲覧ページ等）を取得することがあります。
+          取得した情報は、サイト改善の目的にのみ使用し、個人を特定する情報は収集しません。
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-2xl font-bold border-b pb-2">アクセス解析ツールについて</h2>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+          当サイトでは、Google が提供する Google アナリティクスを利用しています。
+          Google アナリティクスは Cookie を使用してデータを収集・分析します。
+          Cookie を無効にすることでデータの収集を拒否することができます。詳細は
+          <a
+            href="https://policies.google.com/technologies/partner-sites"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-blue-600 dark:text-blue-400 hover:underline"
+          >Google のポリシーと規約</a>
+          をご確認ください。
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-2xl font-bold border-b pb-2">アフィリエイトについて</h2>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+          当サイトは、Amazon.co.jp を宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、
+          Amazonアソシエイト・プログラムの参加者です。
+        </p>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+          また、楽天グループ株式会社が運営する楽天アフィリエイトプログラムにも参加しています。
+          当サイト内の商品リンクには、アフィリエイトリンクが含まれる場合があります。
+          リンクを経由して商品を購入された場合、当サイトに紹介料が支払われることがあります。
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-2xl font-bold border-b pb-2">広告の配信について</h2>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+          当サイトは第三者配信の広告サービスを利用することがあります。これらの広告配信事業者は、
+          ユーザーの興味に応じた広告を表示するために Cookie を使用することがあります。
+          Cookie を無効にする設定はご利用のブラウザの設定から行うことができます。
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-2xl font-bold border-b pb-2">お問い合わせ</h2>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+          プライバシーポリシーに関するお問い合わせは、
+          <a
+            href="mailto:milkmaccya@gmail.com"
+            class="text-blue-600 dark:text-blue-400 hover:underline"
+          >milkmaccya@gmail.com</a>
+          までご連絡ください。
+        </p>
+      </section>
+
+      <p class="text-sm text-gray-500 dark:text-gray-400">制定日：2026年2月25日</p>
+    </div>
+  </main>
+</BaseLayout>

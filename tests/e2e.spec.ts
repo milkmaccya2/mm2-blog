@@ -55,4 +55,20 @@ test.describe('Smoke Tests', () => {
       page.getByRole('heading', { level: 1, name: 'Personal Projects' }),
     ).toBeVisible()
   })
+
+  test('privacy page', async ({ page }) => {
+    await page.goto('/privacy')
+    await verifyLayout(page)
+    await expect(
+      page.getByRole('heading', { level: 1, name: 'プライバシーポリシー' }),
+    ).toBeVisible()
+  })
+
+  test('terms page', async ({ page }) => {
+    await page.goto('/terms')
+    await verifyLayout(page)
+    await expect(
+      page.getByRole('heading', { level: 1, name: '利用規約' }),
+    ).toBeVisible()
+  })
 })
