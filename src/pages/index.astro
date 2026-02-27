@@ -4,14 +4,16 @@ import NoteCard from '@/components/NoteCard.astro';
 import NoteIcon from '@/components/NoteIcon.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
-import { NOTES } from '@/data/notes';
 import { PROJECTS } from '@/data/projects';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { fetchNoteArticles } from '@/lib/note-rss';
 import { getPublishedPosts } from '@/lib/posts';
 
 const posts = (await getPublishedPosts()).slice(0, 5);
 
 const projects = PROJECTS.slice(0, 2);
+
+const noteArticles = await fetchNoteArticles(6);
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -148,13 +150,17 @@ const structuredData = {
 					</a>
 				</div>
 
-				<div class="grid md:grid-cols-2 gap-6">
-					{
-						NOTES.map((article) => (
-							<NoteCard article={article} class="note-item" />
-						))
-					}
-				</div>
+				{
+					noteArticles.length > 0 ? (
+						<div class="grid md:grid-cols-2 gap-6">
+							{noteArticles.map((article) => (
+								<NoteCard article={article} class="note-item" />
+							))}
+						</div>
+					) : (
+						<p class="text-gray-500 dark:text-gray-400 text-sm">記事を取得できませんでした。</p>
+					)
+				}
 			</section>
 
 			<!-- Recent Posts Section -->
