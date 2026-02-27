@@ -24,6 +24,7 @@
     "@sentry/astro": "^10.38.0",
     "astro": "^6.0.0-beta.6",
     "gsap": "^3.14.2",
+    "rss-parser": "^3.13.0",
     "satori": "^0.19.1"
   },
   "devDependencies": {
