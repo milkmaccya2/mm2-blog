@@ -4,14 +4,16 @@ import NoteCard from '@/components/NoteCard.astro';
 import NoteIcon from '@/components/NoteIcon.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
-import { NOTES } from '@/data/notes';
 import { PROJECTS } from '@/data/projects';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { fetchNoteOgp } from '@/lib/note-ogp';
 import { getPublishedPosts } from '@/lib/posts';
 
 const posts = (await getPublishedPosts()).slice(0, 5);
 
 const projects = PROJECTS.slice(0, 2);
+
+const noteOgp = await fetchNoteOgp();
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -24,7 +26,7 @@ const structuredData = {
     '@type': 'Organization',
     name: SITE_TITLE,
   },
-};
+} as const;
 ---
 
 <BaseLayout structuredData={structuredData}>
@@ -148,13 +150,7 @@ const structuredData = {
 					</a>
 				</div>
 
-				<div class="grid md:grid-cols-2 gap-6">
-					{
-						NOTES.map((article) => (
-							<NoteCard article={article} class="note-item" />
-						))
-					}
-				</div>
+				<NoteCard ogp={noteOgp} />
 			</section>
 
 			<!-- Recent Posts Section -->
