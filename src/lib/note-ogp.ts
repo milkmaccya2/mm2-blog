@@ -8,17 +8,13 @@ export interface NoteOgp {
 }
 
 function extractMeta(html: string, property: string): string | undefined {
-  // property="og:xxx" content="..." 形式
-  const pattern1 = new RegExp(
-    `<meta[^>]*property=["']${property}["'][^>]*content=["']([^"']+)["']`,
+  // property="og:xxx" content="..." 形式と順序が逆の形式の両方に対応
+  const pattern = new RegExp(
+    `<meta[^>]*property=["']${property}["'][^>]*content=["']([^"']+)["']|<meta[^>]*content=["']([^"']+)["'][^>]*property=["']${property}["']`,
     'i'
   );
-  // content="..." property="og:xxx" 形式（順序逆）
-  const pattern2 = new RegExp(
-    `<meta[^>]*content=["']([^"']+)["'][^>]*property=["']${property}["']`,
-    'i'
-  );
-  return (html.match(pattern1) ?? html.match(pattern2))?.[1];
+  const match = html.match(pattern);
+  return match?.[1] ?? match?.[2];
 }
 
 /**
