@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import type { NoteOgp } from '@/lib/note-ogp';
 
 interface Props {
@@ -16,14 +17,13 @@ const { ogp } = Astro.props;
 >
   {ogp.image && (
     <div class="aspect-1200/630 overflow-hidden bg-gray-100 dark:bg-gray-800">
-      <img
+      <Image
         src={ogp.image}
         alt={ogp.title}
-        width="1200"
-        height="630"
+        width={960}
+        height={504}
         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         loading="lazy"
-        decoding="async"
       />
     </div>
   )}
