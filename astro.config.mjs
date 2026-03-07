@@ -11,6 +11,9 @@ import remarkLinkCardPlus from 'remark-link-card-plus';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://blog.milkmaccya.com',
+  image: {
+    remotePatterns: [{ protocol: 'https' }],
+  },
   markdown: {
     remarkPlugins: [
       [
