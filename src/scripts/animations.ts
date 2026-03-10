@@ -28,6 +28,12 @@ export function initAnimations() {
   });
   observers = [];
 
+  // Set reveal-content initial state via JS (not CSS) to allow LCP measurement on first render
+  const revealContentEls = document.querySelectorAll('.reveal-content');
+  if (revealContentEls.length > 0) {
+    gsap.set(revealContentEls, { opacity: 0 });
+  }
+
   // Fallback for reduced motion: ensure content is visible
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.querySelectorAll('.reveal-content').forEach((el) => {
