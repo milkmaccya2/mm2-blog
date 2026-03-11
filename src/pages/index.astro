@@ -237,9 +237,7 @@ const structuredData = {
 		display: block;
 	}
 
-	.reveal-content {
-		opacity: 0;
-	}
+	/* opacity は animations.ts の gsap.set() で初期化する (LCP改善のためCSS初期値は非表示にしない) */
 
 	.reveal-block {
 		position: absolute;
