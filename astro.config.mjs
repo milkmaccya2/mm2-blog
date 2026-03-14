@@ -2,7 +2,7 @@
 
 import cloudflare from '@astrojs/cloudflare';
 import mdx from '@astrojs/mdx';
-import preact from '@astrojs/preact';
+import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import sentry from '@sentry/astro';
 import tailwindcss from '@tailwindcss/vite';
@@ -31,7 +31,7 @@ export default defineConfig({
   },
   integrations: [
     mdx(),
-    preact({ compat: true }),
+    react(),
     sentry({
       enabled: !!process.env.SENTRY_AUTH_TOKEN,
       sourceMapsUploadOptions: {
