@@ -4,7 +4,9 @@ import cloudflare from '@astrojs/cloudflare';
 import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
-import sentry from '@sentry/astro';
+// NOTE: @sentry/astro はCloudflare Workers (workerd) のプリレンダラーと非互換
+// addEventListener(useCapture: true) がworkerdで使えないためビルドがクラッシュする
+// Cloudflare環境でSentryを使うには @sentry/cloudflare を直接設定する必要がある
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
 import compress from 'astro-compress';
@@ -31,20 +33,7 @@ export default defineConfig({
       ],
     ],
   },
-  integrations: [
-    mdx(),
-    react(),
-    sentry({
-      enabled: !!process.env.SENTRY_AUTH_TOKEN,
-      sourceMapsUploadOptions: {
-        project: process.env.SENTRY_PROJECT,
-        org: process.env.SENTRY_ORG,
-        authToken: process.env.SENTRY_AUTH_TOKEN,
-      },
-    }),
-    sitemap(),
-    compress(),
-  ],
+  integrations: [mdx(), react(), sitemap(), compress()],
   vite: {
     plugins: [tailwindcss()],
   },
