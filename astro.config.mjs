@@ -15,7 +15,7 @@ import remarkLinkCardPlus from 'remark-link-card-plus';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://blog.milkmaccya.com',
-  adapter: cloudflare({ remoteBindings: false }),
+  adapter: cloudflare(),
   image: {
     remotePatterns: [{ protocol: 'https' }],
   },
@@ -33,6 +33,19 @@ export default defineConfig({
   },
   integrations: [mdx(), react(), sitemap(), compress()],
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+      {
+        name: 'cloudflare-disable-remote-bindings',
+        configResolved() {
+          // @astrojs/cloudflare のバグ回避: preview時に cloudflareOptions が
+          // globalThis.astroCloudflareOptions にマージされないため、ここで補完する
+          const opts = globalThis.astroCloudflareOptions;
+          if (opts) {
+            opts.remoteBindings = false;
+          }
+        },
+      },
+    ],
   },
 });
