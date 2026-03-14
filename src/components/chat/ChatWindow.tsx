@@ -10,6 +10,7 @@ interface Props {
 export default function ChatWindow({ onClose }: Props) {
   const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
     api: '/api/chat',
+    initialInput: '',
   });
   const messagesEndRef = useRef<HTMLDivElement>(null);
 

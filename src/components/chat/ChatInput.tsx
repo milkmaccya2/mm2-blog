@@ -18,7 +18,7 @@ export default function ChatInput({ input, isLoading, onInputChange, onSubmit }:
       />
       <button
         type="submit"
-        disabled={isLoading || !input.trim()}
+        disabled={isLoading || !(input ?? '').trim()}
         class="rounded-lg bg-blue-600 px-4 py-2 text-sm text-white transition-colors hover:bg-blue-700 disabled:opacity-50"
       >
         {isLoading ? '...' : '送信'}
