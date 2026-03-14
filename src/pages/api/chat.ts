@@ -12,7 +12,7 @@ export const POST: APIRoute = async ({ request }) => {
   const modelMessages = await convertToModelMessages(messages);
 
   // 最新のユーザーメッセージでRAG検索（Vectorizeがローカルで使えない場合はスキップ）
-  const lastUserMessage = [...messages].reverse().find((m) => m.role === 'user');
+  const lastUserMessage = messages.findLast((m) => m.role === 'user');
 
   let context = '';
   if (lastUserMessage) {

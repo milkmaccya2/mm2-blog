@@ -1,6 +1,6 @@
 interface Props {
   role: 'user' | 'assistant';
-  content: string;
+  content: React.ReactNode;
 }
 
 export default function ChatMessage({ role, content }: Props) {

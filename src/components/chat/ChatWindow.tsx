@@ -51,15 +51,9 @@ export default function ChatWindow({ onClose }: Props) {
             ブログの内容について何でも聞いてください
           </p>
         )}
-        {messages.map((m) => {
-          const text = m.parts
-            ?.filter((p) => p.type === 'text')
-            .map((p) => p.text)
-            .join('');
-          return (
-            <ChatMessage key={m.id} role={m.role as 'user' | 'assistant'} content={text || ''} />
-          );
-        })}
+        {messages.map((m) => (
+          <ChatMessage key={m.id} role={m.role as 'user' | 'assistant'} content={m.content} />
+        ))}
         {error && (
           <p className="mt-2 text-center text-xs text-red-500">
             エラーが発生しました。しばらくしてからお試しください。

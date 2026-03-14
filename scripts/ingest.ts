@@ -17,7 +17,11 @@ async function loadBlogChunks(): Promise<Chunk[]> {
   for (const file of files) {
     const content = readFileSync(join(BLOG_DIR, file), 'utf-8');
     const dateMatch = file.match(/(\d{4}-\d{2}-\d{2})/);
-    const date = dateMatch?.[1] ?? '';
+    if (!dateMatch) {
+      console.warn(`Skipping file without date in filename: ${file}`);
+      continue;
+    }
+    const date = dateMatch[1];
 
     const titleMatch = content.match(/title:\s*['"](.+?)['"]/);
     const title = titleMatch?.[1] ?? file.replace('.md', '');
