@@ -1,6 +1,8 @@
 // @ts-check
 
+import cloudflare from '@astrojs/cloudflare';
 import mdx from '@astrojs/mdx';
+import preact from '@astrojs/preact';
 import sitemap from '@astrojs/sitemap';
 import sentry from '@sentry/astro';
 import tailwindcss from '@tailwindcss/vite';
@@ -11,6 +13,7 @@ import remarkLinkCardPlus from 'remark-link-card-plus';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://blog.milkmaccya.com',
+  adapter: cloudflare(),
   image: {
     remotePatterns: [{ protocol: 'https' }],
   },
@@ -28,7 +31,9 @@ export default defineConfig({
   },
   integrations: [
     mdx(),
+    preact({ compat: true }),
     sentry({
+      enabled: !!process.env.SENTRY_AUTH_TOKEN,
       sourceMapsUploadOptions: {
         project: process.env.SENTRY_PROJECT,
         org: process.env.SENTRY_ORG,

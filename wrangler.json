@@ -8,5 +8,14 @@
   },
   "observability": {
     "enabled": true
+  },
+  "vectorize": [
+    {
+      "binding": "VECTORIZE",
+      "index_name": "mm2-blog-content"
+    }
+  ],
+  "ai": {
+    "binding": "AI"
   }
 }
