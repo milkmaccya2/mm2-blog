@@ -1,17 +1,22 @@
-import { useChat } from '@ai-sdk/react';
 import { useEffect, useRef, useState } from 'preact/hooks';
 import ChatInput from './ChatInput';
 import ChatMessage from './ChatMessage';
+
+interface Message {
+  id: string;
+  role: 'user' | 'assistant';
+  content: string;
+}
 
 interface Props {
   onClose: () => void;
 }
 
 export default function ChatWindow({ onClose }: Props) {
-  const { messages, append, isLoading, error } = useChat({
-    api: '/api/chat',
-  });
-  const [localInput, setLocalInput] = useState('');
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: メッセージ追加時にスクロールさせたい
@@ -19,12 +24,70 @@ export default function ChatWindow({ onClose }: Props) {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages.length]);
 
-  const handleSubmit = (e: Event) => {
+  const handleSubmit = async (e: Event) => {
     e.preventDefault();
-    const text = localInput.trim();
+    const text = input.trim();
     if (!text || isLoading) return;
-    setLocalInput('');
-    append({ role: 'user', content: text });
+
+    const userMessage: Message = { id: crypto.randomUUID(), role: 'user', content: text };
+    const allMessages = [...messages, userMessage];
+    setMessages(allMessages);
+    setInput('');
+    setError('');
+    setIsLoading(true);
+
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: allMessages.map(({ role, content }) => ({ role, content })),
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
+      }
+
+      const reader = res.body?.getReader();
+      if (!reader) throw new Error('No response body');
+
+      const assistantId = crypto.randomUUID();
+      setMessages((prev) => [...prev, { id: assistantId, role: 'assistant', content: '' }]);
+
+      const decoder = new TextDecoder();
+      let buffer = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() ?? '';
+
+        for (const line of lines) {
+          if (!line.startsWith('data: ') || line === 'data: [DONE]') continue;
+          try {
+            const data = JSON.parse(line.slice(6));
+            // UI message stream format: type "text" contains text content
+            if (data.type === 'text' && data.value) {
+              setMessages((prev) =>
+                prev.map((m) =>
+                  m.id === assistantId ? { ...m, content: m.content + data.value } : m
+                )
+              );
+            }
+          } catch {
+            // skip malformed JSON
+          }
+        }
+      }
+    } catch {
+      setError('エラーが発生しました。しばらくしてからお試しください。');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -48,21 +111,17 @@ export default function ChatWindow({ onClose }: Props) {
           <p class="text-center text-sm text-gray-400">ブログの内容について何でも聞いてください</p>
         )}
         {messages.map((m) => (
-          <ChatMessage key={m.id} role={m.role as 'user' | 'assistant'} content={m.content} />
+          <ChatMessage key={m.id} role={m.role} content={m.content} />
         ))}
-        {error && (
-          <p class="mt-2 text-center text-xs text-red-500">
-            エラーが発生しました。しばらくしてからお試しください。
-          </p>
-        )}
+        {error && <p class="mt-2 text-center text-xs text-red-500">{error}</p>}
         <div ref={messagesEndRef} />
       </div>
 
       {/* Input */}
       <ChatInput
-        input={localInput}
+        input={input}
         isLoading={isLoading}
-        onInputChange={(e) => setLocalInput((e.target as HTMLInputElement).value)}
+        onInputChange={(e) => setInput((e.target as HTMLInputElement).value)}
         onSubmit={handleSubmit}
       />
     </div>
