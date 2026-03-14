@@ -15,9 +15,7 @@ import remarkLinkCardPlus from 'remark-link-card-plus';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://blog.milkmaccya.com',
-  adapter: cloudflare({
-    remoteBindings: false,
-  }),
+  adapter: cloudflare(),
   image: {
     remotePatterns: [{ protocol: 'https' }],
   },

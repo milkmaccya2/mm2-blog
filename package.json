@@ -14,7 +14,7 @@
     "lint:textlint": "textlint 'src/content/blog/**/*.md'",
     "lint:textlint:fix": "textlint --fix 'src/content/blog/**/*.md'",
     "lint:fix": "npm run lint:biome:fix && npm run lint:textlint:fix",
-    "test": "playwright test",
+    "test": "node -e \"const fs=require('fs');fs.copyFileSync('wrangler.json','wrangler.json.bak');fs.copyFileSync('wrangler.test.json','wrangler.json')\" && playwright test; node -e \"const fs=require('fs');fs.copyFileSync('wrangler.json.bak','wrangler.json');fs.unlinkSync('wrangler.json.bak')\"",
     "test:ui": "playwright test --ui",
     "prepare": "lefthook install",
     "ingest:prepare": "npx tsx scripts/ingest.ts > /tmp/chunks.json",
@@ -50,7 +50,8 @@
     "schema-dts": "1.1.5",
     "sharp": "0.34.5",
     "tailwindcss": "4.1.18",
-    "textlint": "14.8.4"
+    "textlint": "14.8.4",
+    "tsx": "^4.21.0"
   },
   "overrides": {
     "@sentry/astro": {
