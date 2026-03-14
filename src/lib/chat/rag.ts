@@ -11,7 +11,7 @@ export async function searchRelevantChunks(
   vectorize: VectorizeIndex,
   topK = 5
 ): Promise<RagResult[]> {
-  const embedding = await ai.run('@cf/pfnet/plamo-embedding-1b', {
+  const embedding = await ai.run('@cf/baai/bge-m3', {
     text: [query],
   });
 

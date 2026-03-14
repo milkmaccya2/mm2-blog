@@ -33,7 +33,7 @@ export default {
       const batch = chunks.slice(i, i + BATCH_SIZE);
       const texts = batch.map((c) => c.text);
 
-      const embeddings = await env.AI.run('@cf/pfnet/plamo-embedding-1b', {
+      const embeddings = await env.AI.run('@cf/baai/bge-m3', {
         text: texts,
       });
 

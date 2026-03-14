@@ -39,9 +39,9 @@ async function loadBlogChunks(): Promise<Chunk[]> {
 }
 
 async function loadNoteChunks(): Promise<Chunk[]> {
-  console.log('Fetching note articles...');
+  console.error('Fetching note articles...');
   const articles = await fetchNoteArticles();
-  console.log(`Fetched ${articles.length} note articles`);
+  console.error(`Fetched ${articles.length} note articles`);
 
   const chunks: Chunk[] = [];
   for (const article of articles) {
@@ -57,21 +57,21 @@ async function loadNoteChunks(): Promise<Chunk[]> {
 }
 
 async function main() {
-  console.log('=== Ingest Start ===');
+  console.error('=== Ingest Start ===');
 
   const blogChunks = await loadBlogChunks();
-  console.log(`Blog chunks: ${blogChunks.length}`);
+  console.error(`Blog chunks: ${blogChunks.length}`);
 
   const aboutChunks = createAboutChunks();
-  console.log(`About chunks: ${aboutChunks.length}`);
+  console.error(`About chunks: ${aboutChunks.length}`);
 
   const noteChunks = await loadNoteChunks();
-  console.log(`Note chunks: ${noteChunks.length}`);
+  console.error(`Note chunks: ${noteChunks.length}`);
 
   const allChunks = [...blogChunks, ...aboutChunks, ...noteChunks];
-  console.log(`Total chunks: ${allChunks.length}`);
+  console.error(`Total chunks: ${allChunks.length}`);
 
-  console.log(JSON.stringify(allChunks, null, 2));
+  process.stdout.write(JSON.stringify(allChunks));
 }
 
 main().catch(console.error);
