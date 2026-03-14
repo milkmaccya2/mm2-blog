@@ -14,7 +14,7 @@
     "lint:textlint": "textlint 'src/content/blog/**/*.md'",
     "lint:textlint:fix": "textlint --fix 'src/content/blog/**/*.md'",
     "lint:fix": "npm run lint:biome:fix && npm run lint:textlint:fix",
-    "test": "node -e \"const fs=require('fs');fs.copyFileSync('wrangler.json','wrangler.json.bak');fs.copyFileSync('wrangler.test.json','wrangler.json')\" && playwright test; node -e \"const fs=require('fs');fs.copyFileSync('wrangler.json.bak','wrangler.json');fs.unlinkSync('wrangler.json.bak')\"",
+    "test": "playwright test",
     "test:ui": "playwright test --ui",
     "prepare": "lefthook install",
     "ingest:prepare": "npx tsx scripts/ingest.ts > /tmp/chunks.json",
