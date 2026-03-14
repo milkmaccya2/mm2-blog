@@ -36,3 +36,9 @@ pr_comments.txt
 pr_details.txt
 pr_inline_comments.json
 pr_reviews.json
+
+# Claude skills (branch-independent)
+.claude/skills/weekly-blog/
+
+# docs (local only)
+docs/
