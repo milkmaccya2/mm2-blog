@@ -1,5 +1,5 @@
 import { useChat } from '@ai-sdk/react';
-import { useEffect, useRef } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import ChatInput from './ChatInput';
 import ChatMessage from './ChatMessage';
 
@@ -8,16 +8,24 @@ interface Props {
 }
 
 export default function ChatWindow({ onClose }: Props) {
-  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
+  const { messages, append, isLoading } = useChat({
     api: '/api/chat',
-    initialInput: '',
   });
+  const [localInput, setLocalInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: メッセージ追加時にスクロールさせたい
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages.length]);
+
+  const handleSubmit = (e: Event) => {
+    e.preventDefault();
+    const text = localInput.trim();
+    if (!text || isLoading) return;
+    setLocalInput('');
+    append({ role: 'user', content: text });
+  };
 
   return (
     <div class="fixed bottom-20 right-4 z-50 flex h-[500px] w-[360px] flex-col rounded-2xl bg-[var(--color-bg)] shadow-2xl ring-1 ring-gray-200 dark:ring-gray-700 max-sm:bottom-0 max-sm:right-0 max-sm:h-full max-sm:w-full max-sm:rounded-none">
@@ -47,9 +55,9 @@ export default function ChatWindow({ onClose }: Props) {
 
       {/* Input */}
       <ChatInput
-        input={input}
+        input={localInput}
         isLoading={isLoading}
-        onInputChange={handleInputChange}
+        onInputChange={(e) => setLocalInput((e.target as HTMLInputElement).value)}
         onSubmit={handleSubmit}
       />
     </div>

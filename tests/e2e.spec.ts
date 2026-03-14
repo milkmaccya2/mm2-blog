@@ -78,7 +78,7 @@ test.describe('Smoke Tests', () => {
     await expect(chatButton).toBeVisible({ timeout: 10000 })
   })
 
-  test('チャットウィンドウの開閉', async ({ page }) => {
+  test('チャットウィンドウの開閉と入力', async ({ page }) => {
     await page.goto('/')
     const chatButton = page.locator('button[aria-label="チャットを開く"]')
     await expect(chatButton).toBeVisible({ timeout: 10000 })
@@ -86,8 +86,15 @@ test.describe('Smoke Tests', () => {
 
     const closeButton = page.locator('button[aria-label="チャットを閉じる"]')
     await expect(closeButton).toBeVisible({ timeout: 10000 })
-    await closeButton.click()
 
+    // 入力欄にテキストを入力すると送信ボタンが有効になる
+    const input = page.locator('input[placeholder="質問を入力..."]')
+    const submitButton = page.locator('button[type="submit"]')
+    await expect(submitButton).toBeDisabled()
+    await input.type('テスト')
+    await expect(submitButton).toBeEnabled({ timeout: 5000 })
+
+    await closeButton.click()
     await expect(chatButton).toBeVisible()
   })
 })
