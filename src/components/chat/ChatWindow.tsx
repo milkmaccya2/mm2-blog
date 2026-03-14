@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function ChatWindow({ onClose }: Props) {
-  const { messages, append, isLoading } = useChat({
+  const { messages, append, isLoading, error } = useChat({
     api: '/api/chat',
   });
   const [localInput, setLocalInput] = useState('');
@@ -50,6 +50,11 @@ export default function ChatWindow({ onClose }: Props) {
         {messages.map((m) => (
           <ChatMessage key={m.id} role={m.role as 'user' | 'assistant'} content={m.content} />
         ))}
+        {error && (
+          <p class="mt-2 text-center text-xs text-red-500">
+            エラーが発生しました。しばらくしてからお試しください。
+          </p>
+        )}
         <div ref={messagesEndRef} />
       </div>
 

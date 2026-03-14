@@ -1,3 +1,4 @@
+import { env } from 'cloudflare:workers';
 import { createAnthropic } from '@ai-sdk/anthropic';
 import { streamText } from 'ai';
 import type { APIRoute } from 'astro';
@@ -6,17 +7,20 @@ import { buildPromptWithContext } from '@/lib/chat/system-prompt';
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request, locals }) => {
+export const POST: APIRoute = async ({ request }) => {
   const { messages } = await request.json();
-  const env = locals.runtime.env;
 
-  // 最新のユーザーメッセージでRAG検索
+  // 最新のユーザーメッセージでRAG検索（Vectorizeがローカルで使えない場合はスキップ）
   const lastUserMessage = [...messages].reverse().find((m: { role: string }) => m.role === 'user');
 
   let context = '';
   if (lastUserMessage) {
-    const results = await searchRelevantChunks(lastUserMessage.content, env.AI, env.VECTORIZE);
-    context = formatContext(results);
+    try {
+      const results = await searchRelevantChunks(lastUserMessage.content, env.AI, env.VECTORIZE);
+      context = formatContext(results);
+    } catch {
+      context = '（RAG検索は利用できない環境のためスキップ）';
+    }
   }
 
   const anthropic = createAnthropic({
@@ -29,5 +33,5 @@ export const POST: APIRoute = async ({ request, locals }) => {
     messages,
   });
 
-  return result.toDataStreamResponse();
+  return result.toUIMessageStreamResponse();
 };
