@@ -16,7 +16,9 @@
     "lint:fix": "npm run lint:biome:fix && npm run lint:textlint:fix",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
-    "prepare": "lefthook install"
+    "prepare": "lefthook install",
+    "ingest:prepare": "npx tsx scripts/ingest.ts > /tmp/chunks.json",
+    "ingest:upload": "echo 'Run: curl -X POST http://localhost:8787 -H \"Content-Type: application/json\" -d @/tmp/chunks.json'"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.58",
