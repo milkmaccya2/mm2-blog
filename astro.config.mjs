@@ -14,12 +14,7 @@ import remarkLinkCardPlus from 'remark-link-card-plus';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://blog.milkmaccya.com',
-  adapter: cloudflare({
-    platformProxy: {
-      // CI では AI/Vectorize バインディングなしの設定を使い、リモート接続を回避
-      configPath: process.env.CI ? 'wrangler.ci.json' : 'wrangler.json',
-    },
-  }),
+  adapter: cloudflare(),
   image: {
     remotePatterns: [{ protocol: 'https' }],
   },

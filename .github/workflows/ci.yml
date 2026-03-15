@@ -37,6 +37,8 @@ jobs:
         run: npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+      - name: Strip remote bindings from wrangler.json
+        run: jq 'del(.ai, .vectorize)' wrangler.json > wrangler.tmp && mv wrangler.tmp wrangler.json
       - name: Run Playwright tests
         run: npx playwright test
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
