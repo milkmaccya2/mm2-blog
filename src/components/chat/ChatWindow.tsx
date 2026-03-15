@@ -8,7 +8,9 @@ interface Props {
   onClose: () => void;
 }
 
-const transport = new DefaultChatTransport({ api: 'https://chat.milkmaccya.com/chat' });
+const transport = new DefaultChatTransport({
+  api: 'https://feature-rag-source-urls-mm2-blog-chat.milkmaccya2.workers.dev/chat',
+});
 
 export default function ChatWindow({ onClose }: Props) {
   const { messages, sendMessage, status, error } = useChat({ transport });
