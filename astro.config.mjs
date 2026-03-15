@@ -16,9 +16,8 @@ export default defineConfig({
   site: 'https://blog.milkmaccya.com',
   adapter: cloudflare({
     platformProxy: {
-      // CI ではリモート Cloudflare 接続が不可（wrangler 未ログイン）のため無効化
-      enabled: !process.env.CI,
-      configPath: 'wrangler.json',
+      // CI では AI/Vectorize バインディングなしの設定を使い、リモート接続を回避
+      configPath: process.env.CI ? 'wrangler.ci.json' : 'wrangler.json',
     },
   }),
   image: {
