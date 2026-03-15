@@ -1,4 +1,5 @@
 import { type FormEvent, useState } from 'react';
+import { trackChatQuestion } from '@/lib/gtm';
 
 interface Props {
   isLoading: boolean;
@@ -14,6 +15,7 @@ export default function ChatInput({ isLoading, onSubmit }: Props) {
     if (!text || isLoading) return;
     onSubmit(text);
     setInput('');
+    trackChatQuestion(text);
   };
 
   return (
