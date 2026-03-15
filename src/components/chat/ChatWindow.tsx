@@ -24,7 +24,7 @@ export default function ChatWindow({ onClose }: Props) {
     <div className="fixed bottom-20 right-4 z-50 flex h-[500px] w-[360px] flex-col rounded-2xl bg-[var(--color-bg)] shadow-2xl ring-1 ring-gray-200 dark:ring-gray-700 max-sm:bottom-0 max-sm:right-0 max-sm:h-full max-sm:w-full max-sm:rounded-none">
       {/* Header */}
       <div className="flex items-center justify-between rounded-t-2xl bg-blue-600 px-4 py-3 text-white max-sm:rounded-none">
-        <span className="text-sm font-bold">milkmaccya に聞く</span>
+        <span className="text-sm font-bold">ブログアシスタント</span>
         <button
           type="button"
           onClick={onClose}
