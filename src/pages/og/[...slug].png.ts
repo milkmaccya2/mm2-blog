@@ -1,5 +1,7 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
 import type { ReactNode } from 'react';
+import satori from 'satori';
+import sharp from 'sharp';
 import { SITE_TITLE } from '@/consts';
 import { getOgImage, getSatoriOptions, loadGoogleFont } from '@/lib/og-image';
 import { getPublishedPosts } from '@/lib/posts';
@@ -35,8 +37,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const GET: APIRoute = async ({ props }) => {
   const { title, pubDate } = props as { title: string; pubDate: Date };
-  const satori = (await import('satori')).default;
-  const sharp = (await import('sharp')).default;
 
   const formattedDate = pubDate.toLocaleDateString('ja-JP', {
     year: 'numeric',
