@@ -79,31 +79,22 @@ export function getOgImage(title: string, pubDate: string, siteName: string) {
   );
 }
 
-export async function loadGoogleFont(
-  family: string,
-  weight: number,
-): Promise<ArrayBuffer> {
+export async function loadGoogleFont(family: string, weight: number): Promise<ArrayBuffer> {
   const url = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(family)}:wght@${weight}&display=swap`;
   const response = await fetch(url);
   if (!response.ok) {
-    throw new Error(
-      `Failed to fetch font CSS for ${family}: ${response.statusText}`,
-    );
+    throw new Error(`Failed to fetch font CSS for ${family}: ${response.statusText}`);
   }
   const css = await response.text();
 
-  const match = css.match(
-    /src:\s*url\((['"]?)(.+?)\1\)\s*format\((['"]?)(.+?)\3\)/,
-  );
+  const match = css.match(/src:\s*url\((['"]?)(.+?)\1\)\s*format\((['"]?)(.+?)\3\)/);
   if (!match?.[2]) {
     throw new Error(`Failed to parse font URL for ${family} ${weight}`);
   }
 
   const fontResponse = await fetch(match[2]);
   if (!fontResponse.ok) {
-    throw new Error(
-      `Failed to fetch font file for ${family}: ${fontResponse.statusText}`,
-    );
+    throw new Error(`Failed to fetch font file for ${family}: ${fontResponse.statusText}`);
   }
 
   return fontResponse.arrayBuffer();

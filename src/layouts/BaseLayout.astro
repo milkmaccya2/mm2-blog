@@ -3,6 +3,7 @@ import { ClientRouter } from 'astro:transitions';
 import BaseHead from '@/components/BaseHead.astro';
 import type { BreadcrumbItem } from '@/components/Breadcrumb.astro';
 import Breadcrumb from '@/components/Breadcrumb.astro';
+import ChatWidget from '@/components/chat/ChatWidget';
 import Footer from '@/components/Footer.astro';
 import GoogleTagManager from '@/components/GoogleTagManager.astro';
 import Header from '@/components/Header.astro';
@@ -120,5 +121,6 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID;
     <Breadcrumb items={breadcrumbItems} siteOrigin={siteOrigin} />
     <slot />
     <Footer />
+    <ChatWidget client:idle />
   </body>
 </html>

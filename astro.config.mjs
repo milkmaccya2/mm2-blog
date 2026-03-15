@@ -1,6 +1,7 @@
 // @ts-check
 
 import mdx from '@astrojs/mdx';
+import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import sentry from '@sentry/astro';
 import tailwindcss from '@tailwindcss/vite';
@@ -28,6 +29,7 @@ export default defineConfig({
   },
   integrations: [
     mdx(),
+    react(),
     sentry({
       sourceMapsUploadOptions: {
         project: process.env.SENTRY_PROJECT,

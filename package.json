@@ -19,9 +19,12 @@
     "prepare": "lefthook install"
   },
   "dependencies": {
+    "@ai-sdk/react": "^3.0.118",
     "@astrojs/mdx": "^5.0.0-beta.8",
+    "@astrojs/react": "^5.0.0",
     "@astrojs/sitemap": "^3.7.0",
     "@sentry/astro": "^10.38.0",
+    "ai": "^6.0.116",
     "astro": "^6.0.0-beta.6",
     "gsap": "^3.14.2",
     "satori": "^0.19.1"

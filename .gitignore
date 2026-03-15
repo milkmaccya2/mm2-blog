@@ -17,6 +17,10 @@ pnpm-debug.log*
 .env
 .env.production
 
+# Cloudflare
+.wrangler/
+.dev.vars
+
 # macOS-specific files
 .DS_Store
 
@@ -39,6 +43,10 @@ pr_reviews.json
 
 # Claude skills (branch-independent)
 .claude/skills/weekly-blog/
+
+# Claude plans/specs (local only)
+.claude/plans/
+.claude/specs/
 
 # docs (local only)
 docs/
