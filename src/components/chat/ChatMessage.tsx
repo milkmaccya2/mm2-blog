@@ -1,7 +1,7 @@
 import type { UIMessagePart } from 'ai';
 
-interface SourcePart {
-  type: 'source';
+interface SourceUrlPart {
+  type: 'source-url';
   sourceId: string;
   url: string;
   title?: string;
@@ -19,7 +19,7 @@ export default function ChatMessage({ role, parts }: Props) {
     .map((p) => p.text)
     .join('');
 
-  const sources = parts.filter((p): p is SourcePart => p.type === 'source');
+  const sources = parts.filter((p): p is SourceUrlPart => p.type === 'source-url');
 
   if (!text && sources.length === 0) return null;
 
