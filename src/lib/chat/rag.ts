@@ -1,3 +1,5 @@
+import { EMBEDDING_MODEL } from './constants';
+
 export interface RagResult {
   text: string;
   source: string;
@@ -11,7 +13,7 @@ export async function searchRelevantChunks(
   vectorize: VectorizeIndex,
   topK = 5
 ): Promise<RagResult[]> {
-  const embedding = await ai.run('@cf/baai/bge-m3', {
+  const embedding = await ai.run(EMBEDDING_MODEL, {
     text: [query],
   });
 

@@ -1,13 +1,14 @@
 import { defineConfig, devices } from '@playwright/test';
 
 const PORT = 4322;
+const isCI = !!process.env.CI;
 
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
-  forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  forbidOnly: isCI,
+  retries: isCI ? 2 : 0,
+  workers: isCI ? 1 : undefined,
   reporter: 'html',
   use: {
     baseURL: `http://localhost:${PORT}`,
@@ -20,9 +21,13 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: `npm run build && npm run preview -- --port ${PORT}`,
+    // CI: astro preview は Cloudflare リモート接続を要求するため、
+    // プリレンダリング済み静的ファイルを直接配信する
+    command: isCI
+      ? `npm run build && npx serve dist/client -l ${PORT}`
+      : `npm run build && npm run preview -- --port ${PORT}`,
     url: `http://localhost:${PORT}`,
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: !isCI,
     timeout: 120 * 1000,
   },
 });

@@ -52,7 +52,7 @@ export default function ChatWindow({ onClose }: Props) {
           </p>
         )}
         {messages.map((m) => (
-          <ChatMessage key={m.id} role={m.role as 'user' | 'assistant'} content={m.content} />
+          <ChatMessage key={m.id} role={m.role as 'user' | 'assistant'} parts={m.parts} />
         ))}
         {error && (
           <p className="mt-2 text-center text-xs text-red-500">

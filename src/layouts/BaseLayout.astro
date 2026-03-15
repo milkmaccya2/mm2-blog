@@ -112,6 +112,23 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID;
     <script>
       import '@/scripts/animations';
     </script>
+    <script>
+      import * as Sentry from '@sentry/astro';
+      Sentry.init({
+        dsn: import.meta.env.PUBLIC_SENTRY_DSN,
+        sampleRate: 1.0,
+        replaysSessionSampleRate: 0,
+        replaysOnErrorSampleRate: 1.0,
+      });
+      import('@sentry/astro').then(({ replayIntegration }) => {
+        Sentry.addIntegration(
+          replayIntegration({
+            maskAllInputs: true,
+            block: ['[data-sentry-mask]'],
+          }),
+        );
+      });
+    </script>
     {gtmId && <GoogleTagManager id={gtmId} part="head" />}
   </head>
   <body>

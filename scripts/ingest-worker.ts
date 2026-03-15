@@ -1,19 +1,12 @@
 // npx wrangler dev scripts/ingest-worker.ts --remote で実行
 // チャンクJSONを受け取り、embedding + Vectorize upsertを行う
 
+import type { Chunk } from './chunker';
+import { EMBEDDING_MODEL } from './constants';
+
 export interface Env {
   AI: Ai;
   VECTORIZE: VectorizeIndex;
-}
-
-interface Chunk {
-  id: string;
-  text: string;
-  source: string;
-  title: string;
-  section?: string;
-  url?: string;
-  date?: string;
 }
 
 const BATCH_SIZE = 10;
@@ -33,7 +26,7 @@ export default {
       const batch = chunks.slice(i, i + BATCH_SIZE);
       const texts = batch.map((c) => c.text);
 
-      const embeddings = await env.AI.run('@cf/baai/bge-m3', {
+      const embeddings = await env.AI.run(EMBEDDING_MODEL, {
         text: texts,
       });
 
