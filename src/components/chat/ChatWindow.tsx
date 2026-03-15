@@ -3,6 +3,7 @@ import { DefaultChatTransport } from 'ai';
 import { useEffect, useRef } from 'react';
 import ChatInput from './ChatInput';
 import ChatMessage from './ChatMessage';
+import ChatStatusIndicator from './ChatStatusIndicator';
 
 interface Props {
   onClose: () => void;
@@ -47,6 +48,10 @@ export default function ChatWindow({ onClose }: Props) {
         {messages.map((m) => (
           <ChatMessage key={m.id} role={m.role as 'user' | 'assistant'} parts={m.parts} />
         ))}
+        <ChatStatusIndicator
+          status={status}
+          lastAssistantParts={messages.findLast((m) => m.role === 'assistant')?.parts}
+        />
         {error && (
           <p className="mt-2 text-center text-xs text-red-500">
             エラーが発生しました。しばらくしてからお試しください。
