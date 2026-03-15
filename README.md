@@ -78,7 +78,7 @@ graph LR
 ├── public/            # 静的アセット（フォント、favicon等）
 ├── src/
 │   ├── assets/        # ビルド処理されるアセット（画像等）
-│   ├── components/    # Astroコンポーネント
+│   ├── components/    # Astroコンポーネント + chat/ (React)
 │   ├── content/       # 記事コンテンツ (Markdown)
 │   ├── data/          # プロジェクト情報などの静的データ
 │   ├── layouts/       # ページレイアウト
@@ -96,10 +96,24 @@ graph LR
 └── .textlintrc.json   # textlint設定
 ```
 
+## AIチャットウィジェット
+
+全ページにフローティングチャットウィジェット（💬）を搭載。ブログの内容について質問すると、RAGベースで記事を検索し回答する。
+
+バックエンドは別リポ [`mm2-blog-chat`](https://github.com/milkmaccya2/mm2-blog-chat) に分離されており、ブログ側にはフロントエンド（React island）のみを配置。
+
+| レイヤー | 技術 | リポ |
+|---------|------|------|
+| フロントエンド | React island (`client:idle`), AI SDK `useChat` | mm2-blog |
+| バックエンド API | Cloudflare Worker, Anthropic Claude | [mm2-blog-chat](https://github.com/milkmaccya2/mm2-blog-chat) |
+| RAG | Cloudflare Vectorize + Workers AI | [mm2-blog-chat](https://github.com/milkmaccya2/mm2-blog-chat) |
+
 ## 技術スタック
 
 - Astro
 - Tailwind CSS
+- React (チャットウィジェット)
+- AI SDK (`@ai-sdk/react`)
 - Biome (Linter/Formatter)
 - textlint（Improve article text）
 - Lefthook (Git Hooks)
