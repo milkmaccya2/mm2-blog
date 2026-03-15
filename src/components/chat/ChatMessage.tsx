@@ -36,7 +36,7 @@ export default function ChatMessage({ role, parts }: Props) {
         {isUser ? <p className="whitespace-pre-wrap">{text}</p> : <ChatMarkdown content={text} />}
         {sources.length > 0 && (
           <details className="mt-2 border-t border-gray-200 pt-2 dark:border-gray-600">
-            <summary className="cursor-pointer text-xs font-semibold text-gray-500 select-none dark:text-gray-400">
+            <summary className="cursor-pointer rounded text-xs font-semibold text-gray-500 select-none dark:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
               参照元（{sources.length}件）
             </summary>
             <ul className="mt-1 space-y-0.5">
