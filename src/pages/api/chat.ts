@@ -24,8 +24,8 @@ export const POST: APIRoute = async ({ request }) => {
           .join('') ?? '';
       const results = await searchRelevantChunks(userText, env.AI, env.VECTORIZE);
       context = formatContext(results);
-    } catch {
-      context = '（RAG検索は利用できない環境のためスキップ）';
+    } catch (e) {
+      console.error('RAG search failed:', e);
     }
   }
 

@@ -1,6 +1,6 @@
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import ChatInput from './ChatInput';
 import ChatMessage from './ChatMessage';
 
@@ -11,7 +11,6 @@ interface Props {
 const transport = new DefaultChatTransport({ api: '/api/chat' });
 
 export default function ChatWindow({ onClose }: Props) {
-  const [input, setInput] = useState('');
   const { messages, sendMessage, status, error } = useChat({ transport });
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const isLoading = status === 'streaming' || status === 'submitted';
@@ -20,14 +19,6 @@ export default function ChatWindow({ onClose }: Props) {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages.length]);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const text = input.trim();
-    if (!text || isLoading) return;
-    sendMessage({ text });
-    setInput('');
-  };
 
   return (
     <div className="fixed bottom-20 right-4 z-50 flex h-[500px] w-[360px] flex-col rounded-2xl bg-[var(--color-bg)] shadow-2xl ring-1 ring-gray-200 dark:ring-gray-700 max-sm:bottom-0 max-sm:right-0 max-sm:h-full max-sm:w-full max-sm:rounded-none">
@@ -63,12 +54,7 @@ export default function ChatWindow({ onClose }: Props) {
       </div>
 
       {/* Input */}
-      <ChatInput
-        input={input}
-        isLoading={isLoading}
-        onInputChange={(e) => setInput(e.target.value)}
-        onSubmit={handleSubmit}
-      />
+      <ChatInput isLoading={isLoading} onSubmit={(text) => sendMessage({ text })} />
     </div>
   );
 }
