@@ -1,4 +1,5 @@
-import type { UIMessagePart } from 'ai';
+import { isTextUIPart, type UIMessagePart } from 'ai';
+import ChatMarkdown from './ChatMarkdown';
 
 interface SourceUrlPart {
   type: 'source-url';
@@ -15,7 +16,7 @@ interface Props {
 export default function ChatMessage({ role, parts }: Props) {
   const isUser = role === 'user';
   const text = parts
-    .filter((p) => p.type === 'text')
+    .filter(isTextUIPart)
     .map((p) => p.text)
     .join('');
 
@@ -32,7 +33,7 @@ export default function ChatMessage({ role, parts }: Props) {
             : 'bg-[var(--color-bg-secondary,#f3f4f6)] text-[var(--color-text)] dark:bg-gray-700 dark:text-gray-100'
         }`}
       >
-        <div className="whitespace-pre-wrap">{text}</div>
+        {isUser ? <p className="whitespace-pre-wrap">{text}</p> : <ChatMarkdown content={text} />}
         {sources.length > 0 && (
           <div className="mt-2 border-t border-gray-200 pt-2 dark:border-gray-600">
             <p className="mb-1 text-xs font-semibold text-gray-500 dark:text-gray-400">参照元</p>
