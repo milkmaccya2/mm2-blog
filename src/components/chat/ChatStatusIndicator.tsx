@@ -23,12 +23,12 @@ export default function ChatStatusIndicator({ status, lastAssistantParts }: Prop
 
   const parts = lastAssistantParts ?? [];
   const searching = isToolSearching(parts);
-  const generating = hasText(parts);
+  const hasTextContent = hasText(parts);
 
   let label: string | null = null;
   if (searching) {
     label = 'ブログを検索中...';
-  } else if (!generating) {
+  } else if (!hasTextContent) {
     label = '回答を生成中...';
   }
 
