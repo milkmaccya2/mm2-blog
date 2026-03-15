@@ -44,5 +44,9 @@ pr_reviews.json
 # Claude skills (branch-independent)
 .claude/skills/weekly-blog/
 
+# Claude plans/specs (local only)
+.claude/plans/
+.claude/specs/
+
 # docs (local only)
 docs/
