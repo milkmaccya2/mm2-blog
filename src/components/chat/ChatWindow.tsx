@@ -9,7 +9,7 @@ interface Props {
 }
 
 const transport = new DefaultChatTransport({
-  api: 'https://feature-rag-source-urls-mm2-blog-chat.milkmaccya2.workers.dev/chat',
+  api: import.meta.env.PUBLIC_CHAT_API_URL || 'https://chat.milkmaccya.com/chat',
 });
 
 export default function ChatWindow({ onClose }: Props) {

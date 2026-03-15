@@ -46,6 +46,7 @@ export default function ChatMessage({ role, parts }: Props) {
                     className="text-xs text-blue-500 underline hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
                   >
                     {s.title || s.url}
+                    <span className="sr-only">（新しいタブで開きます）</span>
                   </a>
                 </li>
               ))}
