@@ -1,4 +1,4 @@
-import type { UIDataTypes, UIMessagePart, UITools } from 'ai';
+import { isToolUIPart, type UIDataTypes, type UIMessagePart, type UITools } from 'ai';
 
 type Part = UIMessagePart<UIDataTypes, UITools>;
 
@@ -9,7 +9,7 @@ interface Props {
 
 function isToolSearching(parts: Part[]): boolean {
   return parts.some(
-    (p) => p.type === 'dynamic-tool' && p.state !== 'output-available' && p.state !== 'output-error'
+    (p) => isToolUIPart(p) && p.state !== 'output-available' && p.state !== 'output-error'
   );
 }
 
