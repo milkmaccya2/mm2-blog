@@ -1,4 +1,4 @@
-import { isTextUIPart, type UIMessagePart } from 'ai';
+import { isTextUIPart, type UIDataTypes, type UIMessagePart, type UITools } from 'ai';
 import ChatMarkdown from './ChatMarkdown';
 
 interface SourceUrlPart {
@@ -10,7 +10,7 @@ interface SourceUrlPart {
 
 interface Props {
   role: 'user' | 'assistant';
-  parts: UIMessagePart[];
+  parts: UIMessagePart<UIDataTypes, UITools>[];
 }
 
 export default function ChatMessage({ role, parts }: Props) {
