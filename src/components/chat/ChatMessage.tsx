@@ -1,6 +1,13 @@
 import { isTextUIPart, type UIMessagePart } from 'ai';
 import ChatMarkdown from './ChatMarkdown';
 
+interface SourceUrlPart {
+  type: 'source-url';
+  sourceId: string;
+  url: string;
+  title?: string;
+}
+
 interface Props {
   role: 'user' | 'assistant';
   parts: UIMessagePart[];
@@ -12,6 +19,8 @@ export default function ChatMessage({ role, parts }: Props) {
     .filter(isTextUIPart)
     .map((p) => p.text)
     .join('');
+
+  const sources = parts.filter((p): p is SourceUrlPart => p.type === 'source-url');
 
   if (!text) return null;
 
@@ -25,6 +34,26 @@ export default function ChatMessage({ role, parts }: Props) {
         }`}
       >
         {isUser ? <p className="whitespace-pre-wrap">{text}</p> : <ChatMarkdown content={text} />}
+        {sources.length > 0 && (
+          <div className="mt-2 border-t border-gray-200 pt-2 dark:border-gray-600">
+            <p className="mb-1 text-xs font-semibold text-gray-500 dark:text-gray-400">参照元</p>
+            <ul className="space-y-0.5">
+              {sources.map((s) => (
+                <li key={s.sourceId}>
+                  <a
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-blue-500 underline hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                  >
+                    {s.title || s.url}
+                    <span className="sr-only">（新しいタブで開きます）</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
