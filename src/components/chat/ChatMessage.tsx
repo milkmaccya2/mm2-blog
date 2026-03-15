@@ -21,7 +21,7 @@ export default function ChatMessage({ role, parts }: Props) {
 
   const sources = parts.filter((p): p is SourceUrlPart => p.type === 'source-url');
 
-  if (!text && sources.length === 0) return null;
+  if (!text) return null;
 
   return (
     <div className={`flex ${isUser ? 'justify-end' : 'justify-start'} mb-3`}>
