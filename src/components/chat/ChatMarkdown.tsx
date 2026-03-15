@@ -5,7 +5,7 @@ import remarkCjkFriendly from 'remark-cjk-friendly';
 import remarkCjkFriendlyGfmStrikethrough from 'remark-cjk-friendly-gfm-strikethrough';
 import remarkGfm from 'remark-gfm';
 
-const remarkPlugins = [remarkGfm, remarkCjkFriendly, remarkCjkFriendlyGfmStrikethrough];
+const remarkPlugins = [remarkGfm, remarkCjkFriendlyGfmStrikethrough, remarkCjkFriendly];
 const rehypePlugins = [rehypeSanitize];
 
 const components: Components = {
