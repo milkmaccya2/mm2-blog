@@ -1,4 +1,4 @@
-import type { UIMessagePart } from 'ai';
+import { isTextUIPart, type UIMessagePart } from 'ai';
 import ChatMarkdown from './ChatMarkdown';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 export default function ChatMessage({ role, parts }: Props) {
   const isUser = role === 'user';
   const text = parts
-    .filter((p) => p.type === 'text')
+    .filter(isTextUIPart)
     .map((p) => p.text)
     .join('');
 

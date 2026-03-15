@@ -5,6 +5,9 @@ import remarkCjkFriendly from 'remark-cjk-friendly';
 import remarkCjkFriendlyGfmStrikethrough from 'remark-cjk-friendly-gfm-strikethrough';
 import remarkGfm from 'remark-gfm';
 
+const remarkPlugins = [remarkGfm, remarkCjkFriendly, remarkCjkFriendlyGfmStrikethrough];
+const rehypePlugins = [rehypeSanitize];
+
 const components: Components = {
   h1: ({ children }) => <h1 className="mb-2 text-base font-bold">{children}</h1>,
   h2: ({ children }) => <h2 className="mb-1.5 text-sm font-bold">{children}</h2>,
@@ -70,8 +73,8 @@ export default function ChatMarkdown({ content }: Props) {
   return (
     <div className="min-w-0">
       <ReactMarkdown
-        remarkPlugins={[remarkGfm, remarkCjkFriendly, remarkCjkFriendlyGfmStrikethrough]}
-        rehypePlugins={[rehypeSanitize]}
+        remarkPlugins={remarkPlugins}
+        rehypePlugins={rehypePlugins}
         components={components}
       >
         {content}
