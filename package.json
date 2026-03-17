@@ -20,12 +20,13 @@
   },
   "dependencies": {
     "@ai-sdk/react": "^3.0.118",
-    "@astrojs/mdx": "^5.0.0-beta.8",
+    "@astrojs/compiler-rs": "^0.1.5",
+    "@astrojs/mdx": "^5.0.1",
     "@astrojs/react": "^5.0.0",
-    "@astrojs/sitemap": "^3.7.0",
+    "@astrojs/sitemap": "^3.7.1",
     "@sentry/astro": "^10.38.0",
     "ai": "^6.0.116",
-    "astro": "^6.0.0-beta.6",
+    "astro": "^6.0.5",
     "gsap": "^3.14.2",
     "react-markdown": "^10.1.0",
     "rehype-sanitize": "^6.0.0",
@@ -41,7 +42,6 @@
     "@tailwindcss/vite": "4.2.1",
     "@textlint-ja/textlint-rule-preset-ai-writing": "1.6.1",
     "@types/react": "19.2.14",
-    "astro-compress": "2.3.9",
     "concurrently": "8.2.2",
     "lefthook": "2.1.4",
     "pagefind": "1.4.0",
@@ -51,11 +51,5 @@
     "sharp": "0.34.5",
     "tailwindcss": "4.2.1",
     "textlint": "14.8.4"
-  },
-  "overrides": {
-    "@sentry/astro": {
-      "astro": "$astro"
-    },
-    "@astrojs/internal-helpers": "^0.8.0-beta.2"
   }
 }
