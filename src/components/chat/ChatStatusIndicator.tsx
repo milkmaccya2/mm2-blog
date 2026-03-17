@@ -27,9 +27,9 @@ export default function ChatStatusIndicator({ status, lastAssistantParts }: Prop
 
   let label: string | null = null;
   if (searching) {
-    label = 'ブログを検索中...';
+    label = 'ブログを検索中';
   } else if (!hasTextContent) {
-    label = '回答を生成中...';
+    label = '回答を生成中';
   }
 
   if (!label) return null;
@@ -37,12 +37,12 @@ export default function ChatStatusIndicator({ status, lastAssistantParts }: Prop
   return (
     <div className="mb-3 flex justify-start">
       <div className="flex items-center gap-2 rounded-2xl bg-[var(--color-bg-secondary,#f3f4f6)] px-4 py-2 text-sm text-gray-500 dark:bg-gray-700 dark:text-gray-400">
+        <span>{label}</span>
         <span className="flex gap-0.5">
           <span className="animate-bounce text-lg leading-none [animation-delay:0ms]">.</span>
           <span className="animate-bounce text-lg leading-none [animation-delay:150ms]">.</span>
           <span className="animate-bounce text-lg leading-none [animation-delay:300ms]">.</span>
         </span>
-        <span>{label}</span>
       </div>
     </div>
   );
