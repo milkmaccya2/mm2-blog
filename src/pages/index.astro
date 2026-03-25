@@ -3,17 +3,21 @@ import FormattedDate from '@/components/FormattedDate.astro';
 import NoteCard from '@/components/NoteCard.astro';
 import NoteIcon from '@/components/NoteIcon.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
+import QiitaCard from '@/components/QiitaCard.astro';
+import QiitaIcon from '@/components/QiitaIcon.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
 import { PROJECTS } from '@/data/projects';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { fetchNoteOgp } from '@/lib/note-ogp';
 import { getPublishedPosts } from '@/lib/posts';
+import { fetchQiitaOgp } from '@/lib/qiita-ogp';
 
 const posts = (await getPublishedPosts()).slice(0, 5);
 
 const projects = PROJECTS.slice(0, 2);
 
 const noteOgp = await fetchNoteOgp();
+const qiitaOgp = await fetchQiitaOgp();
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -151,6 +155,26 @@ const structuredData = {
 				</div>
 
 				<NoteCard ogp={noteOgp} />
+			</section>
+
+			<!-- Qiita Section -->
+			<section class="qiita-section mb-20">
+				<div
+					class="flex items-center justify-between mb-8 pb-4 border-b border-gray-100 dark:border-gray-800 section-header"
+				>
+					<QiitaIcon class="h-8 w-auto text-black dark:text-white" />
+					<a
+						href="https://qiita.com/milkmaccya2"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 flex items-center gap-1 group"
+					>
+						View All
+						<span class="transform group-hover:translate-x-1 transition-transform">&rarr;</span>
+					</a>
+				</div>
+
+				<QiitaCard ogp={qiitaOgp} />
 			</section>
 
 			<!-- Recent Posts Section -->

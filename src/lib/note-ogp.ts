@@ -1,3 +1,5 @@
+import { extractMeta } from '@/lib/ogp-utils';
+
 const NOTE_TOP_URL = 'https://note.com/milkmaccya2';
 
 export interface NoteOgp {
@@ -5,16 +7,6 @@ export interface NoteOgp {
   description?: string;
   image?: string;
   url: string;
-}
-
-function extractMeta(html: string, property: string): string | undefined {
-  // property="og:xxx" content="..." 形式と順序が逆の形式の両方に対応
-  const pattern = new RegExp(
-    `<meta[^>]*property=["']${property}["'][^>]*content=["']([^"']+)["']|<meta[^>]*content=["']([^"']+)["'][^>]*property=["']${property}["']`,
-    'i'
-  );
-  const match = html.match(pattern);
-  return match?.[1] ?? match?.[2];
 }
 
 /**

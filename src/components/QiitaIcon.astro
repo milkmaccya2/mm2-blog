@@ -1,0 +1,13 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<img
+  src="/images/qiita-logo.png"
+  alt="Qiita"
+  class:list={['dark:brightness-0 dark:invert', className]}
+/>
