@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import type { QiitaOgp } from '@/lib/qiita-ogp';
+
+interface Props {
+  ogp: QiitaOgp;
+}
+
+const { ogp } = Astro.props;
+---
+
+<a
+  href={ogp.url}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="group block rounded-2xl border border-gray-100 dark:border-gray-800 overflow-hidden bg-white dark:bg-gray-900 hover:border-blue-100 dark:hover:border-blue-900 hover:shadow-xl transition-all duration-300 hover:scale-[1.02] qiita-item"
+>
+  {ogp.image && (
+    <div class="aspect-1200/630 overflow-hidden bg-gray-100 dark:bg-gray-800">
+      <Image
+        src={ogp.image}
+        alt={ogp.title}
+        width={960}
+        height={504}
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        loading="lazy"
+      />
+    </div>
+  )}
+  <div class="p-5">
+    <p class="text-xs text-gray-400 dark:text-gray-500 mb-2 font-mono">qiita.com</p>
+    <h3 class="text-base font-bold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2 mb-2">
+      {ogp.title}<span class="sr-only">（外部リンク）</span>
+    </h3>
+    {ogp.description && (
+      <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-3">
+        {ogp.description}
+      </p>
+    )}
+  </div>
+</a>

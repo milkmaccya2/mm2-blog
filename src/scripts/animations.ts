@@ -41,7 +41,7 @@ export function initAnimations() {
     });
     document
       .querySelectorAll(
-        '.fade-in-up, .hero-actions, .post-item, .project-item, .note-item, .experience-item, .skills-item'
+        '.fade-in-up, .hero-actions, .post-item, .project-item, .note-item, .qiita-item, .experience-item, .skills-item'
       )
       .forEach((el) => {
         (el as HTMLElement).style.opacity = '1';
@@ -104,7 +104,7 @@ export function initAnimations() {
   const staggerObserver = createObserver(
     (entry) => {
       const items = entry.target.querySelectorAll(
-        '.post-item, .project-item, .note-item, .experience-item, .skills-item'
+        '.post-item, .project-item, .note-item, .qiita-item, .experience-item, .skills-item'
       );
       items.forEach((item, i) => {
         (item as HTMLElement).style.setProperty('--stagger-delay', `${i * 0.1}s`);
@@ -115,7 +115,7 @@ export function initAnimations() {
   );
   document
     .querySelectorAll(
-      '.posts-section, .projects-section, .projects-page-section, .experience-section, .skills-section, .note-section'
+      '.posts-section, .projects-section, .projects-page-section, .experience-section, .skills-section, .note-section, .qiita-section'
     )
     .forEach((el) => {
       staggerObserver.observe(el);
