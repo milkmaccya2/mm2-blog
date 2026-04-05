@@ -12,15 +12,15 @@ jobs:
   lighthouse:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
         with:
           node-version: 24
 
       - name: Setup Chrome
-        uses: browser-actions/setup-chrome@v2
+        uses: browser-actions/setup-chrome@4f8e94349a351df0f048634f25fec36c3c91eded # v2
         with:
           chrome-version: stable
 
@@ -31,7 +31,7 @@ jobs:
         run: lhci collect --url="https://blog.milkmaccya.com" --numberOfRuns=3 --settings.chromeFlags="--no-sandbox" --settings.throttling.cpuSlowdownMultiplier=1
 
       - name: Evaluate scores and create issue if needed
-        uses: actions/github-script@v8
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         with:
           script: |
             const fs = require('fs');
@@ -134,7 +134,7 @@ jobs:
             core.warning('スコアが閾値を下回ったため Issue を作成しました');
 
       - name: Upload Report
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7
         if: always()
         with:
           name: lighthouse-report-${{ github.run_id }}
