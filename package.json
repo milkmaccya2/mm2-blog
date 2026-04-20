@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@ai-sdk/react": "3.0.169",
-    "@astrojs/compiler-rs": "0.1.6",
+    "@astrojs/compiler-rs": "0.1.7",
     "@astrojs/mdx": "5.0.3",
     "@astrojs/react": "5.0.2",
     "@astrojs/sitemap": "3.7.2",
