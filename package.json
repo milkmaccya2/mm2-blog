@@ -29,7 +29,7 @@
     "@sentry/astro": "10.43.0",
     "@tailwindcss/typography": "0.5.19",
     "@tailwindcss/vite": "4.2.1",
-    "@textlint-ja/textlint-rule-preset-ai-writing": "1.6.1",
+    "@textlint-ja/textlint-rule-preset-ai-writing": "1.6.3",
     "@types/react": "19.2.14",
     "ai": "6.0.144",
     "astro": "6.1.0",
