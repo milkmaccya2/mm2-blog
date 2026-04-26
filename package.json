@@ -31,7 +31,7 @@
     "@tailwindcss/vite": "4.2.1",
     "@textlint-ja/textlint-rule-preset-ai-writing": "1.6.1",
     "@types/react": "19.2.14",
-    "ai": "6.0.144",
+    "ai": "6.0.168",
     "astro": "6.1.0",
     "concurrently": "9.2.1",
     "gsap": "3.14.2",
