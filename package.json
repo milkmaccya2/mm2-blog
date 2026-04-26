@@ -24,7 +24,7 @@
     "@astrojs/mdx": "5.0.3",
     "@astrojs/react": "5.0.2",
     "@astrojs/sitemap": "3.7.2",
-    "@biomejs/biome": "2.4.12",
+    "@biomejs/biome": "2.4.13",
     "@playwright/test": "1.58.2",
     "@sentry/astro": "10.43.0",
     "@tailwindcss/typography": "0.5.19",
