@@ -41,9 +41,6 @@ pr_details.txt
 pr_inline_comments.json
 pr_reviews.json
 
-# Claude skills (branch-independent)
-.claude/skills/weekly-blog/
-
 # Claude plans/specs (local only)
 .claude/plans/
 .claude/specs/
