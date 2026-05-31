@@ -43,7 +43,7 @@
     "remark-cjk-friendly": "2.0.1",
     "remark-cjk-friendly-gfm-strikethrough": "2.0.1",
     "remark-gfm": "4.0.1",
-    "remark-link-card-plus": "0.7.3",
+    "remark-link-card-plus": "0.7.4",
     "satori": "0.26.0",
     "schema-dts": "2.0.0",
     "sharp": "0.34.5",
