@@ -19,7 +19,7 @@
     "prepare": "lefthook install"
   },
   "devDependencies": {
-    "@ai-sdk/react": "3.0.212",
+    "@ai-sdk/react": "3.0.213",
     "@astrojs/compiler-rs": "0.1.10",
     "@astrojs/mdx": "5.0.6",
     "@astrojs/react": "5.0.7",
