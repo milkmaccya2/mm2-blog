@@ -11,6 +11,10 @@
       "matchDepTypes": ["dependencies"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "automerge": true
+    },
+    {
+      "matchPackageNames": ["astro", "@astrojs/**"],
+      "automerge": false
     }
   ],
   "prConcurrentLimit": 5,
