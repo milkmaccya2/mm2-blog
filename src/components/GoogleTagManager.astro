@@ -8,10 +8,8 @@ const { id, part = 'head' } = Astro.props;
 ---
 
 {part === 'head' && (
-  <!-- Google Tag Manager preconnect -->
   <link rel="preconnect" href="https://www.googletagmanager.com" />
   <link rel="dns-prefetch" href="//www.googletagmanager.com" />
-  <!-- Google Tag Manager (deferred to reduce TBT impact) -->
   <script is:inline set:html={`
     window.addEventListener('load', function() {
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -21,12 +19,9 @@ const { id, part = 'head' } = Astro.props;
       })(window,document,'script','dataLayer',${JSON.stringify(id)});
     });
   `} />
-  <!-- End Google Tag Manager -->
 )}
 
 {part === 'body' && (
-  <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${id}`}
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
 )}
