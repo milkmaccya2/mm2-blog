@@ -19,7 +19,7 @@
     "prepare": "lefthook install"
   },
   "dependencies": {
-    "@ai-sdk/react": "3.0.221",
+    "@ai-sdk/react": "3.0.224",
     "react": "19.2.7",
     "react-dom": "19.2.7",
     "react-markdown": "10.1.0",
