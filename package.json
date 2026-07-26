@@ -20,8 +20,8 @@
   },
   "dependencies": {
     "@ai-sdk/react": "3.0.236",
-    "react": "19.2.7",
-    "react-dom": "19.2.7",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
     "react-markdown": "10.1.0",
     "rehype-sanitize": "6.0.0",
     "remark-cjk-friendly": "2.0.1",
