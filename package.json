@@ -29,7 +29,7 @@
     "remark-gfm": "4.0.1"
   },
   "devDependencies": {
-    "@astrojs/compiler-rs": "0.2.3",
+    "@astrojs/compiler-rs": "0.3.2",
     "@astrojs/mdx": "5.0.6",
     "@astrojs/react": "5.0.7",
     "@astrojs/sitemap": "3.7.3",
