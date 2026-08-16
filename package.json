@@ -33,7 +33,7 @@
     "@astrojs/mdx": "5.0.6",
     "@astrojs/react": "5.0.7",
     "@astrojs/sitemap": "3.7.3",
-    "@biomejs/biome": "2.5.7",
+    "@biomejs/biome": "2.5.8",
     "@playwright/test": "1.62.1",
     "@sentry/astro": "10.43.0",
     "@tailwindcss/typography": "0.5.20",
