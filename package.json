@@ -32,7 +32,7 @@
     "@astrojs/compiler-rs": "0.4.0",
     "@astrojs/mdx": "5.0.6",
     "@astrojs/react": "5.0.7",
-    "@astrojs/sitemap": "3.7.3",
+    "@astrojs/sitemap": "3.7.4",
     "@biomejs/biome": "2.5.12",
     "@playwright/test": "1.62.1",
     "@sentry/astro": "10.43.0",
